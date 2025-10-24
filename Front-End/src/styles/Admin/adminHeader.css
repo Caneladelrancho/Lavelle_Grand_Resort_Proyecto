@@ -1,0 +1,19 @@
+.admin-header{      
+    background-color: #FFF3D6;       
+} 
+
+.admin-header-content{ 
+    height: 100%; 
+    padding: 0 2rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+} 
+
+
+.admin-header-content h2{ 
+    margin-left: 25px; 
+    color: #034363; 
+    font-weight: 600; 
+    font-size: 1.8rem; 
+}

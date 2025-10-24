@@ -1,0 +1,19 @@
+.admin-layout{
+    display: flex;
+    min-height: 100vh;   
+
+}
+
+.admin-content-wrapper{
+    flex: 1;
+    margin-left: 250px;
+    display: grid;
+    grid-template-rows: 115px 1fr; 
+    min-height: 100vh;
+
+}
+
+.admin-content{      
+    padding: 2rem;
+    overflow-y: auto;
+}

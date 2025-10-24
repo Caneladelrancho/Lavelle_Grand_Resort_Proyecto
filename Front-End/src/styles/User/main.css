@@ -1,0 +1,38 @@
+.main-container{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.main-image{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.background-image{
+    width: 100%;
+    height: 100vh;
+    background-image: url('/img/hotel-main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+}
+
+/*---------RESPONSIVE----------*/
+/*--TABLET--*/
+@media screen and (max-width: 768px)  {
+    .background-image{
+        background-attachment: scroll;
+    }
+}
+
+/*--MOBILE--*/
+@media screen and (max-width: 480px) {
+    .background-image{
+        background-image: url('/public/img/hotel-2.jpg');
+        background-attachment: scroll;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;        
+    }
+}    

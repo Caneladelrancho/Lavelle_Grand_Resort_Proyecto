@@ -1,0 +1,15 @@
+body{
+    font-family: "Cinzel Decorative", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF9EB;
+    
+}
+
+body.admin-page {
+    background-color: #8ECAE6;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
