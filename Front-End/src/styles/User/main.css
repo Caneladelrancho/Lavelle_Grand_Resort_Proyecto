@@ -1,6 +1,6 @@
 .main-container{
     width: 100%;
-    min-height: 100vh;
+    min-height: 100vh
 }
 
 .main-image{
@@ -20,19 +20,25 @@
 
 /*---------RESPONSIVE----------*/
 /*--TABLET--*/
-@media screen and (max-width: 768px)  {
-    .background-image{
+@media screen and (max-width: 768px) {
+    .background-image {
         background-attachment: scroll;
+    }
+
+    @media (orientation: portrait) {
+        .background-image {
+            background-image: url('/public/img/header-tablet-ver.jpeg');
+        }
     }
 }
 
 /*--MOBILE--*/
 @media screen and (max-width: 480px) {
-    .background-image{
+    .background-image {
         background-image: url('/public/img/hotel-2.jpg');
         background-attachment: scroll;
         height: 100vh;
         background-size: cover;
-        background-position: center;        
+        background-position: center;
     }
-}    
+}

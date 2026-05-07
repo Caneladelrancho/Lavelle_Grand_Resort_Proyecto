@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -28,6 +29,11 @@ public class RoomService implements IRoomService {
     //GUARDAR O AGREGAR UN ROOM CON IMÁGENES
     @Override
     public Room saveRoom(AdminProductDto adminProductDto) throws IOException {
+
+        Optional<Room> existingRoom = roomRepository.findByName(adminProductDto.getName());
+        if (existingRoom.isPresent()){
+            throw new IllegalArgumentException("Ya existe una habitación con el nombre: " + adminProductDto.getName());
+        }
 
         try {
             //Crear una entidad room y desde adminProductDto se asignan los valores, pero sin las imágenes

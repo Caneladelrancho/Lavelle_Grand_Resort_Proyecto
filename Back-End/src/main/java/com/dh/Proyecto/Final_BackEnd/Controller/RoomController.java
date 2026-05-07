@@ -32,6 +32,12 @@ public class RoomController {
         try {
             Room savedRoom = iRoomService.saveRoom(adminProductDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedRoom);
+
+        } catch (IllegalArgumentException e) {
+            // Error 400 - El usuario hizo algo mal (nombre duplicado)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+
         }catch (IOException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", e.getMessage()));
@@ -66,7 +72,7 @@ public class RoomController {
         try{
             //Llamar al servicio para eliminar la habitacion
             iRoomService.deleteRoom(id);
-            return ResponseEntity.ok("Room with ID " + id + " deleted successfully");
+            return ResponseEntity.ok("Room with ID " + id + " successfully deleted.");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error deleting room: " + e.getMessage());

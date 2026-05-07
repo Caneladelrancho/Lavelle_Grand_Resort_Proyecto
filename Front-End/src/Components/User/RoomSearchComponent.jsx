@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Swal from "sweetalert2"
+import { UseSweetAlert } from "../../Hooks/sweetAlertHook"
 import '../../styles/User/roomSearch.css'
 
 
@@ -13,6 +13,8 @@ export const RoomSearchComponent = () => {
         roomType: 'any'
     })
 
+    const {showError} = UseSweetAlert()
+
     const handleInputChange = (e) => {
         const { name, value } = e.target
         setSearchData(prevData => ({
@@ -23,17 +25,19 @@ export const RoomSearchComponent = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
+        
+        if (!searchData.checkIn || !searchData.checkOut) {
+            showError('Por favor selecciona las fechas de check-in y check-out')
+            return
+        }
+        
+        if (new Date(searchData.checkIn) >= new Date(searchData.checkOut)) {
+            showError('La fecha de check-out debe ser posterior a la de check-in')
+            return        
+        }
     }
-
-    /*if (!searchData.checkIn || !searchData.checkOut) {
-        alert('Por favor selecciona las fechas de check-in y check-out')
-        return
-    }
-
-    if (new Date(searchData.checkIn) >= new Date(searchData.checkOut)) {
-        alert('La fecha de check-out debe ser posterior a la de check-in')
-        return        
-    }*/
+        
+    //Logica de busqueda para futuros sprints 
 
     const getTodayDate = () => {
         return new Date().toISOString().split('T')[0]
@@ -51,11 +55,12 @@ export const RoomSearchComponent = () => {
     return (
         <div className="room-search-container">
             <div className="title-form">
-                <h2>Encuentra tu habitación perfecta</h2>
+                <h2>Tu escape perfecto comienza aquí.</h2>
+                <p>Elige la habitación perfecta y déjate envolver por el encanto y la serenidad de Lavelle Grand Resort.</p>
             </div>
 
             <div className="search-form">
-                <div className="form-group date-field">
+                <div className="form-group-search date-field">
                     <label htmlFor="checkIn">Check-in</label>
                     <input
                         type="date"
@@ -68,7 +73,7 @@ export const RoomSearchComponent = () => {
                     />
                 </div>
 
-                <div className="form-group date-field">
+                <div className="form-group-search date-field">
                     <label htmlFor="checkOut">Check-out</label>
                     <input
                         type="date"
@@ -81,7 +86,7 @@ export const RoomSearchComponent = () => {
                     />
                 </div>
 
-                <div className="form-group number-field">
+                <div className="form-group-search number-field">
                     <label htmlFor="adults">Adultos</label>
                     <select
                         name="adults"
@@ -95,7 +100,7 @@ export const RoomSearchComponent = () => {
                     </select>
                 </div>
 
-                <div className="form-group number-field">
+                <div className="form-group-search number-field">
                     <label htmlFor="children">Niños</label>
                     <select
                         name="children"
@@ -110,7 +115,7 @@ export const RoomSearchComponent = () => {
                 </div>
 
 
-                <div className="form-group room-type-field">
+                <div className="form-group-search room-type-field">
                     <label htmlFor="roomType">Tipo de habitación</label>
                     <select
                         name="roomType"

@@ -1,140 +1,167 @@
-.header{
-    position: fixed;
-    top: 0;
-    width: 100%;        
-    transition: background-color 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.header.scrolled{
-    background-color: #FFF3D6;
-    opacity:0.8 ;
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.nav-menu{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    /*max-width: 1200px;*/
-    position: relative;
+.img-header {
+  height: 45px;
+  width: 45px;
+}
+
+.img-header-ligth {
+  display: none;
+}
+
+.header.scrolled {
+  background-color: #fff3d6;
+  opacity: 0.8;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  /*max-width: 1200px;*/
+  position: relative;
 }
 
 .nav-menu a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-.title{
-    color: #034363;    
-      
+.header-title {
+  color: #034363;
 }
 
 .nav-buttons-container {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.header-buttons{
-    display: flex;
-    gap: 10px;
+.header-buttons {
+  display: flex;
+  gap: 28px;
 }
 
-.user-buttons{
-    background: none;
-    border: none;
-    color: #034363;
-    font: inherit;
-    font-weight: 700;
-    font-size: 18px;
-    cursor: pointer; 
-    
-
+.user-buttons {
+  background: none;
+  border: none;
+  color: #034363;
+  font: inherit;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-.hamburger-menu{
-    display: none;
-    
+.hamburger-menu {
+  display: none;
 }
 
-.menu-icon{
-    width: 28px;
-    height: 28px;
+.menu-icon {
+  width: 28px;
+  height: 28px;
 }
 
 /*---------RESPONSIVE----------*/
 /*--TABLET--*/
 
-@media screen and (max-width: 768px)  {
-    .title{
-        font-size: 22px;
-    }
+@media screen and (max-width: 768px) {
+  .img-header {
+    height: 30px;
+    width: 30px;
+  }
 
-    .user-buttons{
-        font-size: 16px;
-    }
+  .img-header-ligth {
+    display: none;
+  }
 
-    .nav-menu{
-        width: 95%;
-    }
-    
-    
+  .header-title {
+    font-size: 22px;
+  }
+
+  .user-buttons {
+    font-size: 16px;
+  }
+
+  .nav-menu {
+    width: 95%;
+  }
 }
 
 /*--MOBILE--*/
 @media screen and (max-width: 480px) {
-    .title{
-        color: #FFF3D6;
-        font-size: 18px;
-    }
+  .img-header {
+    display: none;
+  }
 
-    .header.scrolled{
-        background-color: #034363;
-        opacity:0.8 ;
-    }
+  .img-header-ligth{
+    display: block;
+    height: 30px;
+    width: 30px;
+  }
 
-    .hamburger-menu{
-        display: flex;
-    }    
+  .header-title {
+    color: #fff3d6;
+    font-size: 18px;
+  }
 
-    .nav-menu{
-        width: 90%;
-        padding: 15px 0;
-    }
+  .header.scrolled {
+    background-color: #034363;
+    opacity: 0.8;
+  }
 
-    .header.scrolled{
-        opacity: 0.95;
-    }
+  .hamburger-menu {
+    display: flex;
+  }
 
-    .nav-buttons-container{
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: #034363;
-        border-radius: 8px;                        
-        overflow: hidden;
-        opacity: 0;
-        transition: all 0.3s ease;
-        z-index: 10;
-    }
+  .nav-menu {
+    width: 90%;
+    padding: 15px 0;
+  }
 
-    .nav-buttons-container.menu-open {
-        padding: 20px;
-        max-height: 200px;
-        opacity: 1;
-    }
+  .header.scrolled {
+    opacity: 0.95;
+  }
 
-    .header-buttons {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .user-buttons {
-        padding: 8px 10px;
-        text-align: center;
-        color: #FFF3D6;
-        
-        
-    }
+  .nav-buttons-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #034363;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .nav-buttons-container.menu-open {
+    padding: 45px 13px;
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .header-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .user-buttons {
+    padding: 8px 10px; 
+    margin-right: 10px;
+    text-align: center;
+    color: #fff3d6;
+  }
 }

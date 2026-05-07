@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { createRoom, createAmenity } from '../../Api/Api'
+import { UseSweetAlert } from '../../Hooks/sweetAlertHook';
 import '../../styles/Admin/addProduct.css'
 
 
@@ -15,16 +16,13 @@ export const AddProductComponent = () => {
 
 
     const [loading, setLoading] = useState(false)
-    const [message, setMessage] = useState('')
-    const [error, setError] = useState('')
-
+    
+    const { showSuccess, showError } = UseSweetAlert()
 
     const handleSubmit = async (e) => {
 
         e.preventDefault()
-        setLoading(true)
-        setError('')
-        setMessage('')
+        setLoading(true)        
         console.log('Formulario enviado', product);
 
         // Crear FormData
@@ -39,20 +37,16 @@ export const AddProductComponent = () => {
             })
         }
 
-        try {
-            let result
-
+        try {            
             if (product.type === 'room') {
-                result = await createRoom(formData)
-                setMessage('Habitación agregada exitosamente!')
+                await createRoom(formData)
+                showSuccess('!Habitación agregada exitosamente!')
             } else {
                 // Es amenity
                 formData.append('needsReservation', product.needsReservation ? 'true' : 'false')
-                result = await createAmenity(formData)
-                setMessage('Servicio agregado exitosamente!')
-            }
-
-            console.log('Éxito', result);
+                await createAmenity(formData)
+                showSuccess('!Servicio agregado exitosamente!')
+            }            
 
             setProduct({ //resetear formulario
                 type: 'room',
@@ -65,8 +59,9 @@ export const AddProductComponent = () => {
             document.getElementById('imagenes').value = ''
 
         } catch (err) {
-            console.error('Error:', err);
-            setError('Error al agregar el producto. Intenta nuevamente')
+            console.error('error completo:', err);
+            console.error('mensaje:', err.message);                       
+            showError('Error al agregar el producto. Intenta nuevamente')
         } finally {
             setLoading(false)
         }
@@ -79,10 +74,6 @@ export const AddProductComponent = () => {
             <div className="form-title">
                 <h2>Agregar nuevo producto</h2>
             </div>
-
-            {message && <div className="success-message">{message}</div>}
-            {error && <div className="error-message">{error}</div>}
-
 
             <div className="form-container">
                 <div className="category-form">
@@ -148,8 +139,7 @@ export const AddProductComponent = () => {
                 )}
 
                 <button type="submit" className="submitt-button" disabled={loading}>
-                    {loading ? 'Agregando...' : 'Agregar producto'}
-                    Agregar producto
+                    {loading ? 'Agregando...' : 'Agregar producto'}                    
                 </button>
             </div>
         </form>

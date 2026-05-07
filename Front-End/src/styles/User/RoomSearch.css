@@ -6,7 +6,13 @@
 .title-form{
     text-align: center;
     color: #034363;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
+}
+
+.title-form p{
+    font-size: 22px;    
+    margin-top: 2rem;
+
 }
 
 .search-form{
@@ -18,29 +24,29 @@
     border-radius: 8px;
 }
 
-.form-group{
+.form-group-search{
     display: flex;
     flex-direction: column;
     min-width: 140px;
     flex: 1;
 }
 
-.form-group.date-field{
+.form-group-search.date-field{
     min-width: 160px;
     flex: 1.2;
 }
 
-.form-group.number-field{
+.form-group-search.number-field{
     min-width: 100px;
     flex: 0.8;
 }
 
-.form-group.room-type-field{
+.form-group-search.room-type-field{
     min-width: 180px;
     flex: 1.3;
 }
 
-.form-group label{
+.form-group-search label{
     font-weight: 600;
     color: #034363;
     margin-bottom: 0.4rem;
@@ -48,8 +54,8 @@
     letter-spacing: 1.2px;
 }
 
-.form-group input,
-.form-group select{
+.form-group-search input,
+.form-group-search select{
     padding: 0.75rem 0.8rem;
     border: 1px solid #034363;
     border-radius: 5px;
@@ -61,15 +67,15 @@
     
 }
 
-.form-group input:focus,
-.form-group select:focus{
+.form-group-search input:focus,
+.form-group-search select:focus{
     outline: none;
     border-color: #116479;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }
 
-.form-group input:hover,
-.form-group select:hover{
+.form-group-search input:hover,
+.form-group-search select:hover{
     border-color: #8ECAE6;
 }
 
@@ -105,10 +111,10 @@
         align-items: stretch;
     }
 
-    .form-group,
-    .form-group.date-field,
-    .form-group.number-field,
-    .form-group.room-type-field {
+    .form-group-search,
+    .form-group-search.date-field,
+    .form-group-search.number-field,
+    .form-group-search.room-type-field {
         min-width: 100%;
         flex: 1;
     }

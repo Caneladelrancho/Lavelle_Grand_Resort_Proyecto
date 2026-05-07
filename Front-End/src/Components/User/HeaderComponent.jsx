@@ -34,27 +34,30 @@ export const HeaderComponent = () => {
             <header className={`header ${scrolled ? "scrolled" : ""}`}>
                 <nav className='nav-menu'>
 
-                    <Link to="/" onClick={handleLinkClick} >
-                        <h1 className='title'>Lavelle Grand Resort</h1>
+                    <Link to="/" onClick={handleLinkClick} className='header-logo'>
+                        <img className='img-header' src="/img/logo_lavelle_blue.png" alt="logo" />
+                        <img className='img-header-ligth' src="/img/logo_lavelle.png" alt="logo" />
+
+                        <h1 className='header-title'>Lavelle Grand Resort</h1>
                     </Link>
 
                     <div className={`nav-buttons-container ${mobileMenuOpen ? "menu-open" : ""}`}>
                         <ul className='header-buttons'>
 
                             <Link
+                                to="/sigup"
+                                className='user-buttons' 
+                                onClick={handleLinkClick}                                
+                            >
+                                Crear cuenta
+                            </Link>
+
+                            <Link
                                 to="/login"
                                 className='user-buttons' 
                                 onClick={handleLinkClick}                                
                             >
-                                Login
-                            </Link>
-
-                            <Link
-                                to="/signup"
-                                className='user-buttons' 
-                                onClick={handleLinkClick}                                
-                            >
-                                Sign up                            
+                                Iniciar sesión                            
                             </Link>
                         </ul>
                     </div>

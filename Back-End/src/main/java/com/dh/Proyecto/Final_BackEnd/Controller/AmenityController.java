@@ -29,6 +29,12 @@ public class AmenityController {
         try{
             Amenity savedAmenity = iAmenityService.saveAmenity(adminProductDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedAmenity);
+
+        } catch (IllegalArgumentException e) {
+            // Error 400 - El usuario hizo algo mal (nombre duplicado)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error: " + e.getMessage());
+
         }catch (IOException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", e.getMessage()));
@@ -62,7 +68,7 @@ public class AmenityController {
     public ResponseEntity<?> deleteAmenity(@PathVariable Long id){
         try {
             iAmenityService.deleteAmenity(id);
-            return ResponseEntity.ok("Amenity with ID " + id + " deleted successfully");
+            return ResponseEntity.ok("Amenity with ID " + id + " successfully deleted.");
 
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

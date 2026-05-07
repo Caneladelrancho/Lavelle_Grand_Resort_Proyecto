@@ -14,10 +14,13 @@
 .hotel-branding{
     padding: 2rem 1.5rem;
     text-align: center;
-    border-bottom: 1px solid #FFF3D6;
-    
+    border-bottom: 1px solid #FFF3D6;    
 }
 
+
+.hotel-branding h1{
+    color: #FFF3D6;
+}
 .admin-navigation{
     flex: 1;
     padding: 2rem 0;

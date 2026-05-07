@@ -5,6 +5,7 @@ import com.dh.Proyecto.Final_BackEnd.model.Image;
 import com.dh.Proyecto.Final_BackEnd.model.Room;
 import com.dh.Proyecto.Final_BackEnd.repository.IImageRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,23 +27,30 @@ public class ImageService implements IImageService {
     private IImageRepository imageRepository;
 
     //Constante para almacenar la ruta de la carpeta de las imágenes
-    private static final Path ROOT_LOCATION = Paths.get("../Img_proyecto_final");
-
-    //Tamaño máximo de archivo permitido, 10mb
-    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024;
+    private static final Path ROOT_LOCATION = Paths.get("uploads");
 
     //Formatos permitidos para las imágenes
     private static final List<String> ALLOWED_FORMATS = Arrays.asList("image/jpeg", "image/jpg", "image/png");
+
+    private static final String BASE_URL = "http://localhost:8080/images/";
+
+    @PostConstruct
+    public void init(){
+        try{
+            if (!Files.exists(ROOT_LOCATION)){
+                Files.createDirectories(ROOT_LOCATION);
+                System.out.println("Upload directory created: " + ROOT_LOCATION.toAbsolutePath());
+            }
+        }catch (IOException e){
+            throw new RuntimeException("Could not create upload folder!", e);
+        }
+    }
 
     //Validar los archivos de las imágenes
     private void validateImageFile(MultipartFile file) throws IOException{
 
         if (file.isEmpty()){
             throw new IOException("The file is empty");
-        }
-
-        if (file.getSize() > MAX_FILE_SIZE){
-            throw new IOException("File size exceeds maximum allowed of 10MB");
         }
 
         if (!ALLOWED_FORMATS.contains(file.getContentType())){
@@ -102,11 +110,16 @@ public class ImageService implements IImageService {
     @Override
     public List<String> findImageUrlsRoom(Room room) throws Exception {
         try {
-
             List<Image> images = imageRepository.findByRoom(room);
             //Convertir las imagenes a URLs
             return images.stream()
-                    .map(Image::getImageUrl)
+                    .map(image -> {
+                        Path path = Paths.get(image.getImageUrl());
+                        String fileName = path.getFileName().toString();
+
+                        return BASE_URL + fileName;
+
+                    })
                     .collect(Collectors.toList());
 
         }catch (Exception e){
@@ -119,7 +132,13 @@ public class ImageService implements IImageService {
         try{
             List<Image> images = imageRepository.findByAmenity(amenity);
             return images.stream()
-                    .map(Image::getImageUrl)
+                    .map(image -> {
+                        Path path = Paths.get(image.getImageUrl());
+                        String fileName = path.getFileName().toString();
+
+                        return BASE_URL + fileName;
+
+                    })
                     .collect(Collectors.toList());
 
         }catch (Exception e){
@@ -137,9 +156,12 @@ public class ImageService implements IImageService {
                 for (Image image : images){
                     //Eliminar archivo fisico
                     try{
-                        Path filePath = Paths.get(image.getImageUrl());
-                        if (Files.exists(filePath)){
-                            Files.delete(filePath);
+                        Path oldPath = Paths.get(image.getImageUrl());
+                        String fileName = oldPath.getFileName().toString();
+                        Path newPath = ROOT_LOCATION.resolve(fileName);
+
+                        if (Files.exists(newPath)){
+                            Files.delete(newPath);
                         }
                     }catch (IOException e){
                         System.out.println("Warning: Could not delete physical file: " + image.getImageUrl());
@@ -161,9 +183,12 @@ public class ImageService implements IImageService {
                 for (Image image : images){
                     //Eliminar archivo fisico
                     try{
-                        Path filePath = Paths.get(image.getImageUrl());
-                        if (Files.exists(filePath)){
-                            Files.delete(filePath);
+                        Path oldPath = Paths.get(image.getImageUrl());
+                        String fileName = oldPath.getFileName().toString();
+                        Path newPath = ROOT_LOCATION.resolve(fileName);
+
+                        if (Files.exists(newPath)){
+                            Files.delete(newPath);
                         }
                     }catch (IOException e){
                         System.out.println("Warning: Could not delete physical file: " + image.getImageUrl());

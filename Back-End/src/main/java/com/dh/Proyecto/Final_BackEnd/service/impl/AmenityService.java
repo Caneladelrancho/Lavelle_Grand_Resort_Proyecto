@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AmenityService implements IAmenityService {
@@ -24,6 +25,11 @@ public class AmenityService implements IAmenityService {
 
     @Override
     public Amenity saveAmenity(AdminProductDto adminProductDto) throws IOException {
+
+        Optional<Amenity> existingAmenity = amenityRepository.findByName(adminProductDto.getName());
+        if (existingAmenity.isPresent()){
+            throw new IllegalArgumentException("Ya existe un servicio con el nombre: " + adminProductDto.getName());
+        }
 
         try {
             Amenity amenity = new Amenity();
