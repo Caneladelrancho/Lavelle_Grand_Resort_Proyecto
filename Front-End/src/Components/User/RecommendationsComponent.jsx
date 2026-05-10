@@ -8,33 +8,27 @@ export const RecommendationsComponent = ({ products }) => {
 
     const coverImages = {
         //Rooms
-        "Suite": "a3be20d8-39fb-40a1-9ab4-3b09376fe900_su_1.jpeg",
-        "Habitación Deluxe": "e3a0a72d-db15-432b-856d-dc05299f7cb7_deluxe_2.jpeg",
-        "Villa privada": "0dc37f67-dd5b-44a2-8c96-542e2ef99f02_villa_1.jpeg",
-        "Habitación Premium": "17861b9f-e54f-48da-9911-479642c06ed5_pre_3.jpeg",
+        "Suite": 5,
+        "Habitación Deluxe": 4,
+        "Villa privada": 3,
+        "Habitación Premium": 3,
         //Amenities
-        "spa": "9a0c8a70-07d5-403c-8097-41257dbff283_spa_6.JPG",
-        "Experiencias gastronómicas": "4e139d08-fb8a-44ce-b94c-11efc192a0ca_Gastro_2.jpg",
-        "BAR": "2a007163-62e2-427a-85b9-0d3b4459936e_Bar_5.jpeg",
-        "Aventura y naturaleza": "25b1c78e-c0e0-4b27-bc4e-3b94bf69001d_an_1.jpg",
-        "Gimnasio": "4dc77015-da56-465a-9766-f0308e8166f3_gym_1.jpeg",
-        "Eventos y bodas": "07690e04-045a-419f-bf0c-4e4f36d99fa6_eb_4.JPG",
-        "Actividades acuáticas": "f841b221-f789-4135-b70b-fc6fc1b6adea_acu_5.jpg",
-        "Piscinas": "4ec64a22-d201-4c0c-be4e-9ee9189cb76c_p1_4.jpg",
+        "spa": 0,
+        "Experiencias gastronómicas": 4,
+        "BAR": 0,
+        "Aventura y naturaleza": 4,
+        "Gimnasio": 0,
+        "Eventos y bodas": 2,
+        "Actividades acuáticas": 1,
+        "Piscinas": 4,
     }
 
     const getCoverImage = (product) => {
-    const coverFileName = coverImages[product.name];
-    
-    if (coverFileName) {      
-      const coverUrl = product.imagesUrl.find(url => url.includes(coverFileName));
-      if (coverUrl) {
-        return coverUrl;
-      }
-    }
-    
-    return product.imagesUrl[0];
-  };
+
+        const index = coverImages[product.name] ?? 0;
+
+        return product.imagesUrl?.[index] || null;
+    };
 
     const getRandomProducts = (productsArray) => {
 
@@ -44,7 +38,7 @@ export const RecommendationsComponent = ({ products }) => {
 
     const randomProducts = getRandomProducts(products)
 
-    const handleProductClick = (product) =>{
+    const handleProductClick = (product) => {
         navigate(`/product/${product.type}/${product.id}`)
     }
 

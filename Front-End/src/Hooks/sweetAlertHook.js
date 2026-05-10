@@ -7,11 +7,12 @@ export const UseSweetAlert =() =>{
             title: title,
             text: text,
             icon: 'warning',
+            background: '#fff3d6',
             showCancelButton: true,
             confirmButtonText: 'Sí, eliminar',
             cancelButtonText: 'Cancelar',
             confirmButtonColor: '#EB1E4E',
-            cancelButtonColor: '#034363'
+            cancelButtonColor: '#034363',
 
         })
 

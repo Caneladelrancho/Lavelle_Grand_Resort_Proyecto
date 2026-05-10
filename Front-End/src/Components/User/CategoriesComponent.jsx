@@ -10,7 +10,7 @@ export const CategoriesComponent = ({ products }) => {
   }
 
   const rooms = products.filter(product => product.type === 'ROOM')
-    
+
 
   const premiumCollection = ["Villa privada", "Suite"]
   const classicCollection = ["Habitación Deluxe", "Habitación Premium"]
@@ -25,34 +25,28 @@ export const CategoriesComponent = ({ products }) => {
 
   const coverImages = {
 
-    "Suite": "a3be20d8-39fb-40a1-9ab4-3b09376fe900_su_1.jpeg",
-    "Habitación Deluxe": "e3a0a72d-db15-432b-856d-dc05299f7cb7_deluxe_2.jpeg",
-    "Villa privada": "0dc37f67-dd5b-44a2-8c96-542e2ef99f02_villa_1.jpeg",
-    "Habitación Premium": "17861b9f-e54f-48da-9911-479642c06ed5_pre_3.jpeg",
+    "Suite": 5,
+    "Habitación Deluxe": 4,
+    "Villa privada": 3,
+    "Habitación Premium": 3,
   }
 
 
   const getCoverImage = (product) => {
-    const coverFileName = coverImages[product.name];
+    const index = coverImages[product.name] ?? 0;
 
-    if (coverFileName) {
-      const coverUrl = product.imagesUrl.find(url => url.includes(coverFileName));
-      if (coverUrl) {
-        return coverUrl;
-      }
-    }
-
-    return product.imagesUrl[0]
+    return product.imagesUrl?.[index] || null
   }
 
   const premiumCollectionData = getPremiumCollection()
   const classicCollectionData = getClassicCollection()
 
   const handleProductClick = (product) => {
-    navigate(`/product/${product.type}/${product.id}`)};
+    navigate(`/product/${product.type}/${product.id}`)
+  };
 
   return (
-    <div className='categories-container'>      
+    <div className='categories-container'>
 
       {/*CATEGORIA 1*/}
       <div className='category-section'>
@@ -62,7 +56,7 @@ export const CategoriesComponent = ({ products }) => {
             <div
               key={`${room.type}${room.id}`}
               className='category-card'
-              onClick={()=> handleProductClick(room)}
+              onClick={() => handleProductClick(room)}
             >
               <img
                 src={getCoverImage(room)}
