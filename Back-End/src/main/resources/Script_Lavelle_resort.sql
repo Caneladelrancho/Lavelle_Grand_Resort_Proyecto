@@ -16,6 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `amenities`
+--
+
+DROP TABLE IF EXISTS `amenities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `amenities` (
+  `needs_reservation` bit(1) DEFAULT NULL,
+  `amenity_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(2000) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`amenity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `amenities`
 --
 
@@ -24,6 +40,27 @@ LOCK TABLES `amenities` WRITE;
 INSERT INTO `amenities` VALUES (_binary '',1,'Sumérgete en una experiencia de relajación absoluta. Nuestro exclusivo spa ofrece masajes personalizados, tratamientos rejuvenecedores y rituales de bienestar inspirados en técnicas ancestrales. Ideal para renovar cuerpo, mente y espíritu en un entorno de lujo total.','spa'),(_binary '\0',3,'Ambientes refinados para compartir momentos especiales. Ofrecemos una cuidada carta de vinos, licores premium y cócteles artesanales, todo en espacios con diseño exclusivo y atmósferas envolventes.','BAR'),(_binary '',4,'Explora lo mejor de la naturaleza dentro y fuera del mar. Disfruta de caminatas ecológicas, cabalgatas al atardecer, paseos en yate, tours en veleros y deportes acuáticos. Vive la aventura con el equilibrio perfecto entre emoción y paisajes espectaculares.','Aventura y naturaleza'),(_binary '\0',5,'Mantén tu estilo de vida activo con acceso a un gimnasio de última tecnología. Equipos modernos, clases dirigidas y espacios luminosos para entrenar con comodidad y vista privilegiada.','Gimnasio'),(_binary '',6,'Celebra tu gran día en un entorno de ensueño, donde cada detalle refleja elegancia y distinción. Desde ceremonias íntimas frente al mar hasta recepciones majestuosas en salones decorados con fineza, nuestro equipo experto convierte tu historia en una experiencia mágica e inolvidable.','Eventos y bodas'),(_binary '',7,'Sumérgete en la esencia del mar con experiencias diseñadas para despertar tus sentidos. Disfruta de paseos en yate, recorridos en lancha, snorkel entre aguas cristalinas o relajantes paseos en paddle board. Cada actividad combina aventura, elegancia y la serenidad del océano que rodea Lavelle Grand Resort.','Actividades acuáticas'),(_binary '\0',8,'Refresca cuerpo y alma en nuestras exclusivas piscinas, rodeadas de jardines tropicales y un ambiente de tranquilidad absoluta. Ya sea tomando el sol en una cama balinesa o disfrutando de un cóctel en el bar acuático, cada momento junto al agua se convierte en una experiencia de descanso y placer incomparable.','Piscinas'),(_binary '\0',12,'Descubre una fusión de sabores únicos en restaurantes de clase mundial. Cada plato es una obra de arte diseñada para deleitar tus sentidos.','Experiencias gastronómicas');
 /*!40000 ALTER TABLE `amenities` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `images` (
+  `amenity_id` bigint DEFAULT NULL,
+  `image_id` bigint NOT NULL AUTO_INCREMENT,
+  `room_id` bigint DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`image_id`),
+  KEY `FKis3oy4ujwrpr6rfbgqhhe5fh7` (`amenity_id`),
+  KEY `FKdeh4h59nedlwji0j8e57hu9mf` (`room_id`),
+  CONSTRAINT `FKdeh4h59nedlwji0j8e57hu9mf` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
+  CONSTRAINT `FKis3oy4ujwrpr6rfbgqhhe5fh7` FOREIGN KEY (`amenity_id`) REFERENCES `amenities` (`amenity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `images`
@@ -36,6 +73,23 @@ INSERT INTO `images` VALUES (1,1,NULL,'..\\Img_proyecto_final\\9a0c8a70-07d5-403
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reservation_product`
+--
+
+DROP TABLE IF EXISTS `reservation_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation_product` (
+  `product_id` bigint NOT NULL,
+  `reservation_id` bigint NOT NULL,
+  KEY `FK2u2ieq4j990g4aw10w7ieeisa` (`product_id`),
+  KEY `FKdjmywbm03nm49yjcpuy5apa2t` (`reservation_id`),
+  CONSTRAINT `FK2u2ieq4j990g4aw10w7ieeisa` FOREIGN KEY (`product_id`) REFERENCES `amenities` (`amenity_id`),
+  CONSTRAINT `FKdjmywbm03nm49yjcpuy5apa2t` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `reservation_product`
 --
 
@@ -43,6 +97,27 @@ LOCK TABLES `reservation_product` WRITE;
 /*!40000 ALTER TABLE `reservation_product` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reservation_product` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `reservations`
+--
+
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+  `check_in_date` date DEFAULT NULL,
+  `check_out_date` date DEFAULT NULL,
+  `reservation_id` bigint NOT NULL AUTO_INCREMENT,
+  `room_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`reservation_id`),
+  KEY `FKljt6q1tp205b0h26eiegc5mx6` (`room_id`),
+  KEY `FKb5g9io5h54iwl2inkno50ppln` (`user_id`),
+  CONSTRAINT `FKb5g9io5h54iwl2inkno50ppln` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FKljt6q1tp205b0h26eiegc5mx6` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `reservations`
@@ -54,6 +129,24 @@ LOCK TABLES `reservations` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rooms`
+--
+
+DROP TABLE IF EXISTS `rooms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rooms` (
+  `availability` bit(1) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  `room_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(2000) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `room_number` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`room_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `rooms`
 --
 
@@ -62,6 +155,24 @@ LOCK TABLES `rooms` WRITE;
 INSERT INTO `rooms` VALUES (NULL,NULL,1,'Elegancia y distinción en cada detalle. Las suites combinan diseño contemporáneo con un ambiente acogedor, ofreciendo sala de estar independiente, baño de mármol con jacuzzi y una vista impresionante al mar. Ideal para quienes desean disfrutar del lujo con un toque de intimidad y sofisticación.','Suite',NULL),(NULL,NULL,2,'Confort refinado y estilo moderno. La habitación Deluxe destaca por su amplitud, su cama king size, su decoración con acabados de alta gama y sus vistas encantadoras. Un espacio pensado para el descanso profundo y la experiencia sensorial de un alojamiento de primera clase.','Habitación Deluxe',NULL),(NULL,NULL,4,'Sencillamente elegante. La habitación Premium ofrece un equilibrio perfecto entre comodidad, diseño y funcionalidad. Con mobiliario de lujo, iluminación suave y amenities exclusivos, es el lugar ideal para disfrutar de una estancia relajante con el sello distintivo de Lavelle Grand Resort.','Habitación Premium',NULL),(NULL,NULL,6,'Vive la máxima expresión del lujo y la privacidad. Nuestras villas ofrecen un refugio exclusivo con piscina privada, acceso directo a la playa y amplios espacios diseñados para el descanso total. Cada detalle ha sido cuidadosamente pensado para brindar una experiencia única, rodeada de confort y serenidad absoluta.','Villa privada',NULL),(NULL,NULL,12,'Este producto es para testeo de la profesora. :)','Habitación Profe',NULL);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` enum('ADMIN','USER') DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
@@ -82,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-09 22:09:33
+-- Dump completed on 2026-05-09 23:23:47
