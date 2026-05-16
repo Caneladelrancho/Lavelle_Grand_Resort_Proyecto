@@ -127,20 +127,20 @@ verifica que el comportamiento real de la aplicación coincida con los criterios
 aceptación establecidos, cubriendo tanto flujos exitosos como escenarios de error. 
 No se implementaron tests automatizados en este sprint.
 
-![Caso de uso 1](Docs/casos_de_prueba_1)
-![Caso de uso 2](Docs/casos_de_prueba_2)
+![Caso de uso 1](Docs/casos_de_prueba_1.jpg)
+![Caso de uso 2](Docs/casos_de_prueba_2.jpg)
 
 
 ## Capturas de pantalla 📸
 
-![Header](Docs/header.png)
-![Categorias](Docs/categorias.png)
-![Recomendaciones](Docs/recomendaciones.png)
-![Secciones](Docs/secciones.png)
-![Detalle de producto](Docs/detalle_producto.png)
-![Agregar producto](Docs/agregar_producto.png)
-![Listar productos](Docs/listar.png)
-![Eliminar producto](Docs/eliminar_producto.png)
+![Header](Docs/header.JPG)
+![Categorias](Docs/categorias.PNG)
+![Recomendaciones](Docs/recomendaciones.PNG)
+![Secciones](Docs/secciones.PNG)
+![Detalle de producto](Docs/detalle_producto.PNG)
+![Agregar producto](Docs/agregar_producto.PNG)
+![Listar productos](Docs/listar.PNG)
+![Eliminar producto](Docs/eliminar_producto.PNG)
 ## Autores 👩
 
 - [@VivianArias](https://github.com/Caneladelrancho)
