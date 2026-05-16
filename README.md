@@ -116,7 +116,7 @@ npm run dev
  
 ## Diagrama de entidades 📚
 
-![Diagrama de Base de Datos](docs/Diagrama_BD.png)
+![Diagrama de Base de Datos](Docs/Diagrama_BD.png)
 ## Testing 🧪
 
 
@@ -127,26 +127,26 @@ verifica que el comportamiento real de la aplicación coincida con los criterios
 aceptación establecidos, cubriendo tanto flujos exitosos como escenarios de error. 
 No se implementaron tests automatizados en este sprint.
 
-![Caso de uso 1](docs/casos_de_prueba_1)
-![Caso de uso 2](docs/casos_de_prueba_2)
+![Caso de uso 1](Docs/casos_de_prueba_1)
+![Caso de uso 2](Docs/casos_de_prueba_2)
 
 
 ## Capturas de pantalla 📸
 
-![Header](docs/header.png)
-![Categorias](docs/categorias.png)
-![Recomendaciones](docs/recomendaciones.png)
-![Secciones](docs/secciones.png)
-![Detalle de producto](docs/detalle_producto.png)
-![Agregar producto](docs/agregar_producto.png)
-![Listar productos](docs/listar.png)
-![Eliminar producto](docs/eliminar_producto.png)
+![Header](Docs/header.png)
+![Categorias](Docs/categorias.png)
+![Recomendaciones](Docs/recomendaciones.png)
+![Secciones](Docs/secciones.png)
+![Detalle de producto](Docs/detalle_producto.png)
+![Agregar producto](Docs/agregar_producto.png)
+![Listar productos](Docs/listar.png)
+![Eliminar producto](Docs/eliminar_producto.png)
 ## Autores 👩
 
 - [@VivianArias](https://github.com/Caneladelrancho)
 
 
-## Licensia 📑
+## Licencia 📑
 
 Todos los derechos reservados. Vivian Arias Dev 2026. 
 
