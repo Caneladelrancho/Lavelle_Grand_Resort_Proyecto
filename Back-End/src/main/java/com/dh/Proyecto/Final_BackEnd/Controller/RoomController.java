@@ -39,8 +39,8 @@ public class RoomController {
                     .body("Error: " + e.getMessage());
 
         }catch (IOException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("error", e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error saving room: " + e.getMessage());
         }
     }
 

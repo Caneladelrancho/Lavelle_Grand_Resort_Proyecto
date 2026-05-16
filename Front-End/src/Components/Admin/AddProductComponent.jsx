@@ -61,7 +61,7 @@ export const AddProductComponent = () => {
         } catch (err) {
             console.error('error completo:', err);
             console.error('mensaje:', err.message);                       
-            showError('Error al agregar el producto. Intenta nuevamente')
+            showError('Ya existe un producto con ese nombre. Intenta nuevamente')
         } finally {
             setLoading(false)
         }
