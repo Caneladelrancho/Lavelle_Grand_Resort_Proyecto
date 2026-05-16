@@ -134,7 +134,7 @@ No se implementaron tests automatizados en este sprint.
 ## Capturas de pantalla 📸
 
 ![Header](Docs/header.JPG)
-![Categorias](Docs/categorias.PNG)
+![Categorias](Docs/categorias.JPG)
 ![Recomendaciones](Docs/recomendaciones.PNG)
 ![Secciones](Docs/secciones.PNG)
 ![Detalle de producto](Docs/detalle_producto.PNG)
