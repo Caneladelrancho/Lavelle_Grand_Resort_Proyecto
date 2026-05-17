@@ -1,7 +1,7 @@
 
 # Lavelle Grand Resort 🌊
 
-Lavelle Grand Resort es una aplicación web de gestión de reservas para un resort de lujo. Los huéspedes pueden reservar diferentes tipos de habitaciones junto con sus amenidades y getionar su reserva. Así mismo los administradores pueden administrar habitaciones, servicios y categorías. 
+Lavelle Grand Resort es una aplicación web de gestión de reservas para un resort de lujo. Los huéspedes pueden reservar diferentes tipos de habitaciones junto con sus amenidades y gestionar su reserva. Así mismo los administradores pueden administrar habitaciones, servicios y categorías. 
 
 
 
@@ -15,7 +15,7 @@ Debido a esta problemática, se decidió digitalizar por completo el resort y di
 
 ![Logo](Docs/logo_lavelle_blue.png)
 
-La paleta de colores está inspirada en los cálidos y atractivos colores que rodean el océano y la arena de la isla, trayendo con ello una sensacion de relajación profunda y sofisticación en su máxima expresión. 
+La paleta de colores está inspirada en los cálidos y atractivos colores que rodean el océano y la arena de la isla, trayendo con ello una sensación de relajación profunda y sofisticación en su máxima expresión. 
 
 
 | Color             | Hex                                                                |
@@ -28,14 +28,14 @@ La paleta de colores está inspirada en los cálidos y atractivos colores que ro
 
 
 ## Tecnologías ⚙️
-FrontEnd 💻
-- React 18.3.1 + vite
+Frontend 💻
+- React 18.3.1 + Vite
 - CSS
 - Axios 
 - React Router
 - SweetAlert2 11.22.0
 
-BackEnd ☕
+Backend ☕
 - Java 17
 - Spring Boot 3.3.4 
 - Lombok
@@ -46,7 +46,7 @@ BackEnd ☕
 
 ## Instalación local ⬇️
 
-Requesitos previos: ✅
+Requisitos previos: ✅
 - Node.js v18 o superior
 - Java JDK 17 o superior 
 - MySQL 
@@ -59,7 +59,7 @@ cd Lavelle_Grand_Resort_Proyecto
 
 
 
-## Configuración del  BackEnd 🚪
+## Configuración del  Backend 🚪
 ```bash
 cd Back-End
 ```
@@ -69,7 +69,7 @@ cd Back-End
 ```
 2- Correr el script ubicado en la carpeta resources llamado Script_Lavelle_resort, en MySQL. 
 ```sql
-   source resources/Script_Lavelle_resort;
+   source resources/Script_Lavelle_resort.sql;
 ```
 3- Configurar el archivo `application.properties.example` y renombrarlo por `application.properties` y completar cada campo con tus credenciales:
 ```properties
@@ -79,13 +79,13 @@ cd Back-End
    jwt.secret=CLAVE_SECRETA_QUE_PASE_POR_PRIVADO
    jwt.expiration=7200000
 ```
-4- Correr el BackEnd
+4- Correr el Backend
 ```bash
 ./mvnw spring-boot:run
 ```
 O en intellij desde la clase main  `ProyectoFinalBackEndApplication` dando click al botón de run.
 > El Backend estará disponible en `http://localhost:8080`.
-## Configuración del FrontEnd 🧩
+## Configuración del Frontend 🧩
 ```bash
 cd Front-End
 npm install
@@ -100,7 +100,7 @@ npm install
 npm run dev
 ```
 > La aplicación estará disponible en `http://localhost:5173`
-## Endpoints (API REST) 🔤
+## Endpoints (API REST) 📎
 
 | Método | Endpoint | Descripción | Auth |
 |--------|----------|-------------|------|
@@ -136,7 +136,7 @@ No se implementaron tests automatizados en este sprint.
 ![Header](Docs/header.JPG)
 ![Categorias](Docs/categorias.JPG)
 ![Recomendaciones](Docs/recomendaciones.PNG)
-![Secciones](Docs/secciones.PNG)
+![Footer](Docs/footer.PNG)
 ![Detalle de producto](Docs/detalle_producto.PNG)
 ![Agregar producto](Docs/agregar_producto.PNG)
 ![Listar productos](Docs/listar.PNG)
