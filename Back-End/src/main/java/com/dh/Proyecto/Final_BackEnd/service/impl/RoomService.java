@@ -1,9 +1,11 @@
 package com.dh.Proyecto.Final_BackEnd.service.impl;
 
-import com.dh.Proyecto.Final_BackEnd.model.Image;
+import com.dh.Proyecto.Final_BackEnd.exceptions.DuplicateResourceException;
+import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceNotFoundException;
 import com.dh.Proyecto.Final_BackEnd.model.Room;
 import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
 import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
+import com.dh.Proyecto.Final_BackEnd.model.dto.RoomResponseDto;
 import com.dh.Proyecto.Final_BackEnd.repository.IRoomRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
 import com.dh.Proyecto.Final_BackEnd.service.IRoomService;
@@ -28,11 +30,11 @@ public class RoomService implements IRoomService {
 
     //GUARDAR O AGREGAR UN ROOM CON IMÁGENES
     @Override
-    public Room saveRoom(AdminProductDto adminProductDto) throws IOException {
+    public RoomResponseDto saveRoom(AdminProductDto adminProductDto) throws IOException {
 
         Optional<Room> existingRoom = roomRepository.findByName(adminProductDto.getName());
         if (existingRoom.isPresent()){
-            throw new IllegalArgumentException("Ya existe una habitación con el nombre: " + adminProductDto.getName());
+            throw new DuplicateResourceException("Ya existe una habitación con el nombre: " + adminProductDto.getName());
         }
 
         try {
@@ -51,7 +53,11 @@ public class RoomService implements IRoomService {
                 }
             }
 
-            return savedRoom;
+            return new RoomResponseDto(
+                    savedRoom.getId(),
+                    savedRoom.getName(),
+                    savedRoom.getDescription()
+            );
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -131,17 +137,11 @@ public class RoomService implements IRoomService {
     y despues se asocia ese en el room service*/
     @Override
     public void deleteRoom(Long id) throws Exception {
-        try{
+
             Room room = roomRepository.findById(id)
-                    .orElseThrow(() -> new Exception("Room not found with id: " + id));
+                    .orElseThrow(() -> new ResourceNotFoundException("Room not found with id: " + id));
 
             imageService.deleteImagesRoom(id);
-
             roomRepository.delete(room);
-
-        }catch (Exception e){
-            throw new Exception("Unable to delete room: " + e.getMessage(), e);
-        }
-
     }
 }

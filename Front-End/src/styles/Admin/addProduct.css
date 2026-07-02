@@ -38,6 +38,13 @@
     
 }
 
+.error-message {
+    color: #d9534f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+}
+
 .category-form input[type='text'],
 .category-form textarea{
     width: 100%;

@@ -74,6 +74,7 @@ export const LoginComponent = () => {
                             />
                         </div>
 
+                        
                         <button
                             type="submit"
                             className="login-btn"
@@ -81,6 +82,8 @@ export const LoginComponent = () => {
                         >
                             {loading ? "Ingresando..." : "Ingresar"}
                         </button>
+
+
                     </form>
                 </div>
             </div>

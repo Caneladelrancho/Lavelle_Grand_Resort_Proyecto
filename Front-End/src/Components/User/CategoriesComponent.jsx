@@ -48,6 +48,8 @@ export const CategoriesComponent = ({ products }) => {
   return (
     <div className='categories-container'>
 
+      <p className='categories-main-title'> Situado en una isla privada bañada por aguas turquesas, nuestro resort redefine el lujo contemporáneo con un ambiente sereno, exclusivo y rodeado de naturaleza prístina. </p>
+
       {/*CATEGORIA 1*/}
       <div className='category-section'>
         <h2 className='category-title'>Premimum Collection</h2>

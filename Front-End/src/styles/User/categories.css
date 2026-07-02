@@ -5,8 +5,11 @@
     margin-top: 55px;
 }
 
-.category-section {
-    margin-bottom: 45px;
+.categories-main-title {
+    color: #034363;
+    text-align: center;
+    font-size: 23px;
+    margin-bottom: 6rem;
 }
 
 .category-title {

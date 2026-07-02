@@ -7,11 +7,7 @@ export const RecommendationsComponent = ({ products }) => {
     const navigate = useNavigate()
 
     const coverImages = {
-        //Rooms
-        "Suite": 5,
-        "Habitación Deluxe": 4,
-        "Villa privada": 3,
-        "Habitación Premium": 3,
+        
         //Amenities
         "spa": 0,
         "Experiencias gastronómicas": 4,
@@ -32,7 +28,8 @@ export const RecommendationsComponent = ({ products }) => {
 
     const getRandomProducts = (productsArray) => {
 
-        const shuffled = [...productsArray].sort(() => Math.random() - 0.5)
+        const amenitiesOnly = productsArray.filter(product => product.type === 'AMENITY')
+        const shuffled = [...amenitiesOnly].sort(()=> Math.random() - 0.5)        
         return shuffled.slice(0, 10)
     }
 
@@ -45,7 +42,10 @@ export const RecommendationsComponent = ({ products }) => {
 
     return (
         <div className='recommendations-container'>
-            <p className='recommendations-title'> Situado en una isla privada bañada por aguas turquesas, nuestro resort redefine el lujo contemporáneo con un ambiente sereno, exclusivo y rodeado de naturaleza prístina. </p>
+
+            <p className='recommendations-title'> En Lavelle Grand Resort, el lujo se encuentra en cada detalle. Todas nuestras amenidades están incluidas para nuestros huéspedes, mientras que algunas experiencias exclusivas pueden programarse durante tu estancia para disfrutar de un servicio más personalizado. </p>          
+            
+
             <div className='recommendations-grid'>
                 {randomProducts.map((product) => (
                     <div

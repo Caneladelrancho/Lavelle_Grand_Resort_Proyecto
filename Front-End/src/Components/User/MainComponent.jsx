@@ -36,10 +36,7 @@ export const MainComponent = () => {
     fetchProducts()//ejecutar funcion
   }, [])
 
-  /* if (loading || error) {
-    return null; // O puedes poner un loader global aquí si quieres
-  }*/
-
+ 
 
 
   return (

@@ -6,6 +6,7 @@ import { ProductDetailComponent } from "./Components/User/ProductDetailComponent
 import { FooterComponent } from "./Components/User/FooterComponent";
 import { LoginComponent } from "./Components/Authentication/LoginComponent";
 import { ProtectedRoute } from "./Components/Authentication/ProtectedRoute";
+import { RegisterComponent } from "./Components/Authentication/RegisterComponent";
 
 export const BookingApp = () => {
   const location = useLocation()
@@ -32,7 +33,8 @@ export const BookingApp = () => {
         }
         />
         <Route path="/login" element={<LoginComponent />} />
-
+        <Route path="/register" element={<RegisterComponent />} />
+        
 
 
         {/* Redirección para rutas no encontradas */}

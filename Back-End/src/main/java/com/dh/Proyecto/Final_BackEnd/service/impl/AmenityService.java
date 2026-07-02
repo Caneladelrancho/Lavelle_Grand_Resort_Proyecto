@@ -1,7 +1,10 @@
 package com.dh.Proyecto.Final_BackEnd.service.impl;
 
+import com.dh.Proyecto.Final_BackEnd.exceptions.DuplicateResourceException;
+import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceNotFoundException;
 import com.dh.Proyecto.Final_BackEnd.model.Amenity;
 import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
+import com.dh.Proyecto.Final_BackEnd.model.dto.AmenityResponseDto;
 import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
 import com.dh.Proyecto.Final_BackEnd.repository.IAmenityRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IAmenityService;
@@ -24,11 +27,11 @@ public class AmenityService implements IAmenityService {
     private IImageService imageService;
 
     @Override
-    public Amenity saveAmenity(AdminProductDto adminProductDto) throws IOException {
+    public AmenityResponseDto saveAmenity(AdminProductDto adminProductDto) throws IOException {
 
         Optional<Amenity> existingAmenity = amenityRepository.findByName(adminProductDto.getName());
         if (existingAmenity.isPresent()){
-            throw new IllegalArgumentException("Ya existe un servicio con el nombre: " + adminProductDto.getName());
+            throw new DuplicateResourceException("Ya existe un servicio con el nombre: " + adminProductDto.getName());
         }
 
         try {
@@ -44,7 +47,12 @@ public class AmenityService implements IAmenityService {
                     imageService.saveImageAmenity(imageFile, savedAmenity);
                 }
             }
-            return savedAmenity;
+            return new AmenityResponseDto(
+                    savedAmenity.getId(),
+                    savedAmenity.getName(),
+                    savedAmenity.getDescription(),
+                    savedAmenity.getNeedsReservation()
+            );
 
 
         }catch (Exception e){
@@ -115,17 +123,11 @@ public class AmenityService implements IAmenityService {
 
     @Override
     public void deleteAmenity(Long id) throws Exception {
-        try {
+
             Amenity amenity = amenityRepository.findById(id)
-                    .orElseThrow(() -> new Exception("Amenity not found with id: " + id));
+                    .orElseThrow(() -> new ResourceNotFoundException("Amenity not found with id: " + id));
 
             imageService.deleteImagesAmenity(id);
             amenityRepository.delete(amenity);
-
-
-        }catch (Exception e){
-            throw new Exception("Unable to delete amenity: " + e.getMessage(), e);
-
-        }
     }
 }

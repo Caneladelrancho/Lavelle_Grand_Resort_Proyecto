@@ -14,15 +14,68 @@ export const AddProductComponent = () => {
         needsReservation: false
     })
 
+    const [errors, setErrors] = useState({})
 
     const [loading, setLoading] = useState(false)
-    
+
     const { showSuccess, showError } = UseSweetAlert()
 
-    const handleSubmit = async (e) => {
+    const validate = () => {
+        const newErrors = {}
 
+        //Validación de nombre
+        if (!product.name.trim()) {
+            newErrors.name = 'El nombre del producto es obligatorio.'
+        } else if (product.name.trim().length < 3) {
+            newErrors.name = 'El nombre debe tener al menos 3 caracteres.'
+        }
+
+        //Validación de descripción
+        if (!product.description.trim()) {
+            newErrors.description = 'La descripción es obligatoria.'
+
+        } else if (product.description.trim().length < 10) {
+            newErrors.description = 'La descripción debe tener al menos 10 caracteres.'
+        }
+
+        //Validación de imágenes
+        if (!product.images || product.images.length === 0) {
+            newErrors.images = 'Debes seleccionar a menos una imagen.'
+        } else {
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
+            const maxSizeInBytes = 50 * 1024 * 1024
+
+
+            const imageArray = Array.from(product.images)
+
+            const hasInvalidType = imageArray.some(img => !allowedTypes.includes(img.type))
+            const hasInvalidSize = imageArray.some(img => img.size > maxSizeInBytes)
+
+            if (hasInvalidType) {
+                newErrors.images = 'Solo se permiten imágenes en formato JPG, JPEG o PNG.'
+
+            } else if (hasInvalidSize) {
+                newErrors.images = 'Cada imagen debe pesar máximo 50MB.'
+            }
+        }
+
+        return newErrors
+
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setLoading(true)        
+
+        const validationErrors = validate()
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors)
+            return
+        }
+
+        setErrors({})
+        setLoading(true)
+
         console.log('Formulario enviado', product);
 
         // Crear FormData
@@ -37,7 +90,7 @@ export const AddProductComponent = () => {
             })
         }
 
-        try {            
+        try {
             if (product.type === 'room') {
                 await createRoom(formData)
                 showSuccess('!Habitación agregada exitosamente!')
@@ -46,7 +99,7 @@ export const AddProductComponent = () => {
                 formData.append('needsReservation', product.needsReservation ? 'true' : 'false')
                 await createAmenity(formData)
                 showSuccess('!Servicio agregado exitosamente!')
-            }            
+            }
 
             setProduct({ //resetear formulario
                 type: 'room',
@@ -60,7 +113,7 @@ export const AddProductComponent = () => {
 
         } catch (err) {
             console.error('error completo:', err);
-            console.error('mensaje:', err.message);                       
+            console.error('mensaje:', err.message);
             showError('Ya existe un producto con ese nombre. Intenta nuevamente')
         } finally {
             setLoading(false)
@@ -83,21 +136,27 @@ export const AddProductComponent = () => {
                         id='nombre'
                         name='nombre'
                         value={product.name}
-                        onChange={(e) => setProduct({ ...product, name: e.target.value })}
-                        required
+                        onChange={(e) => {
+                            setProduct({ ...product, name: e.target.value })
+                            if (errors.name) setErrors({ ...errors, name: null })
+                        }}
                     />
+                    {errors.name && <span className="error-message">{errors.name}</span>}
                 </div>
 
                 <div className="category-form">
-                    <label htmlFor="descripcion">Descripción</label>
+                    <label htmlFor="descripción">Descripción</label>
                     <textarea
                         type="text"
-                        id='descripcion'
-                        name='descripcion'
+                        id='descripción'
+                        name='descripción'
                         value={product.description}
-                        onChange={(e) => setProduct({ ...product, description: e.target.value })}
-                        required
+                        onChange={(e) => {
+                            setProduct({ ...product, description: e.target.value })
+                            if (errors.description) setErrors({ ...errors, description: null })
+                        }}
                     />
+                    {errors.description && <span className="error-message">{errors.description}</span>}
                 </div>
 
                 <div className="category-form">
@@ -106,11 +165,14 @@ export const AddProductComponent = () => {
                         type="file"
                         id='imagenes'
                         name='imagenes'
-                        onChange={(e) => setProduct({ ...product, images: e.target.files })}
+                        onChange={(e) => {
+                            setProduct({ ...product, images: e.target.files })
+                            if (errors.images) setErrors({ ...errors, images: null })
+                        }}
                         accept='.jpeg, .png, .jpg'
                         multiple
-                        required
                     />
+                    {errors.images && <span className="error-message">{errors.images}</span>}
                 </div>
 
                 <div className="category-form">
@@ -139,7 +201,7 @@ export const AddProductComponent = () => {
                 )}
 
                 <button type="submit" className="submitt-button" disabled={loading}>
-                    {loading ? 'Agregando...' : 'Agregar producto'}                    
+                    {loading ? 'Agregando...' : 'Agregar producto'}
                 </button>
             </div>
         </form>

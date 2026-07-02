@@ -1,5 +1,6 @@
 package com.dh.Proyecto.Final_BackEnd.configuration;
 
+import com.dh.Proyecto.Final_BackEnd.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -41,6 +42,11 @@ public class JwtUtil  {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDetails.getAuthorities()
                 .iterator().next().getAuthority());
+
+        User user = (User) userDetails;
+        claims.put("name", user.getName());
+        claims.put("lastName", user.getLastName());
+
         return generateToken(claims, userDetails);
     }
 
