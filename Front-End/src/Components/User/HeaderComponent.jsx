@@ -45,7 +45,7 @@ export const HeaderComponent = () => {
                         <ul className='header-buttons'>
 
                             <Link
-                                to="/sigup"
+                                to="/register"
                                 className='user-buttons' 
                                 onClick={handleLinkClick}                                
                             >

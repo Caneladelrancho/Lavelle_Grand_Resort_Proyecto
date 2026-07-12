@@ -2,6 +2,7 @@ package com.dh.Proyecto.Final_BackEnd.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,10 @@ public class RegisterRequestDto {
 
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
+    @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*[0-9]).+$",
+            message = "La contraseña debe contener al menos una mayúscula y un número"
+    )
     private String password;
 
 }

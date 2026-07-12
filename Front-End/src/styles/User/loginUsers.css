@@ -4,8 +4,7 @@
     overflow: hidden;
 }
 
-.left-image-panel{
-    max-width: 800px;
+.left-image-panel{    
     flex: 1;
     background-image: url('img/Admin_login.jpeg');    
     background-size: cover;
@@ -14,15 +13,13 @@
 }
 
 /*----------Lado derecho----------*/
-.login-form-panel{
-    width: 572px;
+.login-form-panel{    
     flex: 1;    
     background-color: #fff3d6;
     display: flex;
     align-items: center;
     justify-content: center;    
     padding: 3rem;
-
 }
 
 .login-form-container{
@@ -37,16 +34,6 @@
 .login-title{
     color: #15667A;
     text-align: center;
-}
-
-.login-error{
-    background-color: rgba(220, 38, 39, 0.08);
-    border-left: 3px solid #dc2626;
-    color: #dc2626;
-    padding: 0.75rem 1rem;
-    border-radius: 2px;
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
 }
 
 .login-form{
@@ -86,7 +73,8 @@
 }
 
 .form-input-login::placeholder{
-    color: #02283B;
+    color: gray;
+    opacity: 0.5;
 }
 
 .login-btn{
@@ -103,4 +91,83 @@
 .login-btn:hover {
     background: linear-gradient(135deg, #18748B 0%, #02283B 100%);
     transform: translateY(-1px);    
+}
+
+/*----RESPONSIVE---*/
+/*--TABLET--*/
+
+@media screen and (max-width: 768px) {
+
+    .login-page{
+        flex-direction: column;           
+        min-height: 100vh;
+    }
+
+    .left-image-panel{       
+        width: 100%;
+        height: 280px;  
+        order: -1;    
+
+    }
+
+    .login-form-panel{        
+        margin-top: -60px;
+        border-radius: 30px 30px 0 0;
+        z-index: 1;
+        padding: 2rem 1.5rem;
+
+    }
+
+    .login-header{
+        margin-bottom: 65px;        
+    }
+
+    .login-form{
+        gap: 30px;
+    }
+
+    .login-btn{
+        margin-top: 17px;
+        font-size: 17px;
+    }
+    
+}
+
+/*--MOBILE--*/
+@media screen and (max-width: 480px) {
+
+    .login-page{
+        flex-direction: column;           
+        min-height: 100vh;
+    }
+
+    .left-image-panel{       
+        width: 100%;
+        height: 280px;  
+        order: -1;    
+
+    }
+
+    .login-form-panel{        
+        margin-top: -60px;
+        border-radius: 30px 30px 0 0;
+        z-index: 1;
+        padding: 2rem 1.5rem;
+
+    }
+
+    .login-header{
+        margin-bottom: 65px;        
+    }
+
+    .login-form{
+        gap: 30px;
+    }
+
+    .login-btn{
+        margin-top: 17px;
+        font-size: 17px;
+    }
+
+    
 }

@@ -1,0 +1,228 @@
+.register-page{
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.right-image-panel{    
+    flex: 1;
+    background-image: url('img/register-panel.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/*----------Lado izquierdo----------*/
+.register-form-panel{    
+    flex: 1;
+    background-color: #fff3d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.register-form-container{
+    width: 100%;
+    max-width: 360px;
+}
+
+
+.register-header{
+    margin-bottom: 40px;
+}
+
+.register-header p{
+    color: #15667a;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+.register-title{
+    color: #15667a;
+    text-align: center;
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group-register{
+    margin-bottom: 10px;
+}
+
+.form-label{
+    display: block;
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    color: #034363;
+    margin-bottom: 5px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.form-input-register{
+    width: 100%;
+    padding: 13px;
+    background-color: #fff3d6;
+    border: 1px solid #1b839d;
+    border-radius: 5px;
+    box-sizing: border-box;    
+    
+}
+
+.form-input-register:focus{
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 0 3px rgba(3, 67, 99, 0.08);
+}
+
+.form-input-register::placeholder{
+    color: gray;
+    opacity: 0.5;
+}
+
+.register-btn{
+    width: 100%;
+    padding: 13px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #219EBC 0%, #034363 100%);
+    color: #fff3d6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-btn:hover{
+    background: linear-gradient(135deg, #18748B 0%, #02283B 100%);
+    transform: translateY(-1px);
+}
+
+.error-message {
+    color: #d9534f;     
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+}
+
+/*----RESPONSIVE---*/
+/*--TABLET--*/
+
+@media screen and (max-width: 768px){
+    .register-page{
+        flex-direction: column;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .right-image-panel{       
+        width: 100%;
+        height: 380px;           
+        flex-shrink: 0;
+        order: -1;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        
+    }
+
+    .register-form-panel{                                
+        padding: 2rem 1.5rem;
+        border-radius: 40px 40px 0 0;
+        margin-top: -40px;       
+        z-index: 20;
+    }
+
+    .register-form-container{
+        max-width: 500px;
+    }
+
+    .register-header{
+        margin-bottom: 40px;
+    }
+
+    .register-title{
+        font-size: 2.5rem;
+    }
+
+    .register-header p{
+        font-size: 1rem;
+        margin-top: 1.2rem;
+        line-height: 1.5;
+    }
+
+    .form-label{
+        font-size: 1.5rem;
+    }
+
+    .register-form{
+        gap: 18px;
+    }
+
+    .register-btn{
+        padding: 16px;
+        font-size: 1.2rem;
+    }
+
+}
+
+/*--MOBILE--*/
+@media screen and (max-width: 480px) {
+
+    .register-page{
+        flex-direction: column;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .right-image-panel{       
+        width: 100%;
+        height: 300px;           
+        flex-shrink: 0;
+        order: -1;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        
+    }
+
+    .register-form-panel{                                
+        padding: 2rem 1.5rem;
+        border-radius: 35px 35px 0 0;
+        margin-top: -40px;       
+        z-index: 20;
+    }
+
+    .register-form-container{
+        max-width: 320px;
+    }
+
+    .register-header{
+        margin-bottom: 40px;
+    }
+
+    .register-title{
+        font-size: 2rem;
+    }
+
+    .register-header p{
+        font-size: 1rem;
+        margin-top: 1.2rem;
+        line-height: 1.5;
+    }
+
+    .form-label{
+        font-size: 1.3rem;
+    }
+
+    .register-form{
+        gap: 18px;
+    }
+
+    .register-btn{
+        font-size: 1rem;
+    }
+}    

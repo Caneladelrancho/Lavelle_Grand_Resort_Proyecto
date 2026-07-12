@@ -7,10 +7,11 @@ import { FooterComponent } from "./Components/User/FooterComponent";
 import { LoginComponent } from "./Components/Authentication/LoginComponent";
 import { ProtectedRoute } from "./Components/Authentication/ProtectedRoute";
 import { RegisterComponent } from "./Components/Authentication/RegisterComponent";
+import { ProfileComponent } from "./Components/User/ProfileComponent";
 
 export const BookingApp = () => {
   const location = useLocation()
-  const isAdminRoute = location.pathname.startsWith('/admin') || location.pathname === '/login'
+  const isAdminRoute = location.pathname.startsWith('/admin') || location.pathname === '/login' || location.pathname === '/register'
   const isHomePage = location.pathname === '/'
 
   return (
@@ -34,6 +35,8 @@ export const BookingApp = () => {
         />
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
+        <Route path="/profile" element={<ProfileComponent />} />
+
         
 
 
