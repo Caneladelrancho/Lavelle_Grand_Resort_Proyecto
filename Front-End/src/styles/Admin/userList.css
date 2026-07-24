@@ -1,49 +1,49 @@
-.product-list-container{
+.user-list-container{
     padding: 3rem;
+    
 }
 
-.product-list-container h2{
-    font-size: 30px;
+.usr-list-title{
+    font-size: 2.2rem;
     color: #034363;
     text-align: center;
 }
 
-.product-table{
+.user-table{
     width: 100%;
-    margin-top: 55px;   
-    
+    margin-top: 3.5rem;
 }
 
-.product-table tr{
+.user-table tr{
     text-align: center;
-    font-size: 18px;
-    
+    font-size: 1.2rem;
 }
 
-.product-table th{
-    background-color: #FFF9EB;
+.user-table th{
+    background-color: #fff9eb;
     border-radius: 5px;
     font-size: 20px;
     color: #034363;
     padding: 10px 2px;
 }
 
-.product-table td{
+.user-table td{
+    color: #034363;
     padding: 10px 5px;
     border-bottom: 1px solid #fff9eb;
-    color: #034363;
+    
 }
 
-table .delete-button{
-    background-color: #1B839D;
+table .chg-role-button{
+    background-color: #1b839d;
     border: none;
-    color: #FFF9EB;
+    color: #fff9eb;
     padding: 9px 12px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 17px;
 }
 
-.delete-button:hover{
+.chg-role-button:hover{
     background-color: #034363;
 }

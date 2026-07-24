@@ -46,6 +46,7 @@ public class JwtUtil  {
         User user = (User) userDetails;
         claims.put("name", user.getName());
         claims.put("lastName", user.getLastName());
+        claims.put("id", user.getId());
 
         return generateToken(claims, userDetails);
     }

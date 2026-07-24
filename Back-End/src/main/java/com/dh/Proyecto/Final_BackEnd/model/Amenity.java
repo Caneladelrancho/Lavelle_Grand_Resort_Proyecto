@@ -37,4 +37,9 @@ public class Amenity {
     @ManyToMany(mappedBy = "amenities")
     private List<Reservation> reservations;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
 }

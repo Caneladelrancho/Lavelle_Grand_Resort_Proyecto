@@ -73,7 +73,8 @@ public class ImageService implements IImageService {
         return UUID.randomUUID().toString() + "_" + sanitizedFileName;
     }
 
-    private String processAndSaveFile(MultipartFile file) throws IOException {
+    @Override
+    public String processAndSaveFile(MultipartFile file) throws IOException {
 
         String fileName = processFileName(file.getOriginalFilename());
         Path destinationFile = ROOT_LOCATION.resolve(Paths.get(fileName));
@@ -144,67 +145,21 @@ public class ImageService implements IImageService {
         }catch (Exception e){
             throw new Exception("Unable to retreive images" + e.getMessage(), e);
         }
-
     }
 
+    //Eliminar imagenes de la BBD y archivo fisico
     @Override
-    public void deleteImagesRoom(Long id) throws IOException {
+    public void deletePhysicalFile(String filePath) throws IOException {
         try{
-            List<Image> images = imageRepository.findByRoomId(id);
+            Path oldPath = Paths.get(filePath);
+            String fileName = oldPath.getFileName().toString();
+            Path targetPath = ROOT_LOCATION.resolve(fileName);
 
-            if (!images.isEmpty()){
-                for (Image image : images){
-                    //Eliminar archivo fisico
-                    try{
-                        Path oldPath = Paths.get(image.getImageUrl());
-                        String fileName = oldPath.getFileName().toString();
-                        Path newPath = ROOT_LOCATION.resolve(fileName);
-
-                        if (Files.exists(newPath)){
-                            Files.delete(newPath);
-                        }
-                    }catch (IOException e){
-                        System.out.println("Warning: Could not delete physical file: " + image.getImageUrl());
-                    }
-                }
-                imageRepository.deleteAll(images);
+            if (Files.exists(targetPath)){
+                Files.delete(targetPath);
             }
-        }catch (Exception e){
-            throw new IOException("Unable to delete images for room ID " + id + ": " + e.getMessage(), e);
+        }catch (IOException e){
+            System.out.println("Warning: Could not delete physical file: " + filePath);
         }
     }
-
-    @Override
-    public void deleteImagesAmenity(Long id) throws IOException {
-        try{
-            List<Image> images = imageRepository.findByAmenityId(id);
-
-            if (!images.isEmpty()){
-                for (Image image : images){
-                    //Eliminar archivo fisico
-                    try{
-                        Path oldPath = Paths.get(image.getImageUrl());
-                        String fileName = oldPath.getFileName().toString();
-                        Path newPath = ROOT_LOCATION.resolve(fileName);
-
-                        if (Files.exists(newPath)){
-                            Files.delete(newPath);
-                        }
-                    }catch (IOException e){
-                        System.out.println("Warning: Could not delete physical file: " + image.getImageUrl());
-                    }
-                }
-                imageRepository.deleteAll(images);
-            }
-        }catch (Exception e){
-            throw new IOException("Unable to delete images for amenity ID " + id + ": " + e.getMessage(), e);
-        }
-
-    }
-
-
-
-
-
-
 }

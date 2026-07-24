@@ -1,7 +1,7 @@
 .admin-sidebar{ 
     width: 250px; 
     background-color: #034363; 
-    color: #FFF3D6; 
+    color: #FFF9EB; 
     display: flex; 
     flex-direction: column;    
     position: fixed; 
@@ -14,12 +14,12 @@
 .hotel-branding{
     padding: 2rem 1.5rem;
     text-align: center;
-    border-bottom: 1px solid #FFF3D6;    
+    border-bottom: 1px solid #FFF9EB;    
 }
 
 
 .hotel-branding h1{
-    color: #FFF3D6;
+    color: #FFF9EB;
 }
 .admin-navigation{
     flex: 1;
@@ -53,15 +53,15 @@
 
 .admin-logout{
     padding: 1.5rem;
-    border-top: 1px solid #FFF3D6;
+    border-top: 1px solid #FFF9EB;
 }
 
 .logout-btn {
   width: 100%;
   padding: 0.75rem 1rem;
   background: transparent;
-  border: 1px solid #FFF3D6;
-  color: #FFF3D6;
+  border: 1px solid #FFF9EB;
+  color: #FFF9EB;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;

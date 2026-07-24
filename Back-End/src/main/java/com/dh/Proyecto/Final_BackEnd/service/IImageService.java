@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IImageService {
+    String processAndSaveFile(MultipartFile file) throws IOException;
     Image saveImageRoom(MultipartFile file, Room room) throws IOException;
     Image saveImageAmenity(MultipartFile file, Amenity amenity) throws IOException;
     List<String> findImageUrlsRoom(Room room) throws Exception;
     List<String> findImageUrlsAmenity(Amenity amenity) throws Exception;
-    void deleteImagesRoom (Long id) throws IOException;
-    void deleteImagesAmenity(Long id) throws IOException;
+    void deletePhysicalFile(String filePath) throws IOException;
 }

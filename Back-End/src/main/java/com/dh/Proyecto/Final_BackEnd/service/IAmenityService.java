@@ -14,5 +14,6 @@ public interface IAmenityService {
     List<ProductDisplayDto> displayAmenities() throws IOException;
     List<ProductDisplayDto> findAllAmenities() throws Exception;
     void deleteAmenity(Long id) throws Exception;
+    AmenityResponseDto updateAmenity(Long id, AdminProductDto adminProductDto) throws IOException;
 
 }

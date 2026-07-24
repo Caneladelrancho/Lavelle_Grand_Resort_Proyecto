@@ -37,12 +37,13 @@
 
 .ftr-list {
   list-style: none;
-  color: #fff3d6;
+  color: #FFF9EB;
   font-size: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   cursor: pointer;
+  padding: 0;  
 }
 
 .section-two-ftr {
@@ -51,8 +52,13 @@
   gap: 21px;
 }
 
+.footer-contact{
+  text-align: center;
+}
+
 .footer-contact h3 {
-  color: #fff3d6;
+  color: #FFF9EB;
+  text-align: center;
 }
 
 .btn-contact {
@@ -67,15 +73,16 @@
 .footer-social {
   display: flex;
   gap: 15px;
+  
 }
 
 .footer-social a {
-  color: #fff3d6;
+  color: #FFF9EB;
 }
 
 .copyright {
   text-align: center;
-  color: #fff3d6;
+  color: #FFF9EB;
   font-size: 11px;
 }
 
@@ -102,11 +109,7 @@
   .section-two-ftr {
     align-items: center;
   }
-
-  .btn-contact {
-    margin-left: 70px;
-    
-  }
+  
 }
 
 /*--MOBILE--*/
@@ -150,8 +153,7 @@
     color: #034363;
   }
 
-  .btn-contact {
-    margin-left: 70px;
+  .btn-contact {    
     background-color: #034363;
     color: #fedd9a;
   }

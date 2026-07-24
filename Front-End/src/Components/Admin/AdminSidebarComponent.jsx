@@ -34,12 +34,18 @@ export const AdminSidebarComponent = () => {
                     Listar productos
                 </Link>
 
+                <Link to='/admin/usuarios'
+                    className={`nav-item ${location.pathname === '/admin/usuarios' ? 'active' : ''}`}
+                >
+                    Listar usuarios
+                </Link>
+
                 {/*-----AGREGAR MAS NAVEGACION AQUI-----*/}
             </nav>
 
             <div className='admin-logout'>
                 <button className='logout-btn' onClick={handleLogout}>
-                    Log out
+                    Cerrar sesión
                 </button>
             </div>
         </aside>

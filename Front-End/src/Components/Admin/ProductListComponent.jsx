@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { UseSweetAlert } from "../../Hooks/sweetAlertHook"
+import { useSweetAlert } from "../../Hooks/sweetAlertHook"
 import { deleteAmenity, deleteRoom, getAllAmenitiesForAdmin, getAllRoomsForAdmin } from "../../Api/Api"
 import '../../styles/Admin/productList.css'
 
@@ -11,7 +11,7 @@ export const ProductListComponent = () => {
   const [error, setError] = useState('')
 
   //Funciones de sweetAlert
-  const {showConfirm, showSuccess, showError} = UseSweetAlert()
+  const {showConfirm, showSuccess, showError} = useSweetAlert()
 
   //Cuando se monta el componente, se carga los productos
   useEffect(() => {
@@ -93,7 +93,7 @@ export const ProductListComponent = () => {
               <tr key={`${product.type}-${product.id}`}>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
-                <td className={`type-bafge ${product.type}`}>
+                <td className={`type-badge ${product.type}`}>
                   {product.type === 'room' ? 'Habitación' : 'Amenity'}
                 </td>
                 <td>

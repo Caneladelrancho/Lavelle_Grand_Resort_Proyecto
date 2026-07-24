@@ -49,6 +49,18 @@ export const registerAdmin = async (userData) => {
     return response.data
 }
 
+//---------------USERS------------------//
+
+export const getAllUsers = async () =>{
+    const response = await api.get('/admin/users')
+    return response.data
+}
+
+export const updateUser = async (id, role) =>{
+    const response = await api.put(`/admin/users/${id}/role`, {role})
+    return response.data
+}
+
 //--------------ROOMS---------------//
 
 //Crear room con imagenes

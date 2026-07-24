@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { UseSweetAlert } from "../../Hooks/sweetAlertHook"
+import { useSweetAlert } from "../../Hooks/sweetAlertHook"
 import '../../styles/User/roomSearch.css'
 
 
@@ -13,7 +13,7 @@ export const RoomSearchComponent = () => {
         roomType: 'any'
     })
 
-    const {showError} = UseSweetAlert()
+    const {showError} = useSweetAlert()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target

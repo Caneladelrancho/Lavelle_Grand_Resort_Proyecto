@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { UseSweetAlert } from "../../Hooks/sweetAlertHook"
+import { useSweetAlert } from "../../Hooks/sweetAlertHook"
 import { useAuth } from "./AuthContext"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../Api/Api"
@@ -19,7 +19,7 @@ export const RegisterComponent = () => {
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
 
-  const { showError } = UseSweetAlert()
+  const { showError } = useSweetAlert()
   const { login } = useAuth()
   const navigate = useNavigate()
 

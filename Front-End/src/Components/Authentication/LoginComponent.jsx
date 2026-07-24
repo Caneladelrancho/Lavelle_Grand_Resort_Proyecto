@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "./AuthContext"
 import { loginUser } from "../../Api/Api"
-import { UseSweetAlert } from "../../Hooks/sweetAlertHook"
+import { useSweetAlert } from "../../Hooks/sweetAlertHook"
 import '../../styles/User/loginUsers.css'
 
 
@@ -13,7 +13,7 @@ export const LoginComponent = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
 
-    const { showError } = UseSweetAlert()
+    const { showError } = useSweetAlert()
 
     const { login } = useAuth()
     const navigate = useNavigate()
@@ -26,9 +26,7 @@ export const LoginComponent = () => {
             const data = await loginUser(email, password)
             login(data.token)
 
-            const decoded = jwtDecode(data.token)
-            console.log(decoded) 
-            console.log(decoded.role)
+            const decoded = jwtDecode(data.token)            
 
             if (decoded.role === "ROLE_ADMIN") {
                 navigate("/admin")

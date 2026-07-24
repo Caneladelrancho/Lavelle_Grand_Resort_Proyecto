@@ -84,7 +84,7 @@ export const ProductDetailComponent = () => {
             {/*HEADER*/}
 
             <header className="product-header">
-                <h1 className='title'>Lavelle Grand Resort</h1>
+                <h1>Lavelle Grand Resort</h1>
             </header>
 
             {/*BODY*/}

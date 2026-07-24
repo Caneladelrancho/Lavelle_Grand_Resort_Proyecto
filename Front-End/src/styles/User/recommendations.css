@@ -9,21 +9,21 @@
 .recommendations-title {
     color: #034363;
     text-align: center;
-    font-size: 23px;
+    font-size: clamp(1.15rem, 1.5vw + 0.9rem, 1.4375rem);
 }
 
 .recommendations-grid {
     margin-top: 5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: clamp(2.5rem, 1vw + 2.2rem, 2.8125rem);
 }
 
 .product-card {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    height: 550px;
+    height: clamp(400px, 60vw, 550px);
 }
 
 .product-card:hover {
@@ -48,16 +48,10 @@
     }
 
     .recommendations-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 45px;
+        grid-template-columns: repeat(1, 1fr);        
     }
-
-    .product-card {
-        height: 600px;
-    }
+    
 }
-
-
 
 /*-----MOBILE------*/
 @media screen and (max-width: 480px) {
@@ -66,12 +60,7 @@
     }
 
     .recommendations-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 45px;
-    }
-
-    .product-card {
-        height: 400px;
-    }
+        grid-template-columns: repeat(1, 1fr);        
+    }   
 
 }

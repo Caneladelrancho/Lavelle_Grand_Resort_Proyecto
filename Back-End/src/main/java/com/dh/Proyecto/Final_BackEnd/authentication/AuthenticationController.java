@@ -3,6 +3,7 @@ package com.dh.Proyecto.Final_BackEnd.authentication;
 import com.dh.Proyecto.Final_BackEnd.model.dto.AuthenticationRequestDto;
 import com.dh.Proyecto.Final_BackEnd.model.dto.AuthenticationResponseDto;
 import com.dh.Proyecto.Final_BackEnd.model.dto.RegisterRequestDto;
+import com.dh.Proyecto.Final_BackEnd.service.IUserService;
 import com.dh.Proyecto.Final_BackEnd.service.impl.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,19 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final UserService userService;
+    private final IUserService iUserService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponseDto> register(
            @Valid @RequestBody RegisterRequestDto request){
-        return ResponseEntity.ok(userService.registerUser(request));
+        return ResponseEntity.ok(iUserService.registerUser(request));
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponseDto> login(
            @Valid @RequestBody AuthenticationRequestDto request
     ){
-        return ResponseEntity.ok(userService.login(request));
+        return ResponseEntity.ok(iUserService.login(request));
     }
 
 }

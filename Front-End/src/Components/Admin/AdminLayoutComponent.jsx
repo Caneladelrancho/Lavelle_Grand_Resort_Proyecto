@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import '../../styles/Admin/adminLayout.css'
 import { useEffect, useState } from "react";
 import { ProductListComponent } from "./ProductListComponent";
+import { UserListComponent } from "./UserListComponent";
 
 
 export const AdminLayoutComponent = ({ children, adminName }) => {
@@ -50,6 +51,7 @@ export const AdminLayoutComponent = ({ children, adminName }) => {
           <Routes>
             <Route path="agregar-producto" element={<AddProductComponent />} />
             <Route path="productos" element={<ProductListComponent />} />
+            <Route path="usuarios" element={<UserListComponent />} />
             <Route path="" element={
               <div className="welcome-container">
                 <div className="welcome-overlay">

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { createRoom, createAmenity } from '../../Api/Api'
-import { UseSweetAlert } from '../../Hooks/sweetAlertHook';
+import { useSweetAlert } from '../../Hooks/sweetAlertHook';
 import '../../styles/Admin/addProduct.css'
 
 
@@ -18,7 +18,7 @@ export const AddProductComponent = () => {
 
     const [loading, setLoading] = useState(false)
 
-    const { showSuccess, showError } = UseSweetAlert()
+    const { showSuccess, showError } = useSweetAlert()
 
     const validate = () => {
         const newErrors = {}

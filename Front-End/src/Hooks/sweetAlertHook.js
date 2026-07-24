@@ -1,16 +1,16 @@
 import Swal from "sweetalert2";
 
-export const UseSweetAlert =() =>{
+export const useSweetAlert = () => {
 
-    const showConfirm = async (title, text) =>{
+    const showConfirm = async (title, text, confirmText = 'Sí, eliminar', cancelText = 'Cancelar') => {
         const result = await Swal.fire({
             title: title,
             text: text,
             icon: 'warning',
             background: '#fff3d6',
             showCancelButton: true,
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: confirmText,
+            cancelButtonText: cancelText,
             confirmButtonColor: '#EB1E4E',
             cancelButtonColor: '#034363',
 
@@ -37,6 +37,6 @@ export const UseSweetAlert =() =>{
         })
     }
 
-    return {showConfirm, showSuccess, showError}
-    
+    return { showConfirm, showSuccess, showError }
+
 }

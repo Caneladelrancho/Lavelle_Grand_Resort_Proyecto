@@ -14,4 +14,5 @@ public interface IRoomService {
     List<ProductDisplayDto> displayRooms() throws IOException;
     List<ProductDisplayDto> findAllRooms() throws Exception;//Listar todos los rooms que ya esten registrados
     void deleteRoom(Long id) throws Exception;//Eliminar los rooms
+    RoomResponseDto updateRoom(Long id, AdminProductDto adminProductDto) throws IOException;
 }

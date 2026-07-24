@@ -1,11 +1,11 @@
 .register-page{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     height: 100vh;
-    overflow: hidden;
+    
 }
 
 .right-image-panel{    
-    flex: 1;
     background-image: url('img/register-panel.jpeg');
     background-size: cover;
     background-position: center;
@@ -15,9 +15,8 @@
 /*----------Lado izquierdo----------*/
 .register-form-panel{    
     flex: 1;
-    background-color: #fff3d6;
-    display: flex;
-    align-items: center;
+    background-color: #FFF9EB;
+    display: flex;    
     justify-content: center;
     padding: 3rem;
 }
@@ -25,6 +24,7 @@
 .register-form-container{
     width: 100%;
     max-width: 360px;
+    margin: auto 0;
 }
 
 
@@ -35,13 +35,14 @@
 .register-header p{
     color: #15667a;
     text-align: center;
-    font-size: 16px;
+    font-size: clamp(1rem, 0.3vw + 0.9rem, 1rem);
     margin-top: 40px;
 }
 
 .register-title{
     color: #15667a;
     text-align: center;
+    font-size: clamp(2rem, 2vw + 1.3rem, 2.3rem);
 }
 
 .register-form{
@@ -56,18 +57,17 @@
 
 .form-label{
     display: block;
-    font-size: 18px;
+    font-size: clamp(1.1875rem, 1.5vw + 1rem, 1.5rem);
     letter-spacing: 1.2px;
     color: #034363;
-    margin-bottom: 5px;
-    font-size: 19px;
+    margin-bottom: 5px;    
     font-weight: 600;
 }
 
 .form-input-register{
     width: 100%;
     padding: 13px;
-    background-color: #fff3d6;
+    background-color: #FFF9EB;
     border: 1px solid #1b839d;
     border-radius: 5px;
     box-sizing: border-box;    
@@ -89,8 +89,9 @@
     width: 100%;
     padding: 13px;
     font-weight: 600;
+    font-size: clamp(1rem, 1vw + 0.85rem, 1.2rem);
     background: linear-gradient(135deg, #219EBC 0%, #034363 100%);
-    color: #fff3d6;
+    color: #FFF9EB;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -111,118 +112,35 @@
 /*----RESPONSIVE---*/
 /*--TABLET--*/
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px), screen and (max-width: 1024px) and (orientation: portrait){
     .register-page{
-        flex-direction: column;
-        height: 100vh;
-        overflow-y: auto;
+        display: flex;
+        flex-direction: column;        
     }
 
-    .right-image-panel{       
+    .right-image-panel{ 
+        flex: 0 0 auto;      
         width: 100%;
-        height: 380px;           
-        flex-shrink: 0;
-        order: -1;
-        position: sticky;
-        top: 0;
-        z-index: 10;
+        height: clamp(280px, 35vw, 380px);                   
+        order: -1;       
         
     }
 
-    .register-form-panel{                                
+    .register-form-panel{   
+        flex: 1 0 auto;                             
         padding: 2rem 1.5rem;
         border-radius: 40px 40px 0 0;
-        margin-top: -40px;       
-        z-index: 20;
-    }
+        margin-top: -40px;   
+        position: relative;
+        z-index: 1;
+        
+    }    
 
-    .register-form-container{
-        max-width: 500px;
-    }
-
-    .register-header{
-        margin-bottom: 40px;
-    }
-
-    .register-title{
-        font-size: 2.5rem;
-    }
-
-    .register-header p{
-        font-size: 1rem;
-        margin-top: 1.2rem;
-        line-height: 1.5;
-    }
-
-    .form-label{
-        font-size: 1.5rem;
-    }
-
+   
     .register-form{
         gap: 18px;
     }
-
-    .register-btn{
-        padding: 16px;
-        font-size: 1.2rem;
-    }
+    
 
 }
 
-/*--MOBILE--*/
-@media screen and (max-width: 480px) {
-
-    .register-page{
-        flex-direction: column;
-        height: 100vh;
-        overflow-y: auto;
-    }
-
-    .right-image-panel{       
-        width: 100%;
-        height: 300px;           
-        flex-shrink: 0;
-        order: -1;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        
-    }
-
-    .register-form-panel{                                
-        padding: 2rem 1.5rem;
-        border-radius: 35px 35px 0 0;
-        margin-top: -40px;       
-        z-index: 20;
-    }
-
-    .register-form-container{
-        max-width: 320px;
-    }
-
-    .register-header{
-        margin-bottom: 40px;
-    }
-
-    .register-title{
-        font-size: 2rem;
-    }
-
-    .register-header p{
-        font-size: 1rem;
-        margin-top: 1.2rem;
-        line-height: 1.5;
-    }
-
-    .form-label{
-        font-size: 1.3rem;
-    }
-
-    .register-form{
-        gap: 18px;
-    }
-
-    .register-btn{
-        font-size: 1rem;
-    }
-}    

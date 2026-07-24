@@ -24,7 +24,7 @@ La paleta de colores está inspirada en los cálidos y atractivos colores que ro
 | Azul Cian | ![#1B839D](https://placehold.co/40x40/1B839D/1B839D.png) #1B839D |
 | Azul pacífico | ![#219EBC](https://placehold.co/40x40/219EBC/219EBC.png) #219EBC |
 | Amarillo suave | ![#FECF72](https://placehold.co/40x40/FECF72/FECF72.png) #FECF72 |
-| Beige claro | ![#FFF3D6](https://placehold.co/40x40/FFF3D6/FFF3D6.png) #FFF3D6 |
+| Oro pálido | ![#FFF9EB](https://placehold.co/40x40/FFF9EB/FFF9EB.png) #FFF9EB |
 
 
 ## Tecnologías ⚙️
