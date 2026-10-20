@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Lavelle Grand Resort -Open Api Documentation",
-                version = "1.0",
+                version = "2.0",
                 description = "Luxury resort API rest information"
 
         ),

@@ -1,8 +1,8 @@
 package com.dh.Proyecto.Final_BackEnd.service.impl;
 
-import com.dh.Proyecto.Final_BackEnd.model.Amenity;
-import com.dh.Proyecto.Final_BackEnd.model.Image;
-import com.dh.Proyecto.Final_BackEnd.model.Room;
+import com.dh.Proyecto.Final_BackEnd.entity.Amenity;
+import com.dh.Proyecto.Final_BackEnd.entity.Image;
+import com.dh.Proyecto.Final_BackEnd.entity.Room;
 import com.dh.Proyecto.Final_BackEnd.repository.IImageRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
 import jakarta.annotation.PostConstruct;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -109,8 +108,8 @@ public class ImageService implements IImageService {
     }
 
     @Override
-    public List<String> findImageUrlsRoom(Room room) throws Exception {
-        try {
+    public List<String> findImageUrlsRoom(Room room)  {
+
             List<Image> images = imageRepository.findByRoom(room);
             //Convertir las imagenes a URLs
             return images.stream()
@@ -122,15 +121,11 @@ public class ImageService implements IImageService {
 
                     })
                     .collect(Collectors.toList());
-
-        }catch (Exception e){
-            throw new Exception("Unable to retrieve images" + e.getMessage(), e);
-        }
     }
 
     @Override
-    public List<String> findImageUrlsAmenity(Amenity amenity) throws Exception {
-        try{
+    public List<String> findImageUrlsAmenity(Amenity amenity) {
+
             List<Image> images = imageRepository.findByAmenity(amenity);
             return images.stream()
                     .map(image -> {
@@ -141,13 +136,9 @@ public class ImageService implements IImageService {
 
                     })
                     .collect(Collectors.toList());
-
-        }catch (Exception e){
-            throw new Exception("Unable to retreive images" + e.getMessage(), e);
-        }
     }
 
-    //Eliminar imagenes de la BBD y archivo fisico
+    //Eliminar imagenes de la BD y archivo fisico
     @Override
     public void deletePhysicalFile(String filePath) throws IOException {
         try{

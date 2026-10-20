@@ -2,19 +2,22 @@ package com.dh.Proyecto.Final_BackEnd.service.impl;
 
 import com.dh.Proyecto.Final_BackEnd.exceptions.DuplicateResourceException;
 import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceNotFoundException;
-import com.dh.Proyecto.Final_BackEnd.model.Category;
-import com.dh.Proyecto.Final_BackEnd.model.Image;
-import com.dh.Proyecto.Final_BackEnd.model.Room;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.RoomResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.Category;
+import com.dh.Proyecto.Final_BackEnd.entity.Characteristic;
+import com.dh.Proyecto.Final_BackEnd.entity.Image;
+import com.dh.Proyecto.Final_BackEnd.entity.Room;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.*;
+import com.dh.Proyecto.Final_BackEnd.mapper.CategoryMapper;
+import com.dh.Proyecto.Final_BackEnd.mapper.CharacteristicMapper;
+import com.dh.Proyecto.Final_BackEnd.mapper.RoomMapper;
 import com.dh.Proyecto.Final_BackEnd.repository.ICategoryRepository;
+import com.dh.Proyecto.Final_BackEnd.repository.ICharecteristicRepository;
 import com.dh.Proyecto.Final_BackEnd.repository.IImageRepository;
 import com.dh.Proyecto.Final_BackEnd.repository.IRoomRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
 import com.dh.Proyecto.Final_BackEnd.service.IRoomService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +36,12 @@ public class RoomService implements IRoomService {
     private final IImageService imageService;
     private final IImageRepository imageRepository;
     private final ICategoryRepository categoryRepository;
+    private final ICharecteristicRepository characteristicRepository;
+    private final CategoryMapper categoryMapper;
+    private final CharacteristicMapper characteristicMapper;
+    private final RoomMapper roomMapper;
+
+
 
     //GUARDAR O AGREGAR UN ROOM CON IMÁGENES
     @Override
@@ -43,33 +52,43 @@ public class RoomService implements IRoomService {
             throw new DuplicateResourceException("Ya existe una habitación con el nombre: " + adminProductDto.getName());
         }
 
-        try {
             //Crear una entidad room y desde adminProductDto se asignan los valores, pero sin las imágenes
             Room room = new Room();
             room.setName(adminProductDto.getName());
             room.setDescription(adminProductDto.getDescription());
 
+            Category category = categoryRepository.findById(adminProductDto.getCategoryId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + adminProductDto.getCategoryId()));
+            room.setCategory(category);
+
+            //Validar que la lista de characteristics no venga vacia o no sea null, si pasa, se busca en la BD las characteristics
+            //y se asignan a la room
+            if (adminProductDto.getCharacteristicIds() != null && !adminProductDto.getCharacteristicIds().isEmpty()){
+                List<Characteristic> characteristics = characteristicRepository.findAllById(adminProductDto.getCharacteristicIds());
+                room.setCharacteristics(characteristics);
+            }
+
             Room savedRoom = roomRepository.save(room); //Guardar Room en la BD
 
             //Manejar varias imágenes si están presentes
-
             if (adminProductDto.getImages() != null && !adminProductDto.getImages().isEmpty()) {
                 for (MultipartFile imageFile : adminProductDto.getImages()) {
                     imageService.saveImageRoom(imageFile, savedRoom);
                 }
             }
 
+            //Convertir category a categoryResponseDto llamando al mapper de category
+            CategoryResponseDto categoryResponseDto = categoryMapper.mapCategoryToCategoryResponseDto(category);
+
+            List<CharacteristicResponseDto> characteristicResponseDtos = characteristicMapper.characteristicToResponseDtoList(savedRoom.getCharacteristics());
+
             return new RoomResponseDto(
                     savedRoom.getId(),
                     savedRoom.getName(),
-                    savedRoom.getDescription()
+                    savedRoom.getDescription(),
+                    categoryResponseDto,
+                    characteristicResponseDtos
             );
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
     }
 
     //MOSTRAR ROOMS AL USUARIO
@@ -86,17 +105,7 @@ public class RoomService implements IRoomService {
             List<ProductDisplayDto> displayDtos = new ArrayList<>();
 
             for (Room room : rooms){
-
-
-                ProductDisplayDto displayDto = new ProductDisplayDto();
-                displayDto.setId(room.getId());
-                displayDto.setName(room.getName());
-                displayDto.setDescription(room.getDescription());
-                displayDto.setType("ROOM");
-
-                List<String> imageUrls = imageService.findImageUrlsRoom(room);
-                displayDto.setImagesUrl(imageUrls);
-
+                ProductDisplayDto displayDto = roomMapper.mapRoomToRoomDisplayDto(room);
                 displayDtos.add(displayDto);
             }
 
@@ -123,12 +132,9 @@ public class RoomService implements IRoomService {
 
             for (Room room : rooms) {
                     // Crear un nuevo ProductDisplayDto con los datos básicos de la habitación
-                    ProductDisplayDto productDisplayDto = new ProductDisplayDto();
-                            productDisplayDto.setId(room.getId());
-                            productDisplayDto.setName(room.getName());
+                    ProductDisplayDto productDisplayDto = roomMapper.mapRoomToRoomDisplayDto(room);
 
-                            productDisplayDtos.add(productDisplayDto);
-
+                    productDisplayDtos.add(productDisplayDto);
             }
             return productDisplayDtos;
 
@@ -157,6 +163,7 @@ public class RoomService implements IRoomService {
     }
 
     @Override
+    @Transactional
     public RoomResponseDto updateRoom(Long id, AdminProductDto adminProductDto) throws IOException {
 
         //1- buscar la room existente
@@ -176,11 +183,13 @@ public class RoomService implements IRoomService {
         if (adminProductDto.getImages() != null && !adminProductDto.getImages().isEmpty()){
 
              //4a- Borrar las imagenes viejas en la bd y fisicas
-            List<Image> oldImages = imageRepository.findByRoomId(id);
+            List<Image> oldImages = room.getImages();
             for (Image oldImage : oldImages){
                 imageService.deletePhysicalFile(oldImage.getImageUrl());
             }
-            imageRepository.deleteAll(oldImages);
+            oldImages.clear();
+
+
 
             //4b - Guardar las imagenes nuevas
             for (MultipartFile imageFile : adminProductDto.getImages()){
@@ -188,17 +197,32 @@ public class RoomService implements IRoomService {
             }
         }
 
-        //5- guardar cambios
+        //5- Si no llega nada nuevo, no se ejecuta setCharacteristics y la room conserva las caracteristicas que ya tenia
+        // cargadas desde el findbyid inicial
+        if (adminProductDto.getCharacteristicIds() != null && !adminProductDto.getCharacteristicIds().isEmpty()){
+            List<Characteristic> characteristics = characteristicRepository.findAllById(adminProductDto.getCharacteristicIds());
+            room.setCharacteristics(characteristics);
+        }
+
+        //6- guardar cambios
         Room updatedRoom = roomRepository.save(room);
 
-        //6- devolver dto de respuesta
+        //7-Convertir category a categoryResponseDto
+        CategoryResponseDto categoryResponseDto = categoryMapper.mapCategoryToCategoryResponseDto(category);
+
+        /*8-Convertir la lista de caracteristicas de la entidad characteristic a una nueva lista de characteristicResponseDto
+        porque la entidad characteristic devuelve toda la entidad y en roomResponseDTO pusimos una lista de CharacteristicResponseDto,
+        es un desajuste de tipos de datos y se llame y se hace desde el mapper de characteristic*/
+        List<CharacteristicResponseDto> characteristicResponseDtos = characteristicMapper.characteristicToResponseDtoList(updatedRoom.getCharacteristics());
+
+        //8- devolver dto de respuesta
         return  new RoomResponseDto(
                 updatedRoom.getId(),
                 updatedRoom.getName(),
-                updatedRoom.getDescription()
+                updatedRoom.getDescription(),
+                categoryResponseDto,
+                characteristicResponseDtos
         );
 
     }
-
-
 }

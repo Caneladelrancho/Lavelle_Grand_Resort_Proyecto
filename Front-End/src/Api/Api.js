@@ -91,6 +91,16 @@ export const deleteRoom = async (id) =>{
     return response.data
 }
 
+//Actualzar room 
+export const updateRoom = async (id, formData) =>{
+    const response = await api.put(`/rooms/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    return response.data
+}
+
 //------------------AMENITIES-----------------//
 
 //Crear amenity con imagenes 
@@ -118,5 +128,53 @@ export const getAllAmenitiesForAdmin = async () =>{
 //Eliminar amenity 
 export const deleteAmenity = async (id) =>{
     const response = await api.delete(`/amenities/${id}`)
+    return response.data
+}
+
+//Actualizar Amenity
+export const updateAmenity = async (id, formData) =>{
+    const response = await api.put(`amenities/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    return response.data
+}
+
+
+//--------------CATEGORIES------------//
+export const createCategory = async(categoryData) =>{
+    const response = await api.post('/categories/add', categoryData)
+    return response.data
+}
+
+export const getAllCategories = async() =>{
+    const response = await api.get('/categories')
+    return response.data
+}
+
+export const deleteCategory = async(id) =>{
+    const response = await api.delete(`/categories/${id}`)
+    
+}
+
+//---------CARACTERISTICAS-----------//
+export const createCharacteristic = async(characteristicData) =>{
+    const response = await api.post('/characteristics/add', characteristicData)
+    return response.data
+}
+
+export const getAllCharacteristics = async() =>{
+    const response = await api.get('/characteristics')
+    return response.data
+} 
+
+export const deleteCharacteristics = async(id) =>{
+    const response = await api.delete(`/characteristics/${id}`)
+    return response.data
+}
+
+export const updateCharacteristic = async(id, characteristicData) =>{
+    const response = await api.put(`/characteristics/${id}`, characteristicData)
     return response.data
 }

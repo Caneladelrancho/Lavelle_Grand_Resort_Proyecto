@@ -1,0 +1,222 @@
+.char-list-status {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #034363;
+}
+
+.char-list-status-error {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #c1605f;
+}
+
+.char-list {
+    text-align: center;
+    color: #034363;
+    font-size: 18px;
+    margin-top: 55px;
+}
+
+
+.char-list-container {
+    padding: 3rem;
+
+}
+
+.char-list-container h2 {
+    font-size: 30px;
+    color: #034363;
+    text-align: center;
+}
+
+.char-table {
+    width: 100%;
+    margin-top: 55px;
+}
+
+.char-table tr {
+    text-align: center;
+    font-size: 18px;
+}
+
+.char-table th {
+    background-color: #FFF9EB;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #034363;
+    padding: 10px 2px;
+}
+
+.char-table td {
+    padding: 10px 5px;
+    border-bottom: 1px solid #fff9eb;
+    color: #034363;
+}
+
+.char-table td:last-child {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+table .char-delete-btn {
+    background-color: #c1605f;
+    border: none;
+    color: #FFF9EB;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+
+}
+
+table .edit-char-btn {
+    background-color: #34b996;
+    border: none;
+    color: #FFF9EB;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+
+}
+
+.char-delete-btn:hover {
+    background-color: #992a1e;
+}
+
+.edit-char-btn:hover{
+    background-color: #107357;
+}
+
+/*--------MODAL------*/
+
+.modal-char-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+}
+
+.char-modal-content {
+    max-width: 500px;
+    margin: 7rem auto;
+    background-color: #BCE0F0;
+    border: solid 2px #034363;
+    box-shadow: 0 4px 12px rgba(65, 106, 127, 0.15);
+    border-radius: 10px;
+    padding: 3.5rem;
+
+}
+
+.char-modal-title {
+    text-align: center;
+    color: #034363;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.char-overlay-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.char-overlay-form {
+    color: #034363;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.char-overlay-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.error-message {
+    color: #d9534f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+}
+
+.char-overlay-form input[type='text'],
+.char-overlay-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #034363;
+    border-radius: 5px;
+    background-color: #fff9eb;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.char-overlay-form input[type='text']:focus,
+.char-overlay-form textarea:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.char-overlay-form textarea {
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.char-overlay-form select {
+    border: solid 2px #034363;
+    padding: 0.8rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #034363;
+    border-radius: 8px;
+    background-color: #fff9eb;
+}
+
+.char-overlay-form select:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.modal-upt-btn {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #034363;
+    background: linear-gradient(135deg, #219ebc 0%, #055b86 100%);
+    color: #fff9eb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
+.modal-cancel-btn {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #034363;
+    background: linear-gradient(135deg, #107357 0%, #088e98 100%);
+    color: #fff9eb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}

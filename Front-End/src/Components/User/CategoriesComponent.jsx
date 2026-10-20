@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import { ProductCard } from '../../utils/ProductCard';
 import '../../styles/User/categories.css'
+
 
 export const CategoriesComponent = ({ products }) => {
 
@@ -13,7 +15,7 @@ export const CategoriesComponent = ({ products }) => {
 
 
   const premiumCollection = ["Villa privada", "Suite"]
-  const classicCollection = ["Habitación Deluxe", "Habitación Premium"]
+  const classicCollection = ["Habitación Deluxe", "Habitación Serenity"]
 
   const getPremiumCollection = () => {
     return rooms.filter(room => premiumCollection.includes(room.name))
@@ -25,10 +27,10 @@ export const CategoriesComponent = ({ products }) => {
 
   const coverImages = {
 
-    "Suite": 5,
+    "Suite": 1,
     "Habitación Deluxe": 4,
-    "Villa privada": 3,
-    "Habitación Premium": 3,
+    "Villa privada": 0,
+    "Habitación Serenity": 3,
   }
 
 
@@ -55,20 +57,12 @@ export const CategoriesComponent = ({ products }) => {
         <h2 className='category-title'>Premimum Collection</h2>
         <div className='category-grid'>
           {premiumCollectionData.map((room) => (
-            <div
+            <ProductCard 
               key={`${room.type}${room.id}`}
-              className='category-card'
-              onClick={() => handleProductClick(room)}
-            >
-              <img
-                src={getCoverImage(room)}
-                alt={room.name}
-                className='category-image'
-              />
-              <div className='category-info'>
-                <h3 className='category-name'>{room.name}</h3>
-              </div>
-            </div>
+              productName={room.name}
+              productImage={getCoverImage(room)}
+              onProductClick={() => handleProductClick(room)}              
+            />            
           ))}
         </div>
       </div>
@@ -78,20 +72,12 @@ export const CategoriesComponent = ({ products }) => {
         <h2 className='category-title'>Classic Collection</h2>
         <div className='category-grid'>
           {classicCollectionData.map((room) => (
-            <div
+            <ProductCard 
               key={`${room.type}${room.id}`}
-              className='category-card'
-              onClick={() => handleProductClick(room)}
-            >
-              <img
-                src={getCoverImage(room)}
-                alt={room.name}
-                className='category-image'
-              />
-              <div className='category-info'>
-                <h3 className='category-name'>{room.name}</h3>
-              </div>
-            </div>
+              productName={room.name}
+              productImage={getCoverImage(room)}
+              onProductClick={() => handleProductClick(room)}              
+            />    
           ))}
         </div>
       </div>

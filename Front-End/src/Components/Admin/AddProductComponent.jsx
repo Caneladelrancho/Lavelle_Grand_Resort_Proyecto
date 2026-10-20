@@ -2,6 +2,9 @@ import { useState } from "react"
 import { createRoom, createAmenity } from '../../Api/Api'
 import { useSweetAlert } from '../../Hooks/sweetAlertHook';
 import '../../styles/Admin/addProduct.css'
+import { useCategories } from "../../Hooks/useCategories";
+import { useCharacteristics } from "../../Hooks/useCharacteristics";
+import { iconOptions } from "../../utils/iconOptions";
 
 
 export const AddProductComponent = () => {
@@ -11,14 +14,25 @@ export const AddProductComponent = () => {
         name: '',
         description: '',
         images: [],
-        needsReservation: false
+        needsReservation: false,
+        categoryId: '',
+        characteristicIds: []
     })
 
     const [errors, setErrors] = useState({})
-
     const [loading, setLoading] = useState(false)
 
     const { showSuccess, showError } = useSweetAlert()
+
+    const { categories, categoryLoading } = useCategories()
+    const { characteristics, characteristicLoading } = useCharacteristics()
+
+    //Filtrar las categorias que correspondan a room o a amenity cuando el admin escoga el producto
+    //Si escoge room, solo trae las categorias para room 
+    const filterCategory = categories.filter(category => {
+        return category.categoryType === product.type.toUpperCase()
+    })
+
 
     const validate = () => {
         const newErrors = {}
@@ -40,11 +54,10 @@ export const AddProductComponent = () => {
 
         //Validación de imágenes
         if (!product.images || product.images.length === 0) {
-            newErrors.images = 'Debes seleccionar a menos una imagen.'
+            newErrors.images = 'Debes seleccionar al menos una imagen.'
         } else {
             const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
             const maxSizeInBytes = 50 * 1024 * 1024
-
 
             const imageArray = Array.from(product.images)
 
@@ -57,6 +70,11 @@ export const AddProductComponent = () => {
             } else if (hasInvalidSize) {
                 newErrors.images = 'Cada imagen debe pesar máximo 50MB.'
             }
+        }
+
+        //Validar categoria
+        if (!product.categoryId) {
+            newErrors.categoryId = 'La categoría es obligatoria. Por favor escoge una.'
         }
 
         return newErrors
@@ -82,6 +100,7 @@ export const AddProductComponent = () => {
         const formData = new FormData()
         formData.append('name', product.name)
         formData.append('description', product.description)
+        formData.append('categoryId', product.categoryId)
 
         // Agregar cada imagen
         if (product.images && product.images.length > 0) {
@@ -92,6 +111,7 @@ export const AddProductComponent = () => {
 
         try {
             if (product.type === 'room') {
+                product.characteristicIds.forEach((characteristicId) => formData.append('characteristicIds', characteristicId))
                 await createRoom(formData)
                 showSuccess('!Habitación agregada exitosamente!')
             } else {
@@ -106,7 +126,10 @@ export const AddProductComponent = () => {
                 name: '',
                 description: '',
                 images: [],
-                requiresReservation: false
+                requiresReservation: false,
+                categoryId: '',
+                characteristicIds: []
+
             });
 
             document.getElementById('imagenes').value = ''
@@ -189,7 +212,7 @@ export const AddProductComponent = () => {
 
                 {/* Checkbox SOLO aparece si es amenity */}
                 {product.type === 'amenity' && (
-                    <div className="category-form checkbox">
+                    <div className="category-form-checkbox">
                         <label htmlFor="needsReservation">¿Requiere reserva?</label>
                         <input
                             type="checkbox"
@@ -197,6 +220,70 @@ export const AddProductComponent = () => {
                             checked={product.needsReservation || false}
                             onChange={(e) => setProduct({ ...product, needsReservation: e.target.checked })}
                         />
+                    </div>
+                )}
+
+                {/* CATEGORIAS */}
+                <div className="category-form">
+                    <label htmlFor="categoria">Selecciona la categoría</label>
+                    {categoryLoading ? (
+                        <p className="ctgr-list-empty">Cargando categorías ...</p>
+                    ) : (
+                        <select
+                            id="categoria"
+                            value={product.categoryId}
+                            onChange={(e) => setProduct({ ...product, categoryId: e.target.value })}
+                        >
+                            <option value="" disabled>Selecciona una categoría</option>
+
+                            {filterCategory.map(category => (
+                                <option key={category.id} value={category.id}>{category.title}</option>
+                            ))}
+                        </select>
+                    )}
+                    {errors.categoryId && <span className="error-message">{errors.categoryId}</span>}
+                </div>
+
+                {/* CARACTERISTICAS */}
+                {product.type === 'room' && (
+                    <div className="category-form">
+                        <label>Selecciona las características:</label>
+                        {characteristicLoading ? (
+                            <p>Cargando características ...</p>
+                        ) : (
+                            <div className="characteristics-list">
+                                {characteristics.map(characteristic => {
+                                    const iconOption = iconOptions.find(opt => opt.iconKey === characteristic.icon)
+                                    const isChecked = product.characteristicIds.includes(characteristic.id)
+
+                                    return (
+                                        <label key={characteristic.id} className="characteristic-item">
+                                            <input                                                
+                                                type="checkbox"                                                
+                                                value={characteristic.id}
+                                                checked={isChecked}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setProduct({
+                                                            ...product,
+                                                            characteristicIds: [...product.characteristicIds, characteristic.id]
+                                                        })
+                                                    } else {
+                                                        setProduct({
+                                                            ...product,
+                                                            characteristicIds: product.characteristicIds.filter(id => id !== characteristic.id)
+                                                        })
+                                                    }
+                                                }}
+
+                                            />
+                                            {iconOption && <iconOption.Icon size={20} />}
+                                            {characteristic.name}
+                                        </label>
+                                    )
+                                })}
+                            </div>
+                        )}
                     </div>
                 )}
 

@@ -1,6 +1,6 @@
 package com.dh.Proyecto.Final_BackEnd.repository;
 
-import com.dh.Proyecto.Final_BackEnd.model.Category;
+import com.dh.Proyecto.Final_BackEnd.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

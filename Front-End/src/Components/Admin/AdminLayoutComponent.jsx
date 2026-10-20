@@ -6,6 +6,10 @@ import '../../styles/Admin/adminLayout.css'
 import { useEffect, useState } from "react";
 import { ProductListComponent } from "./ProductListComponent";
 import { UserListComponent } from "./UserListComponent";
+import { CreateCategoryComponent } from "./CreateCategoryComponent";
+import { CreateCharacteristicComponent} from "./CreateCharacteristicComponent"
+import { CharacteristicListComponent } from "./CharacteristicListComponent";
+import { CategoryListComponent } from "./CategoryListComponent";
 
 
 export const AdminLayoutComponent = ({ children, adminName }) => {
@@ -52,6 +56,10 @@ export const AdminLayoutComponent = ({ children, adminName }) => {
             <Route path="agregar-producto" element={<AddProductComponent />} />
             <Route path="productos" element={<ProductListComponent />} />
             <Route path="usuarios" element={<UserListComponent />} />
+            <Route path="agregar-categoria" element={<CreateCategoryComponent />} />
+            <Route path="categorias" element={<CategoryListComponent />} />
+            <Route path="agregar-caracteristicas" element={<CreateCharacteristicComponent />} />
+            <Route path="caracteristicas" element={<CharacteristicListComponent />} />
             <Route path="" element={
               <div className="welcome-container">
                 <div className="welcome-overlay">
@@ -64,6 +72,5 @@ export const AdminLayoutComponent = ({ children, adminName }) => {
         </main>
       </div>
     </div>
-
   )
 }

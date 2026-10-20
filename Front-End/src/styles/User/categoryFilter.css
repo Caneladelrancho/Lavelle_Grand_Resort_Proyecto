@@ -1,0 +1,127 @@
+.ctg-filter-container{    
+    max-width: 1600px;
+    margin: 6.5rem auto auto auto;    
+    padding: 0 20px;
+}
+
+.ctg-filter-header{
+    text-align: center;
+}
+
+.ctg-filter-header h2{
+    color: #034363;
+    font-size: clamp(1.1rem, 2vw + 0.5rem, 1.7rem); 
+}
+
+.ctg-filter-header p{
+    color: #034363;
+    font-size: clamp(1rem, 2vw + 0.5rem, 1.375rem); 
+}
+
+.ctg-filter-list{
+    margin-top: clamp(2rem, 2.5rem, 3.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+
+}
+
+.ctg-filter-btn{
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #30B3BF 0%, #045076 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 52px;
+}
+
+.ctg-filter-btn:hover{
+    background: linear-gradient(135deg, #3BC2CE 0%, #066B9D 100%);
+    transform: translateY(-2px);
+}
+
+.ctg-filter-btn:active{
+    transform: translateY(0);
+}
+
+.ctg-filter-msg{
+    margin-top: 3rem;
+    color: #034363;
+    text-align: center;
+
+}
+
+.ctg-results-grid{
+    margin-top: clamp(2.5rem, 3rem, 3.5rem);
+    display: grid;    
+    grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+    gap: 12px;
+}
+
+.ctg-filter-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.ctg-clear-btn{
+    width: 20%;              
+    background: linear-gradient(135deg, #30B3BF 0%, #1878a8 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 52px;
+}
+
+.ctg-clear-btn:hover{
+    background: linear-gradient(135deg, #177b84 0%, #08425f 100%);
+    transform: translateY(-2px);
+}
+
+.ctg-clear-btn:active{
+    transform: translateY(0);
+}
+
+/*----Responsive----*/
+/*--TABLET--*/
+@media screen and (max-width: 768px){
+    .ctg-filter-container{
+        padding: 25px 38px;
+        margin-top: 4rem; 
+    }
+
+    .ctg-clear-btn{
+        width: 40%;
+    }
+
+}
+
+
+/*---MOBILE--*/
+@media screen and (max-width: 480px){
+    .ctg-filter-container{
+        padding: 0 30px;
+        margin-top: 4rem;        
+    }
+
+    .ctg-filter-btn{
+        padding: 0.75rem 1rem;
+        height: 47px;
+    }
+
+    .ctg-clear-btn{
+        width: 40%;
+    }
+
+    
+
+}
+

@@ -1,9 +1,8 @@
 package com.dh.Proyecto.Final_BackEnd.service;
 
-import com.dh.Proyecto.Final_BackEnd.model.Amenity;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AmenityResponseDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AdminProductDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AmenityResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.ProductDisplayDto;
 
 import java.io.IOException;
 import java.util.List;

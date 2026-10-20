@@ -1,16 +1,17 @@
 package com.dh.Proyecto.Final_BackEnd.service.impl;
 
 import com.dh.Proyecto.Final_BackEnd.exceptions.DuplicateResourceException;
+import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceConflictException;
 import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceNotFoundException;
-import com.dh.Proyecto.Final_BackEnd.model.Category;
-import com.dh.Proyecto.Final_BackEnd.model.dto.CategoryRequestDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.CategoryResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.Category;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.CategoryRequestDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.CategoryResponseDto;
 import com.dh.Proyecto.Final_BackEnd.repository.ICategoryRepository;
+import com.dh.Proyecto.Final_BackEnd.repository.IRoomRepository;
 import com.dh.Proyecto.Final_BackEnd.service.ICategoryService;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class CategoryService implements ICategoryService {
 
     private final ICategoryRepository categoryRepository;
-    private final IImageService imageService;
+    private final IRoomRepository roomRepository;
 
 
     //GUARDAR O CREAR CATEGORIA
@@ -36,15 +37,11 @@ public class CategoryService implements ICategoryService {
         }
 
         try{
-
-            //Procesar imagen
-            String imagePath = imageService.processAndSaveFile(categoryRequestDto.getImage());
-
             //Construir objeto category
             Category category = new Category();
             category.setTitle(categoryRequestDto.getTitle());
             category.setDescription(categoryRequestDto.getDescription());
-            category.setImage(imagePath);
+            category.setCategoryType(categoryRequestDto.getCategoryType());
 
             //Guardar el objeto category
             Category savedCategory = categoryRepository.save(category);
@@ -53,7 +50,7 @@ public class CategoryService implements ICategoryService {
                     savedCategory.getId(),
                     savedCategory.getTitle(),
                     savedCategory.getDescription(),
-                    savedCategory.getImage()
+                    savedCategory.getCategoryType()
             );
 
 
@@ -79,7 +76,7 @@ public class CategoryService implements ICategoryService {
                     categoryResponseDto.setId(category.getId());
                     categoryResponseDto.setTitle(category.getTitle());
                     categoryResponseDto.setDescription(category.getDescription());
-                    categoryResponseDto.setImageUrl(category.getImage());
+                    categoryResponseDto.setCategoryType(category.getCategoryType());
 
                     categoryResponseDtos.add(categoryResponseDto);
             }
@@ -96,9 +93,9 @@ public class CategoryService implements ICategoryService {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
 
-        if (category.getImage() != null){
-            imageService.deletePhysicalFile(category.getImage());
+        if (roomRepository.existsByCategoryId(id)){
+            throw new ResourceConflictException("The category cannot be deleted since it has associated rooms");
         }
-        categoryRepository.deleteById(id);
+        categoryRepository.delete(category);
     }
 }

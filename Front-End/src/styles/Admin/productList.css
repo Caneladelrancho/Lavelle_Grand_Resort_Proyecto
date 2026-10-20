@@ -1,26 +1,47 @@
-.product-list-container{
+.product-list-status {
+    padding: 3rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #034363;
+}
+
+.product-list-status-error {
+    padding: 3rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #c1605f;
+}
+
+.product-list {
+    text-align: center;
+    color: #034363;
+    font-size: 18px;
+    margin-top: 55px;
+}
+
+.product-list-container {
     padding: 3rem;
 }
 
-.product-list-container h2{
+.product-list-container h2 {
     font-size: 30px;
     color: #034363;
     text-align: center;
 }
 
-.product-table{
+.product-table {
     width: 100%;
-    margin-top: 55px;   
-    
+    margin-top: 55px;
+
 }
 
-.product-table tr{
+.product-table tr {
     text-align: center;
     font-size: 18px;
-    
+
 }
 
-.product-table th{
+.product-table th {
     background-color: #FFF9EB;
     border-radius: 5px;
     font-size: 20px;
@@ -28,13 +49,19 @@
     padding: 10px 2px;
 }
 
-.product-table td{
+.product-table td {
     padding: 10px 5px;
     border-bottom: 1px solid #fff9eb;
     color: #034363;
 }
 
-table .delete-button{
+.product-table td:last-child{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+table .delete-button {
     background-color: #1B839D;
     border: none;
     color: #FFF9EB;
@@ -44,6 +71,187 @@ table .delete-button{
     font-size: 17px;
 }
 
-.delete-button:hover{
+table .edit-product-btn{
+    background-color: #34b996;
+    border: none;
+    color: #fff9eb;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.delete-button:hover {
     background-color: #034363;
+}
+
+.edit-product-btn:hover{
+    background-color: #107357;
+}
+
+/*---------MODAL----------*/
+
+.modal-prod-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.prod-modal-content {
+    max-width: 500px;
+    max-height: 800px;
+    overflow: auto;
+    margin: 7rem auto;
+    background-color: #bce0f0;
+    border: solid 2px #034363;
+    box-shadow: 0 4px 12px rgba(65, 106, 127, 0.15);
+    border-radius: 10px;
+    padding: 3.5rem;
+}
+
+.prod-modal-title {
+    text-align: center;
+    color: #034363;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+
+.prod-overlay-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.prod-overlay-form {
+    color: #034363;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.prod-overlay-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.error-message {
+    color: #d9534f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+}
+
+.prod-overlay-form input[type='text'],
+.prod-overlay-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #034363;
+    border-radius: 5px;
+    background-color: #fff9eb;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.prod-overlay-form input[type='text']:focus,
+.prod-overlay-form textarea:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.prod-overlay-form textarea {
+    min-height: 200px;
+    font-family: inherit;
+}
+
+.prod-overlay-form select {
+    border: solid 2px #034363;
+    padding: 0.8rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #034363;
+    border-radius: 8px;
+    background-color: #fff9eb;
+}
+
+.prod-overlay-form select:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.prod-form-checkbox{
+    color: #034363;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+}
+
+.current-images {
+    display: flex; 
+    justify-content: center;   
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+
+.current-images img {
+    width: 28rem;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.updt-warning-message{
+    color: rgb(167, 55, 55);    
+    font-size: 1rem; 
+}
+
+.upt-chars-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 33px;
+    gap: 10px;
+}
+
+
+
+.prod-upt-btn {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #034363;
+    background: linear-gradient(135deg, #219ebc 0%, #055b86 100%);
+    color: #fff9eb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
+.prod-cancel-btn {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #034363;
+    background: linear-gradient(135deg, #107357 0%, #088e98 100%);
+    color: #fff9eb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
 }

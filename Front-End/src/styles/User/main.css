@@ -42,3 +42,17 @@
         background-position: center;
     }
 }
+
+.main-status {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #034363;
+}
+
+.main-status-error {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #c1605f;
+}

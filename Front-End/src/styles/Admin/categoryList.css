@@ -1,0 +1,74 @@
+.cat-list-status {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #034363;
+}
+
+.cat-list-status-error {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #c1605f;
+}
+
+.cat-list-container {
+    padding: 3rem;
+}
+
+.cat-list-container h2 {
+    font-size: 30px;
+    color: #034363;
+    text-align: center;
+}
+
+.cat-list-empty {
+    text-align: center;
+    color: #034363;
+    font-size: 18px;
+    margin-top: 55px;
+}
+
+.cat-table {
+    width: 100%;
+    margin-top: 55px;
+}
+
+.cat-table tr {
+    text-align: center;
+    font-size: 18px;
+}
+
+.cat-table th {
+    background-color: #FFF9EB;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #034363;
+    padding: 10px 2px;
+}
+
+.cat-table td {
+    padding: 10px 5px;
+    border-bottom: 1px solid #fff9eb;
+    color: #034363;
+}
+
+.cat-table td:last-child {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+table .cat-delete-btn {
+    background-color: #c1605f;
+    border: none;
+    color: #FFF9EB;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.cat-delete-btn:hover {
+    background-color: #992a1e;
+}

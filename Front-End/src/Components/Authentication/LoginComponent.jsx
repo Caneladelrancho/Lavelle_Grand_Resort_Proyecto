@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "./AuthContext"
 import { loginUser } from "../../Api/Api"
 import { useSweetAlert } from "../../Hooks/sweetAlertHook"
+import { Link } from 'react-router-dom'
 import '../../styles/User/loginUsers.css'
 
 
@@ -26,7 +27,7 @@ export const LoginComponent = () => {
             const data = await loginUser(email, password)
             login(data.token)
 
-            const decoded = jwtDecode(data.token)            
+            const decoded = jwtDecode(data.token)
 
             if (decoded.role === "ROLE_ADMIN") {
                 navigate("/admin")
@@ -56,11 +57,15 @@ export const LoginComponent = () => {
 
                     <div className="login-header">
                         <h1 className="login-title">Bienvenido de nuevo</h1>
+
+                        <Link to="/" className="return-btn">
+                            <img className="lgn-return-btn" src="/img/logo_lavelle_blue.png" alt="logo" />
+                        </Link>
                     </div>
 
                     <form className="login-form" onSubmit={handleSubmit}>
                         <div className="form-group-login">
-                            <label className="form-label">Correo electronico</label>
+                            <label className="form-label">Correo electrónico</label>
                             <input
                                 type="email"
                                 className="form-input-login"
@@ -82,14 +87,23 @@ export const LoginComponent = () => {
                             />
                         </div>
 
+                        <div className="login-buttons">
+                            <button
+                                type="submit"
+                                className="login-btn"
+                                disabled={loading}
+                            >
+                                {loading ? "Ingresando..." : "Ingresar"}
+                            </button>
 
-                        <button
-                            type="submit"
-                            className="login-btn"
-                            disabled={loading}
-                        >
-                            {loading ? "Ingresando..." : "Ingresar"}
-                        </button>
+                            <p className="regist-text">¿No tienes cuenta todavía? Registrate:</p>
+
+                            <Link to='/register'>
+                                <button type="button" className="regist-btn">
+                                    Registrate
+                                </button>
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </div>

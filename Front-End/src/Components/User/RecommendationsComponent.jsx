@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { ProductCard } from "../../utils/ProductCard";
 import '../../styles/User/recommendations.css'
 
 
@@ -22,7 +23,6 @@ export const RecommendationsComponent = ({ products }) => {
     const getCoverImage = (product) => {
 
         const index = coverImages[product.name] ?? 0;
-
         return product.imagesUrl?.[index] || null;
     };
 
@@ -43,22 +43,17 @@ export const RecommendationsComponent = ({ products }) => {
     return (
         <div className='recommendations-container'>
 
-            <p className='recommendations-title'> En Lavelle Grand Resort, el lujo se encuentra en cada detalle. Todas nuestras amenidades están incluidas para nuestros huéspedes, mientras que algunas experiencias exclusivas pueden programarse durante tu estancia para disfrutar de un servicio más personalizado. </p>          
-            
+            <p className='recommendations-title'> En Lavelle Grand Resort, el lujo se encuentra en cada detalle. Todas nuestras amenidades están incluidas para nuestros huéspedes, mientras que algunas experiencias exclusivas pueden programarse durante tu estancia para disfrutar de un servicio más personalizado. </p>                     
 
             <div className='recommendations-grid'>
                 {randomProducts.map((product) => (
-                    <div
+                    <ProductCard
                         key={`${product.type}--${product.id}`}
-                        className='product-card'
-                        onClick={() => handleProductClick(product)}
-                    >
-                        <img
-                            src={getCoverImage(product)}
-                            alt={product.name}
-                            className='product-image'
-                        />
-                    </div>
+                        productName={product.name}
+                        productImage={getCoverImage(product)}
+                        onProductClick={() => handleProductClick(product)}          
+                    
+                    />                    
                 ))}
             </div>
         </div>

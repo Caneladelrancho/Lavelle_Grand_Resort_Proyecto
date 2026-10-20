@@ -1,5 +1,6 @@
 .room-search-container{    
-    margin: 0;
+    margin: 0 auto;
+    max-width: 1600px;
     padding: 2rem;    
 }
 
@@ -7,6 +8,7 @@
     text-align: center;
     color: #034363;
     margin-top: 2.5rem;
+    font-size: 1.1rem;
 }
 
 .title-form p{
@@ -88,8 +90,6 @@
     cursor: pointer;
     transition: all 0.2s ease;
     height: 52px;
-    font-family: "Cinzel Decorative", serif; 
-
 }
 
 .search-button:hover {

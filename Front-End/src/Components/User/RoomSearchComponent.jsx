@@ -124,7 +124,7 @@ export const RoomSearchComponent = () => {
                         onChange={handleInputChange}
                     >
                         <option value="any">Cualquier tipo</option>
-                        <option value="standard">Premium</option>
+                        <option value="standard">Serenity</option>
                         <option value="deluxe">Deluxe</option>
                         <option value="suite">Suite</option>
                         <option value="villa">Villa</option>

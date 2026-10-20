@@ -29,8 +29,7 @@ export const HeaderComponent = () => {
     }
 
     return (
-        <div>          
-            
+        <div>
             <header className={`header ${scrolled ? "scrolled" : ""}`}>
                 <nav className='nav-menu'>
 

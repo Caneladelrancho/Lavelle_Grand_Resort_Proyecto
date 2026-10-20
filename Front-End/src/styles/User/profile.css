@@ -9,7 +9,7 @@
     background-size: cover;
     background-position: 25% 75%;
     width: 100%;
-    height: clamp(6rem, 20vw, 15rem);
+    height: clamp(10rem, 20vw, 15rem);
     border-radius: 0 0 1rem 1rem;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
 
 .banner-title {
     color: #FFF9EB;
-    font-size: clamp(1.5rem, 2.7rem, 2.9rem);
+    font-size: clamp(1.5rem, 1rem, 2.9rem);
     text-shadow: 0 4px 18px #034363;
 }
 
@@ -36,8 +36,8 @@
 }
 
 .avatar {
-    width: clamp(5rem, 15vw, 7rem);
-    height: clamp(5rem, 15vw, 7rem);
+    width: clamp(6rem, 15vw, 7rem);
+    height: clamp(6rem, 15vw, 7rem);
     border-radius: 50%;
     background-color: #034363;
     color: #FFF9EB;
@@ -56,72 +56,8 @@
 
 .user-name {
     color: #034363;
-    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    font-size: clamp(1.5rem, 2.5vw, 1.7rem);
     margin: 0;
-}
-
-.cards-section {
-    margin-top: 7.5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 2vw, 1.8rem);
-}
-
-.info-card {
-    background-color: #FFEFD6;
-    border-radius: 0.75rem;
-    padding: 3.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.5rem;
-}
-
-.card-title {
-    color: #034363;
-    font-size: clamp(0.95rem, 2vw, 1.5rem);
-    margin: 0 0 0.5rem;
-}
-
-.card-text {
-    color: #1B839D;
-    font-size: clamp(0.85rem, 1vw, 1.2rem);
-}
-
-.info-card-right {
-    background-color: #FFEFD6;
-    border-radius: 0.75rem;
-    padding: 3.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 3.5rem;
-
-}
-
-.action-buttons {
-    border: 1px solid #034363;
-    background-color: transparent;
-    color: #1B839D;
-    padding: 0.75rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.3rem;
-
-}
-
-.rewards {
-    margin-top: 8rem;
-}
-
-
-
-.rws-title {
-    text-align: center;    
-    color: #034363;
-    font-size: clamp(1rem, 1.5vw, 2rem);
 }
 
 .pfr-logout {
@@ -135,4 +71,86 @@
     cursor: pointer;
     padding: 0;
     margin-top: 0.25rem;
+}
+
+.pfr-nav-container{
+    margin-top: clamp(3rem, 3rem, 5rem);
+    background-color: #034363;
+    color: #FECF72;
+    border-radius: 5px;
+    padding: 1rem;   
+
+}
+
+.pfr-nav-list{
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;       
+}
+
+.pfr-nav-list li{
+    cursor: pointer;
+}
+
+.pfr-img-container {    
+    display: flex;    
+    margin-top: clamp(0rem, 3rem, 8rem);
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.pfr-card-img {
+    flex: 1 1 0;
+    min-width: 160px;
+    max-width: 260px;
+    border-radius: 0.85rem;
+    overflow: hidden;    
+    transition: transform 0.25s ease, box-shadow 0.25s ease;       
+}
+
+.pfr-card-img:hover {
+    transform: translateY(-6px);    
+}
+
+.pfr-card-img .img-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.pfr-card-img .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.pfr-card-img:hover .img-wrapper img {
+    transform: scale(1.06);
+}
+
+
+.pfr-card-img.boat .img-wrapper img {
+    object-position: center 30%;
+}
+
+
+.pfr-card-img.villa .img-wrapper img {
+    object-position: center center;
+}
+
+
+.pfr-card-img.pool .img-wrapper img {
+    object-position: center 40%;
+}
+
+/*---------RESPONSIVE----------*/
+/*--MOBILE--*/
+@media screen and (max-width: 480px) {
+
+    .pfr-nav-list{
+        font-size: 0.8rem;
+    }
+
 }

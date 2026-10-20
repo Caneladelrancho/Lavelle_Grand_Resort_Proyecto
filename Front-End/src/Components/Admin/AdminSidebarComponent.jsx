@@ -40,6 +40,29 @@ export const AdminSidebarComponent = () => {
                     Listar usuarios
                 </Link>
 
+                <Link to='/admin/agregar-categoria'
+                    className={`nav-item ${location.pathname === '/admin/agregar-categoria' ? 'active' : ''}`}
+                >
+                    Agregar categoría
+                </Link>
+
+                <Link to={'/admin/categorias'}
+                    className={`nav-item ${location.pathname === 'admin/categorias' ? 'active' : ''}`}
+                >
+                    Listar categorías
+                </Link>
+
+                <Link to='/admin/agregar-caracteristicas'
+                    className={`nav-item ${location.pathname === '/admin/agregar-caracteristicas' ? 'active' : ''}`}
+                >
+                    Agregar característica
+                </Link>
+
+                <Link to='/admin/caracteristicas'
+                    className={`nav-item ${location.pathname === '/admin/caracteristicas' ? 'active' : ''}`}
+                >
+                    Administrar características
+                </Link>
                 {/*-----AGREGAR MAS NAVEGACION AQUI-----*/}
             </nav>
 

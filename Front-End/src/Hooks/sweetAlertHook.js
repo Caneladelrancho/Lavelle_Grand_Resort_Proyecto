@@ -7,7 +7,7 @@ export const useSweetAlert = () => {
             title: title,
             text: text,
             icon: 'warning',
-            background: '#fff3d6',
+            background: '#fff9eb',
             showCancelButton: true,
             confirmButtonText: confirmText,
             cancelButtonText: cancelText,

@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { getAllRooms, getAllAmenities } from '../../Api/Api'
 import '../../styles/User/main.css'
 import { CategoriesComponent } from "./CategoriesComponent";
+import { CategoryFilterComponent } from "./CategoryFilterComponent";
 
 export const MainComponent = () => {
 
-  const [allProducts, setAllProducts] = useState([])
+  const [allProducts, setAllProducts] = useState([]) 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,8 +38,9 @@ export const MainComponent = () => {
     fetchProducts()//ejecutar funcion
   }, [])
 
- 
-
+  
+  if (loading) return <div className="main-status">Cargando productos...</div>
+  if (error) return <div className="main-status-error">{error}</div>
 
   return (
     <main className="main-container">
@@ -46,8 +49,12 @@ export const MainComponent = () => {
         <div className="background-image"></div>
       </section>
 
+      <section>
+        <CategoryFilterComponent products={allProducts}/>
+      </section>
+
       <section className="room-search-compt">
-        <RoomSearchComponent />
+        <RoomSearchComponent  />
       </section>
 
       <section>

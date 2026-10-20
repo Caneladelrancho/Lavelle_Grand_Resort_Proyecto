@@ -35,6 +35,14 @@
     color: #15667A;
     text-align: center;
 }
+.return-btn{
+    display: flex;
+    justify-content: center;
+}
+.lgn-return-btn{          
+    height: 4rem;
+    width: 4rem;
+}
 
 .login-form{
     display: flex;
@@ -76,6 +84,11 @@
     opacity: 0.5;
 }
 
+.login-buttons{
+    display: flex;
+    flex-direction: column;
+}
+
 .login-btn{
     width: 100%;
     padding: 13px;
@@ -88,7 +101,28 @@
     cursor: pointer;    
 }
 
-.login-btn:hover {
+.regist-text{
+    color: #034363;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.regist-btn{
+    width: 100%;
+    padding: 13px;
+    font-weight: 600;
+    font-size: clamp(0.9375rem, 0.5vw + 0.85rem, 1rem);
+    background: linear-gradient(135deg, #055e8b 0%, #054b4b 100%);
+    color: #FFF9EB;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+    
+
+}
+
+.login-btn:hover,
+.regist-btn:hover {
     background: linear-gradient(135deg, #18748B 0%, #02283B 100%);
     transform: translateY(-1px);    
 }

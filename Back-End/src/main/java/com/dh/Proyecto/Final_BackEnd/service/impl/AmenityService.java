@@ -2,21 +2,19 @@ package com.dh.Proyecto.Final_BackEnd.service.impl;
 
 import com.dh.Proyecto.Final_BackEnd.exceptions.DuplicateResourceException;
 import com.dh.Proyecto.Final_BackEnd.exceptions.ResourceNotFoundException;
-import com.dh.Proyecto.Final_BackEnd.model.Amenity;
-import com.dh.Proyecto.Final_BackEnd.model.Category;
-import com.dh.Proyecto.Final_BackEnd.model.Image;
-import com.dh.Proyecto.Final_BackEnd.model.Room;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AmenityResponseDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.RoomResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.Amenity;
+import com.dh.Proyecto.Final_BackEnd.entity.Category;
+import com.dh.Proyecto.Final_BackEnd.entity.Image;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.*;
+import com.dh.Proyecto.Final_BackEnd.mapper.AmenityMapper;
+import com.dh.Proyecto.Final_BackEnd.mapper.CategoryMapper;
 import com.dh.Proyecto.Final_BackEnd.repository.IAmenityRepository;
 import com.dh.Proyecto.Final_BackEnd.repository.ICategoryRepository;
 import com.dh.Proyecto.Final_BackEnd.repository.IImageRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IAmenityService;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +32,8 @@ public class AmenityService implements IAmenityService {
     private final IImageService imageService;
     private final IImageRepository imageRepository;
     private final ICategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+    private final AmenityMapper amenityMapper;
 
     @Override
     public AmenityResponseDto saveAmenity(AdminProductDto adminProductDto) throws IOException {
@@ -42,12 +42,14 @@ public class AmenityService implements IAmenityService {
         if (existingAmenity.isPresent()){
             throw new DuplicateResourceException("Ya existe un servicio con el nombre: " + adminProductDto.getName());
         }
-
-        try {
             Amenity amenity = new Amenity();
             amenity.setName(adminProductDto.getName());
             amenity.setDescription(adminProductDto.getDescription());
             amenity.setNeedsReservation(adminProductDto.getNeedsReservation());
+
+            Category category = categoryRepository.findById(adminProductDto.getCategoryId())
+                    .orElseThrow(()-> new ResourceNotFoundException("Category not found with id: " + adminProductDto.getCategoryId()));
+            amenity.setCategory(category);
 
             Amenity savedAmenity = amenityRepository.save(amenity);
 
@@ -56,19 +58,16 @@ public class AmenityService implements IAmenityService {
                     imageService.saveImageAmenity(imageFile, savedAmenity);
                 }
             }
+
+            CategoryResponseDto categoryResponseDto = categoryMapper.mapCategoryToCategoryResponseDto(category);
+
             return new AmenityResponseDto(
                     savedAmenity.getId(),
                     savedAmenity.getName(),
                     savedAmenity.getDescription(),
-                    savedAmenity.getNeedsReservation()
+                    savedAmenity.getNeedsReservation(),
+                    categoryResponseDto
             );
-
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-
-        }
     }
 
     //MOSTRAR AMENITIES AL USUARIO
@@ -85,15 +84,7 @@ public class AmenityService implements IAmenityService {
             List<ProductDisplayDto> displayDtos = new ArrayList<>();
 
             for (Amenity amenity : amenities){
-                ProductDisplayDto displayDto = new ProductDisplayDto();
-                displayDto.setId(amenity.getId());
-                displayDto.setName(amenity.getName());
-                displayDto.setDescription(amenity.getDescription());
-                displayDto.setType("AMENITY");
-
-                List<String> imageUrls = imageService.findImageUrlsAmenity(amenity);
-                displayDto.setImagesUrl(imageUrls);
-
+                ProductDisplayDto displayDto = amenityMapper.mapAmenityToAmenityDisplayDto(amenity);
                 displayDtos.add(displayDto);
             }
             return displayDtos;
@@ -117,16 +108,14 @@ public class AmenityService implements IAmenityService {
             List<ProductDisplayDto> productDisplayDtos = new ArrayList<>();
 
             for (Amenity amenity : amenities){
-                ProductDisplayDto productDisplayDto = new ProductDisplayDto();
-                        productDisplayDto.setId(amenity.getId());
-                        productDisplayDto.setName(amenity.getName());
+                ProductDisplayDto productDisplayDto = amenityMapper.mapAmenityToAmenityDisplayDto(amenity);
 
                         productDisplayDtos.add(productDisplayDto);
             }
             return productDisplayDtos;
 
         }catch (Exception e){
-            throw new Exception("Unable to retreive amenities for admin: " + e.getMessage(), e);
+            throw new Exception("Unable to retrieve amenities for admin: " + e.getMessage(), e);
         }
     }
 
@@ -147,6 +136,7 @@ public class AmenityService implements IAmenityService {
     }
 
     @Override
+    @Transactional
     public AmenityResponseDto updateAmenity(Long id, AdminProductDto adminProductDto) throws IOException {
 
         //1- buscar la amenity existente
@@ -167,11 +157,11 @@ public class AmenityService implements IAmenityService {
         if (adminProductDto.getImages() != null && !adminProductDto.getImages().isEmpty()){
 
             //4a- Borrar las imagenes viejas en la bd y fisicas
-            List<Image> oldImages = imageRepository.findByAmenityId(id);
+            List<Image> oldImages = amenity.getImages();
             for (Image oldImage : oldImages){
                 imageService.deletePhysicalFile(oldImage.getImageUrl());
             }
-            imageRepository.deleteAll(oldImages);
+            oldImages.clear();
 
             //4b - Guardar las imagenes nuevas
             for (MultipartFile imageFile : adminProductDto.getImages()){
@@ -182,12 +172,16 @@ public class AmenityService implements IAmenityService {
         //5- guardar cambios
         Amenity updateAmenity = amenityRepository.save(amenity);
 
-        //6- devolver dto de respuesta
+        //6-Convertir category a categoryResponseDto
+        CategoryResponseDto categoryResponseDto = categoryMapper.mapCategoryToCategoryResponseDto(category);
+
+        //7- devolver dto de respuesta
         return new AmenityResponseDto(
                 updateAmenity.getId(),
                 updateAmenity.getName(),
                 updateAmenity.getDescription(),
-                updateAmenity.getNeedsReservation()
+                updateAmenity.getNeedsReservation(),
+                categoryResponseDto
         );
     }
 

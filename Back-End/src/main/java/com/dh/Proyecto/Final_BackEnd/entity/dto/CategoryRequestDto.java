@@ -1,0 +1,33 @@
+package com.dh.Proyecto.Final_BackEnd.entity.dto;
+
+import com.dh.Proyecto.Final_BackEnd.entity.CategoryType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CategoryRequestDto {
+
+    @NotBlank(message = "El título es obligatorio.")
+    @Size(min = 3, message = "El título debe tener al menos 3 caracteres.")
+    private String title;
+
+    @NotBlank(message = "La descripción es obligatoria.")
+    @Size(min = 10, message = "La descripción debe tener al menos 10 caracteres.")
+    private String description;
+
+    private CategoryType categoryType;
+
+    @Override
+    public String toString() {
+        return "CategoryRequestDto{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", categoryType=" + categoryType +
+                '}';
+    }
+}

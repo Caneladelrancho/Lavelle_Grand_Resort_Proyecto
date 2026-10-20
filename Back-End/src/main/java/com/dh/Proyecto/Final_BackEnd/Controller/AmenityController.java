@@ -1,9 +1,8 @@
 package com.dh.Proyecto.Final_BackEnd.Controller;
 
-import com.dh.Proyecto.Final_BackEnd.model.Amenity;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AdminProductDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AmenityResponseDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.ProductDisplayDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AdminProductDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AmenityResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.ProductDisplayDto;
 import com.dh.Proyecto.Final_BackEnd.service.IAmenityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("api/amenities")
@@ -48,5 +46,11 @@ public class AmenityController {
     public ResponseEntity<String> deleteAmenity(@PathVariable Long id) throws Exception{
         iAmenityService.deleteAmenity(id);
         return ResponseEntity.ok("Amenidad con ID " + id + " eliminada exitosamente");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AmenityResponseDto> updateAmenity(@PathVariable Long id, @Valid @ModelAttribute AdminProductDto adminProductDto) throws IOException{
+        AmenityResponseDto updatedAmenity = iAmenityService.updateAmenity(id,adminProductDto);
+        return ResponseEntity.ok(updatedAmenity);
     }
 }

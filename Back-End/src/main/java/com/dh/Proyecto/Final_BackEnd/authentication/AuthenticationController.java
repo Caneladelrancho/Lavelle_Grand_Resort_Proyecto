@@ -1,10 +1,9 @@
 package com.dh.Proyecto.Final_BackEnd.authentication;
 
-import com.dh.Proyecto.Final_BackEnd.model.dto.AuthenticationRequestDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AuthenticationResponseDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.RegisterRequestDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AuthenticationRequestDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AuthenticationResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.RegisterRequestDto;
 import com.dh.Proyecto.Final_BackEnd.service.IUserService;
-import com.dh.Proyecto.Final_BackEnd.service.impl.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

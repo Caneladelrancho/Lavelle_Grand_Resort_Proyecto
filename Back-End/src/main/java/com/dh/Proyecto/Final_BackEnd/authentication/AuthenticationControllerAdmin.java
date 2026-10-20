@@ -1,10 +1,10 @@
 package com.dh.Proyecto.Final_BackEnd.authentication;
 
 
-import com.dh.Proyecto.Final_BackEnd.model.Role;
-import com.dh.Proyecto.Final_BackEnd.model.dto.AuthenticationResponseDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.RegisterRequestDto;
-import com.dh.Proyecto.Final_BackEnd.model.dto.UserResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.Role;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.AuthenticationResponseDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.RegisterRequestDto;
+import com.dh.Proyecto.Final_BackEnd.entity.dto.UserResponseDto;
 import com.dh.Proyecto.Final_BackEnd.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

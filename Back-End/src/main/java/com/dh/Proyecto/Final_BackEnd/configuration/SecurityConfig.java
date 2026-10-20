@@ -3,6 +3,7 @@ package com.dh.Proyecto.Final_BackEnd.configuration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,10 +38,10 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/api/rooms", "/api/amenities", "/api/categories").permitAll()
+                        .requestMatchers("/api/rooms/**", "/api/amenities/**", "/api/categories/**", "/api/characteristics/**").hasRole("ADMIN")
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/api/rooms/**").permitAll()
-                        .requestMatchers("/api/amenities/**").permitAll()
                         .requestMatchers(
                                 "swagger-ui.html",
                                            "swagger-ui/**",

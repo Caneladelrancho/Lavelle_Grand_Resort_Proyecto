@@ -11,6 +11,7 @@ const getInitials = (name, lastName) => {
 }
 
 export const ProfileComponent = () => {
+
   const { user } = useAuth()
   const navigate = useNavigate()
   const { logout } = useAuth()
@@ -31,7 +32,7 @@ export const ProfileComponent = () => {
         <div className="profile-header">
           <div className="avatar">
             {getInitials(user?.name, user?.lastName)}
-          </div>          
+          </div>
 
           <div className="user-info">
             <h2 className="user-name">
@@ -40,37 +41,38 @@ export const ProfileComponent = () => {
           </div>
         </div>
         <button className="pfr-logout" onClick={handleLogout}>
-            Cerrar sesión
-          </button>
+          Cerrar sesión
+        </button>
 
-        <div className="cards-section">
-          {/*Tarjeta izquierda*/}
-          <div className="info-card">
-            <h3 className="card-title">Puntos Lavelle</h3>
-            <p className="card-text">0</p>
-            <p className="card-text">Puntos disponibles</p>
-          </div>
-
-          {/*Tarjeta de la mitad*/}
-          <div className="info-card">
-            <h3 className="card-title">Tu próxima reserva</h3>
-            <p className="card-text">Aún no tienes reservas próximas</p>
-          </div>
-
-          {/*Tarjeta derecha*/}
-          <div className="info-card-right">
-            <button className="action-buttons">
-              Favoritos
-            </button>
-            <button className="action-buttons">
-              Mis reservas
-            </button>
-          </div>
+        <div className="pfr-nav-container">
+          <ul className="pfr-nav-list">
+            <li>Historial de reservas</li>
+            <li>Proximas reservas</li>
+            <li>Mis favoritos</li>
+          </ul>
         </div>
 
-        <div className="rewards">
-          <h3 className="rws-title"> Mis recompensas</h3>
-        </div>
+        <div className="pfr-img-container">
+
+          <div className="pfr-card-img boat">
+            <div className="img-wrapper">
+              <img src="/img/boat.jpeg" alt="boat" />
+            </div>
+          </div>
+
+          <div className="pfr-card-img villa">
+            <div className="img-wrapper">
+              <img src="/img/villa.jpeg" alt="villa" />
+            </div>
+          </div>
+
+          <div className="pfr-card-img pool">
+            <div className="img-wrapper">
+              <img src="/img/pool.jpg" alt="piscina" />
+            </div>
+          </div>
+
+        </div>        
       </div>
     </div>
   )

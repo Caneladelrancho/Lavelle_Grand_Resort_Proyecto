@@ -26,34 +26,11 @@
     gap: 25px;
 }
 
-.category-card {
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.category-image:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px #034363;
-}
-
-.category-image {
-    border-radius: 10px;
-    width: 100%;
-    height: clamp(400px, 45vw, 520px);
-    object-fit: cover;
-    display: block;
-}
-
 .category-info {
     padding: 20px;
     text-align: center;
 }
 
-.category-name {
-    color: #034363;
-    font-size: clamp(1.15rem, 1.3vw + 0.9rem, 1.5625rem);
-
-}
 
 /*----RESPONSIVE---*/
 /*--TABLET--*/
@@ -62,12 +39,7 @@
 
     .categories-container {
         padding: 25px 38px;
-    }    
-
-    .category-name {
-        color: #1B839D;
-    }
-
+    } 
 }
 
 
@@ -77,14 +49,5 @@
     .categories-container {
         padding: 0 30px;
         margin-top: 10px;
-    }   
-
-    .category-name {
-        color: #1B839D;
-    }
-
-    
-
-
-
+    }    
 }

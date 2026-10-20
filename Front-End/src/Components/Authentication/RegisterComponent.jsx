@@ -3,6 +3,7 @@ import { useSweetAlert } from "../../Hooks/sweetAlertHook"
 import { useAuth } from "./AuthContext"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../Api/Api"
+import { Link } from 'react-router-dom'
 import '../../styles/User/register.css'
 
 
@@ -114,8 +115,13 @@ export const RegisterComponent = () => {
         <div className="register-form-container">
 
           <div className="register-header">
-            <h1 className="register-title">Bienvenido a una experiencia inolvidable</h1>
+            <h1 className="register-title">Bienvenido a una experiencia inolvidable</h1>            
             <p>Completa tu registro y descubre un mundo de lujo, confort y experiencias diseñadas especialmente para ti.</p>
+
+            <Link to="/" className="return-btn">
+              <img src="/img/logo_lavelle_blue.png" alt="logo" />
+            </Link>
+
           </div>
 
           <form className="register-form" onSubmit={handleSubmit}>

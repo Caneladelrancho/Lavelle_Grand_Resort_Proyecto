@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getAllAmenities, getAllRooms } from "../../Api/Api"
 import '../../styles/User/productDetail.css'
+import { iconOptions } from "../../utils/iconOptions"
 
 
 export const ProductDetailComponent = () => {
@@ -48,6 +49,8 @@ export const ProductDetailComponent = () => {
 
                 if (foundProduct) {
                     setProduct(foundProduct)
+                    console.log(foundProduct);
+
                     //setSelectedImage(0)
                 }
 
@@ -84,6 +87,7 @@ export const ProductDetailComponent = () => {
             {/*HEADER*/}
 
             <header className="product-header">
+                <img className='logo-header' src="/img/logo_lavelle.png" alt="logo" />
                 <h1>Lavelle Grand Resort</h1>
             </header>
 
@@ -131,7 +135,7 @@ export const ProductDetailComponent = () => {
                             <h2 className="modal-title">{product.name}</h2>
                             <div className="modal-images">
                                 {galleryImages.map((image, index) => (
-                                    <img key={index} src={image} alt={`${product.name} ${index +1}`} />
+                                    <img key={index} src={image} alt={`${product.name} ${index + 1}`} />
                                 ))}
                             </div>
                         </div>
@@ -141,6 +145,30 @@ export const ProductDetailComponent = () => {
                 <div className="description-section">
                     <p>{product.description}</p>
                 </div>
+
+                {/*CARACTERISTICAS*/}
+                {type === 'ROOM' && (
+                    <div className="detail-char-container">
+                        <h2 className="detail-char-title">¿Qué te ofrecemos en este alojamiento?</h2>
+                        <div className="detail-char-icons" >
+                            {product.characteristicResponseDtos.map(characteristic => {
+                                const iconOption = iconOptions.find((opt) => opt.iconKey === characteristic.icon)
+
+                                if (!iconOption) {
+                                    return null
+                                } else {
+
+                                    return (
+                                        <div key={characteristic.id} className="room-char-icon">
+                                            <iconOption.Icon size={25} />
+                                            <span>{characteristic.name}</span>
+                                        </div>
+                                    )
+                                }
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )

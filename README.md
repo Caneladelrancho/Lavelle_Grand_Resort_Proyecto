@@ -34,6 +34,7 @@ Frontend 💻
 - Axios 
 - React Router
 - SweetAlert2 11.22.0
+- Lucide-React 
 
 Backend ☕
 - Java 17
@@ -47,7 +48,8 @@ Backend ☕
 ## Instalación local ⬇️
 
 Requisitos previos: ✅
-- Node.js v18 o superior
+- Node.js v22 o superior
+- pnpm 11 o superior
 - Java JDK 17 o superior 
 - MySQL 
 
@@ -88,16 +90,16 @@ O en intellij desde la clase main  `ProyectoFinalBackEndApplication` dando click
 ## Configuración del Frontend 🧩
 ```bash
 cd Front-End
-npm install
+pnpm install
 ```
 
 > **Nota:** Si tu backend corre en un puerto diferente al 8080, 
-> actualizá la URL base en el archivo `src/Api.js` en la 
+> actualiza la URL base en el archivo `src/Api/Api.js` en la 
 > variable `API_BASE_URL`.
 
 #### Correr el frontend:
 ```bash
-npm run dev
+pnpm run dev
 ```
 > La aplicación estará disponible en `http://localhost:5173`
 ## Endpoints (API REST) 📎
@@ -105,30 +107,36 @@ npm run dev
 | Método | Endpoint | Descripción | Auth |
 |--------|----------|-------------|------|
 | POST | /api/rooms/add | Agregar habitaciones | ✅ (ADMIN)|
-| GET | /api/rooms | Listar todas las habitaciones para mostrarlas al usuario | ❌ |
 | GET | /api/rooms/admin | Listar todas las habitaciones para que el admin las gestione | ✅ (ADMIN)|
 | DELETE | /api/rooms/{id} | Eliminar habitaciones | ✅ (ADMIN) |
+| POST | /api/characteristics/add | Agregar características | ✅ (ADMIN) |
+| GET | /api/admin/users | Listar usuarios registrados | ✅ (ADMIN) |
+| PUT | /api/admin/users/{id}/role | Cambiar el rol de un usuario | ✅ (ADMIN) |
+| PUT | /api/rooms/{id} | Editar habitaciones | ✅ (ADMIN) |
+| GET | /api/rooms | Listar todas las habitaciones para mostrarlas al usuario | ❌ |
 | POST | /api/auth/register | Registrar usuarios | ❌ |
 | POST | /api/auth/login | Login y generación de JWT | ❌ |
+| GET | /api/categories | Listar las categorías (las usa el filtro) | ❌ |
 
+>Los endpoints de amenidades (`/api/amenities`) siguen el mismo patrón que los de habitaciones.
 
 >Documentacion de Swagger disponible en: `http://localhost:8080/swagger-ui/index.html`
  
 ## Diagrama de entidades 📚
 
-![Diagrama de Base de Datos](Docs/Diagrama_BD.png)
+![Diagrama de Base de Datos](Docs/diagrama_de_entidades.jpg)
 ## Testing 🧪
 
 
 Las pruebas realizadas para este proyecto corresponden a **tests manuales funcionales**,
 ejecutados directamente en el navegador siguiendo un conjunto de casos de prueba 
-definidos a partir de las historias de usuario del Sprint 1. Cada caso de prueba 
+definidos a partir de las historias de usuario del Sprint 2. Cada caso de prueba 
 verifica que el comportamiento real de la aplicación coincida con los criterios de 
 aceptación establecidos, cubriendo tanto flujos exitosos como escenarios de error. 
 No se implementaron tests automatizados en este sprint.
 
-![Caso de uso 1](Docs/casos_de_prueba_1.jpg)
-![Caso de uso 2](Docs/casos_de_prueba_2.jpg)
+![Caso de uso 1](Docs/casos_de_prueba_3.jpg)
+![Caso de uso 2](Docs/casos_de_prueba_4.jpg)
 
 
 ## Capturas de pantalla 📸

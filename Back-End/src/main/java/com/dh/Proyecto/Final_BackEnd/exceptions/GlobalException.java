@@ -47,4 +47,9 @@ public class GlobalException {
     public ResponseEntity<String> handleBadCredentials(BadCredentialsException e){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o contraseña incorrectos");
     }
+
+    @ExceptionHandler(ResourceConflictException.class)
+    public ResponseEntity<String> handleResourceConflict(ResourceConflictException e){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
 }

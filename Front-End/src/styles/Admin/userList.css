@@ -1,3 +1,24 @@
+.user-list-status {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #034363;
+}
+
+.user-list-error {
+    padding: 3rem;
+    text-align: center;
+    font-size: 18px;
+    color: #c1605f;
+}
+
+.user-table-text {
+    text-align: center;
+    color: #034363;
+    font-size: 18px;
+    margin-top: 55px;
+}
+
 .user-list-container{
     padding: 3rem;
     

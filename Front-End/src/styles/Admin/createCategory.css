@@ -1,0 +1,103 @@
+.main-ctgr-container{
+    max-width: 500px;
+    margin: 7rem auto;
+    background-color: #BCE0F0;
+    border: solid 2px #034363;
+    box-shadow: 0 4px 12px rgba(3, 67, 99, 0.15);
+    border-radius: 10px;
+    padding: 3.5rem;
+}
+
+.ctg-title{
+    text-align: center;
+    color: #034363;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ctg-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.ctgr-form{
+    color: #034363;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.ctgr-form label{
+    display: block;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.error-message {
+    color: #d9534f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+}
+
+.ctgr-form input[type='text'],
+.ctgr-form textarea{
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #034363;
+    border-radius: 5px;
+    background-color: #fff9eb;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.ctgr-form input[type='text']:focus,
+.ctgr-form textarea:focus{
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.ctgr-form textarea{
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.ctgr-form select{
+    border: solid 2px #034363;
+    padding: 0.8rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #034363;
+    border-radius: 8px;
+    background-color: #fff9eb;
+}
+
+.ctgr-form select:focus{
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 5px rgb(3, 67, 99, 0.3);
+}
+
+.ctgr-submitt-btn{
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #034363;
+    background: linear-gradient(135deg, #219ebc 0%, #055b86 100%);
+    color: #fff9eb;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
+.ctgr-submitt-btn:hover{
+    background: linear-gradient(135deg, #1a7d96 0%, #033047 100%);
+    transform: translate(-1px);
+}
+
