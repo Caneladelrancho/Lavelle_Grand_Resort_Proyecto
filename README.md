@@ -65,15 +65,11 @@ cd Lavelle_Grand_Resort_Proyecto
 ```bash
 cd Back-End
 ```
-1- Crear la base de datos en MySQL:
+1- Crear la base de datos vacía en MySQL:
 ```sql
    CREATE DATABASE lavelle_grand_resort;
 ```
-2- Correr el script ubicado en la carpeta resources llamado Script_Lavelle_resort, en MySQL. 
-```sql
-   source resources/Script_Lavelle_resort.sql;
-```
-3- Configurar el archivo `application.properties.example` y renombrarlo por `application.properties` y completar cada campo con tus credenciales:
+2- Configurar el archivo `application.properties.example` y renombrarlo como `application.properties` y completar cada campo con tus credenciales:
 ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/lavelle_grand_resort
    spring.datasource.username=TU_USUARIO
@@ -81,12 +77,22 @@ cd Back-End
    jwt.secret=CLAVE_SECRETA_QUE_PASE_POR_PRIVADO
    jwt.expiration=7200000
 ```
-4- Correr el Backend
+3- Correr el Backend
 ```bash
 ./mvnw spring-boot:run
 ```
-O en intellij desde la clase main  `ProyectoFinalBackEndApplication` dando click al botón de run.
+O en IntelliJ desde la clase main  `ProyectoFinalBackEndApplication` dando click al botón de run.
 > El Backend estará disponible en `http://localhost:8080`.
+
+4- Con el Backend ya iniciado (en el primer arranque se crean las tablas automáticamente), cargar los datos iniciales ejecutando el script ubicado en la carpeta resources llamado `Script_Lavelle_resort.sql`. Puedes hacerlo desde otra terminal con MySQL:
+```sql
+   USE lavelle_grand_resort;
+   source resources/Script_Lavelle_resort.sql;
+```
+O desde MySQL Workbench: `File > Run SQL Script`, seleccionando ese archivo.
+
+> Para entrar al panel de administración se usan las credenciales de demostración entregadas por privado.
+
 ## Configuración del Frontend 🧩
 ```bash
 cd Front-End
@@ -142,13 +148,27 @@ No se implementaron tests automatizados en este sprint.
 ## Capturas de pantalla 📸
 
 ![Header](Docs/header.JPG)
+![Filtrar categorías](Docs/filtro_categorias.jpg)
 ![Categorias](Docs/categorias.JPG)
 ![Recomendaciones](Docs/recomendaciones.PNG)
 ![Footer](Docs/footer.PNG)
+![Iniciar sesión](Docs/login.jpg)
+![Registrarse](Docs/registrarse.jpg)
+
+
+<details>
+<summary>Ver más capturas</summary>
+
 ![Detalle de producto](Docs/detalle_producto.PNG)
+![Características del producto](Docs/caracteristicas.jpg)
 ![Agregar producto](Docs/agregar_producto.PNG)
 ![Listar productos](Docs/listar.PNG)
 ![Eliminar producto](Docs/eliminar_producto.PNG)
+![Administrar características](Docs/admin_caracteristicas.jpg)
+![Página de perfil](Docs/profile_page.jpg)
+
+
+
 ## Autores 👩
 
 - [@VivianArias](https://github.com/Caneladelrancho)

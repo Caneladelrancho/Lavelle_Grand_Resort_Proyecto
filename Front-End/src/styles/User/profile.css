@@ -18,13 +18,14 @@
 
 .banner-title {
     color: #FFF9EB;
-    font-size: clamp(1.5rem, 1rem, 2.9rem);
+    font-size: 2.9rem;
     text-shadow: 0 4px 18px #034363;
 }
 
 .pfr-content-container {
     width: 80%;
     margin: 0 auto;
+    margin-bottom: 7rem;
 }
 
 .profile-header {
@@ -94,7 +95,7 @@
 
 .pfr-img-container {    
     display: flex;    
-    margin-top: clamp(0rem, 3rem, 8rem);
+    margin-top: clamp(0rem, 5rem, 9rem);
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
@@ -148,6 +149,10 @@
 /*---------RESPONSIVE----------*/
 /*--MOBILE--*/
 @media screen and (max-width: 480px) {
+
+    .banner-title{
+        font-size: 1.5rem;
+    }
 
     .pfr-nav-list{
         font-size: 0.8rem;
