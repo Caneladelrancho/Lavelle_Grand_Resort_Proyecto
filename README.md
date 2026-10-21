@@ -58,6 +58,9 @@ Clona mi repositorio: 🗂️
 git clone https://github.com/Caneladelrancho/Lavelle_Grand_Resort_Proyecto.git
 cd Lavelle_Grand_Resort_Proyecto
 ```
+```bash
+cd Lavelle_Grand_Resort_Proyecto
+```
 
 
 
@@ -84,14 +87,12 @@ cd Back-End
 O en IntelliJ desde la clase main  `ProyectoFinalBackEndApplication` dando click al botón de run.
 > El Backend estará disponible en `http://localhost:8080`.
 
-4- Con el Backend ya iniciado (en el primer arranque se crean las tablas automáticamente), cargar los datos iniciales ejecutando el script ubicado en la carpeta resources llamado `Script_Lavelle_resort.sql`. Puedes hacerlo desde otra terminal con MySQL:
+4- Con el Backend ya iniciado (en el primer arranque se crean las tablas automáticamente), cargar los datos iniciales ejecutando el script ubicado en la carpeta resources llamado `Script_Lavelle_resort.sql`. 
 ```sql
    USE lavelle_grand_resort;
    source resources/Script_Lavelle_resort.sql;
 ```
 O desde MySQL Workbench: `File > Run SQL Script`, seleccionando ese archivo.
-
-> Para entrar al panel de administración se usan las credenciales de demostración entregadas por privado.
 
 ## Configuración del Frontend 🧩
 ```bash
@@ -167,7 +168,7 @@ No se implementaron tests automatizados en este sprint.
 ![Administrar características](Docs/admin_caracteristicas.jpg)
 ![Página de perfil](Docs/profile_page.jpg)
 
-
+</details>
 
 ## Autores 👩
 

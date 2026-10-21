@@ -16,6 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `amenities`
+--
+
+DROP TABLE IF EXISTS `amenities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `amenities` (
+  `needs_reservation` bit(1) DEFAULT NULL,
+  `amenity_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(2000) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `category_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`amenity_id`),
+  KEY `FKb4ui1obr0guwrw60q7hxyvso3` (`category_id`),
+  CONSTRAINT `FKb4ui1obr0guwrw60q7hxyvso3` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `amenities`
 --
 
@@ -24,6 +43,23 @@ LOCK TABLES `amenities` WRITE;
 INSERT INTO `amenities` VALUES (_binary '',1,'Sumérgete en una experiencia de relajación absoluta. Nuestro exclusivo spa ofrece masajes personalizados, tratamientos rejuvenecedores y rituales de bienestar inspirados en técnicas ancestrales. Ideal para renovar cuerpo, mente y espíritu en un entorno de lujo total.','Spa',8),(_binary '\0',3,'Ambientes refinados para compartir momentos especiales. Ofrecemos una cuidada carta de vinos, licores premium y cócteles artesanales, todo en espacios con diseño exclusivo y atmósferas envolventes.','Bar',9),(_binary '',4,'Explora lo mejor de la naturaleza dentro y fuera del mar. Disfruta de caminatas ecológicas, cabalgatas al atardecer, paseos en yate, tours en veleros y deportes acuáticos. Vive la aventura con el equilibrio perfecto entre emoción y paisajes espectaculares.','Aventura y naturaleza',10),(NULL,5,'Mantén tu estilo de vida activo con acceso a un gimnasio de última tecnología. Equipos modernos, clases dirigidas y espacios luminosos para entrenar con comodidad y vista privilegiada.','Gimnasio',8),(_binary '',6,'Celebra tu gran día en un entorno de ensueño, donde cada detalle refleja elegancia y distinción. Desde ceremonias íntimas frente al mar hasta recepciones majestuosas en salones decorados con fineza, nuestro equipo experto convierte tu historia en una experiencia mágica e inolvidable.','Eventos y bodas',13),(_binary '',7,'Sumérgete en la esencia del mar con experiencias diseñadas para despertar tus sentidos. Disfruta de paseos en yate, recorridos en lancha, snorkel entre aguas cristalinas o relajantes paseos en paddle board. Cada actividad combina aventura, elegancia y la serenidad del océano que rodea Lavelle Grand Resort.','Actividades acuáticas',11),(NULL,8,'Refresca cuerpo y alma en nuestras exclusivas piscinas, rodeadas de jardines tropicales y un ambiente de tranquilidad absoluta. Ya sea tomando el sol en una cama balinesa o disfrutando de un cóctel en el bar acuático, cada momento junto al agua se convierte en una experiencia de descanso y placer incomparable.','Piscinas',12),(_binary '',12,'Descubre una fusión de sabores únicos en restaurantes de clase mundial. Cada plato es una obra de arte diseñada para deleitar tus sentidos.','Experiencias gastronómicas',9);
 /*!40000 ALTER TABLE `amenities` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categories` (
+  `category_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `category_type` enum('AMENITY','ROOM') DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `categories`
@@ -36,6 +72,21 @@ INSERT INTO `categories` VALUES (8,'Encuentra un espacio dedicado al descanso y 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `characteristics`
+--
+
+DROP TABLE IF EXISTS `characteristics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `characteristics` (
+  `characteristic_id` bigint NOT NULL AUTO_INCREMENT,
+  `icon` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`characteristic_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `characteristics`
 --
 
@@ -44,6 +95,27 @@ LOCK TABLES `characteristics` WRITE;
 INSERT INTO `characteristics` VALUES (1,'Wifi','Wifi'),(2,'Piscina Privada','Piscina privada'),(3,'Piscina Privada','Vista a la piscina'),(4,'Vista al mar','Vista al mar'),(5,'Cocina','Cocina'),(6,'Sala de estar','Sala de estar'),(7,'Aire acondicionado','Aire acondicionado'),(8,'MiniBar','Minibar'),(9,'Pet friendly','Pet friendly'),(10,'Playa privada','Playa privada'),(11,'Playa privada','Vista a la playa'),(12,'Cama doble','Cama king size'),(13,'Cama doble','Cama doble'),(14,'Tv','Televisión'),(15,'Nevera','Nevera'),(16,'Jacuzzi','Jacuzzi'),(17,'Lavadora','Lavadora'),(20,'Tina de baño','Tina de baño');
 /*!40000 ALTER TABLE `characteristics` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `images` (
+  `amenity_id` bigint DEFAULT NULL,
+  `image_id` bigint NOT NULL AUTO_INCREMENT,
+  `room_id` bigint DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`image_id`),
+  KEY `FKis3oy4ujwrpr6rfbgqhhe5fh7` (`amenity_id`),
+  KEY `FKdeh4h59nedlwji0j8e57hu9mf` (`room_id`),
+  CONSTRAINT `FKdeh4h59nedlwji0j8e57hu9mf` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
+  CONSTRAINT `FKis3oy4ujwrpr6rfbgqhhe5fh7` FOREIGN KEY (`amenity_id`) REFERENCES `amenities` (`amenity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `images`
@@ -56,6 +128,23 @@ INSERT INTO `images` VALUES (1,1,NULL,'..\\Img_proyecto_final\\9a0c8a70-07d5-403
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reservation_product`
+--
+
+DROP TABLE IF EXISTS `reservation_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation_product` (
+  `product_id` bigint NOT NULL,
+  `reservation_id` bigint NOT NULL,
+  KEY `FK2u2ieq4j990g4aw10w7ieeisa` (`product_id`),
+  KEY `FKdjmywbm03nm49yjcpuy5apa2t` (`reservation_id`),
+  CONSTRAINT `FK2u2ieq4j990g4aw10w7ieeisa` FOREIGN KEY (`product_id`) REFERENCES `amenities` (`amenity_id`),
+  CONSTRAINT `FKdjmywbm03nm49yjcpuy5apa2t` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `reservation_product`
 --
 
@@ -65,6 +154,27 @@ LOCK TABLES `reservation_product` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reservations`
+--
+
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservations` (
+  `check_in_date` date DEFAULT NULL,
+  `check_out_date` date DEFAULT NULL,
+  `reservation_id` bigint NOT NULL AUTO_INCREMENT,
+  `room_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`reservation_id`),
+  KEY `FKljt6q1tp205b0h26eiegc5mx6` (`room_id`),
+  KEY `FKb5g9io5h54iwl2inkno50ppln` (`user_id`),
+  CONSTRAINT `FKb5g9io5h54iwl2inkno50ppln` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FKljt6q1tp205b0h26eiegc5mx6` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `reservations`
 --
 
@@ -72,6 +182,23 @@ LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `room_characteristic`
+--
+
+DROP TABLE IF EXISTS `room_characteristic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `room_characteristic` (
+  `room_id` bigint NOT NULL,
+  `characteristic_id` bigint NOT NULL,
+  KEY `FK5nq00ryy02ywtodgk3wgurh5m` (`characteristic_id`),
+  KEY `FKqtmmc3t41xpdpisg19yuqkqik` (`room_id`),
+  CONSTRAINT `FK5nq00ryy02ywtodgk3wgurh5m` FOREIGN KEY (`characteristic_id`) REFERENCES `characteristics` (`characteristic_id`),
+  CONSTRAINT `FKqtmmc3t41xpdpisg19yuqkqik` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `room_characteristic`
@@ -84,6 +211,27 @@ INSERT INTO `room_characteristic` VALUES (21,1),(21,2),(21,4),(21,5),(21,6),(21,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rooms`
+--
+
+DROP TABLE IF EXISTS `rooms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rooms` (
+  `availability` bit(1) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  `room_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(2000) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `room_number` varchar(255) DEFAULT NULL,
+  `category_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`room_id`),
+  KEY `FKny0kelw84f5mokcnk9pga4qb9` (`category_id`),
+  CONSTRAINT `FKny0kelw84f5mokcnk9pga4qb9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `rooms`
 --
 
@@ -92,6 +240,24 @@ LOCK TABLES `rooms` WRITE;
 INSERT INTO `rooms` VALUES (NULL,NULL,2,'Confort refinado y estilo moderno. La habitación Deluxe destaca por su amplitud, su cama doble, su decoración con acabados de alta gama y sus vistas encantadoras. Un espacio pensado para el descanso profundo y la experiencia sensorial de un alojamiento de primera clase.','Habitación Deluxe',NULL,21),(NULL,NULL,4,'Sencillamente elegante. La habitación Premium ofrece un equilibrio perfecto entre comodidad, diseño y funcionalidad. Con mobiliario de lujo, iluminación suave y amenities exclusivos, es el lugar ideal para disfrutar de una estancia relajante con el sello distintivo de Lavelle Grand Resort.','Habitación Serenity',NULL,22),(NULL,NULL,21,'Vive la máxima expresión del lujo y la privacidad. Nuestras villas ofrecen un refugio exclusivo con piscina privada, terraza con vista panorámica, amplios espacios interiores y servicio de mayordomo personal. Un santuario diseñado para quienes buscan una experiencia única, rodeada de confort absoluto y serenidad.','Villa privada',NULL,20),(NULL,NULL,22,'Elegancia y distinción en cada detalle. Las suites combinan diseño contemporáneo con un ambiente acogedor, ofreciendo sala de estar independiente, baño de mármol con jacuzzi y vistas inigualables. Ideal para quienes desean disfrutar del lujo con un toque de intimidad y sofisticación.','Suite',NULL,20);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` enum('ADMIN','USER') DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
@@ -112,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-20 18:37:42
+-- Dump completed on 2026-10-21 18:04:03
