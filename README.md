@@ -56,7 +56,6 @@ Requisitos previos: ✅
 Clona mi repositorio: 🗂️
 ```bash
 git clone https://github.com/Caneladelrancho/Lavelle_Grand_Resort_Proyecto.git
-cd Lavelle_Grand_Resort_Proyecto
 ```
 ```bash
 cd Lavelle_Grand_Resort_Proyecto
@@ -87,10 +86,10 @@ cd Back-End
 O en IntelliJ desde la clase main  `ProyectoFinalBackEndApplication` dando click al botón de run.
 > El Backend estará disponible en `http://localhost:8080`.
 
-4- Con el Backend ya iniciado (en el primer arranque se crean las tablas automáticamente), cargar los datos iniciales ejecutando el script ubicado en la carpeta resources llamado `Script_Lavelle_resort.sql`. 
+4- Con el Backend ya iniciado (en el primer arranque se crean las tablas automáticamente), cargar los datos iniciales ejecutando el script ubicado en la carpeta resources llamado `Script_Lavelle_resort_v2.sql`. 
 ```sql
    USE lavelle_grand_resort;
-   source resources/Script_Lavelle_resort.sql;
+   source resources/Script_Lavelle_resort_v2.sql;
 ```
 O desde MySQL Workbench: `File > Run SQL Script`, seleccionando ese archivo.
 
@@ -109,7 +108,7 @@ pnpm install
 pnpm run dev
 ```
 > La aplicación estará disponible en `http://localhost:5173`
-## Endpoints (API REST) 📎
+## Endpoints API REST (resumen) 📎
 
 | Método | Endpoint | Descripción | Auth |
 |--------|----------|-------------|------|
@@ -151,8 +150,6 @@ No se implementaron tests automatizados en este sprint.
 ![Header](Docs/header.JPG)
 ![Filtrar categorías](Docs/filtro_categorias.jpg)
 ![Categorias](Docs/categorias.JPG)
-![Recomendaciones](Docs/recomendaciones.PNG)
-![Footer](Docs/footer.PNG)
 ![Iniciar sesión](Docs/login.jpg)
 ![Registrarse](Docs/registrarse.jpg)
 
@@ -160,6 +157,8 @@ No se implementaron tests automatizados en este sprint.
 <details>
 <summary>Ver más capturas</summary>
 
+![Recomendaciones](Docs/recomendaciones.PNG)
+![Footer](Docs/footer.PNG)
 ![Detalle de producto](Docs/detalle_producto.PNG)
 ![Características del producto](Docs/caracteristicas.jpg)
 ![Agregar producto](Docs/agregar_producto.PNG)
