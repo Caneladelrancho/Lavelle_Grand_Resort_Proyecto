@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ICharacteristicService {
 
-    CharacteristicResponseDto createCharacteristic(CharacteristicRequestDto characteristicRequestDto) throws IOException;
-    List<CharacteristicResponseDto> findAllCharacteristics() throws Exception;
+    CharacteristicResponseDto createCharacteristic(CharacteristicRequestDto characteristicRequestDto);
+    List<CharacteristicResponseDto> findAllCharacteristics();
     void deleteCharacteristic(Long id) throws Exception;
-    CharacteristicResponseDto updateCharacteristic(Long id, CharacteristicRequestDto characteristicRequestDto) throws IOException;
+    CharacteristicResponseDto updateCharacteristic(Long id, CharacteristicRequestDto characteristicRequestDto);
 }

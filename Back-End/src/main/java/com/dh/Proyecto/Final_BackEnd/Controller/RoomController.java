@@ -29,13 +29,13 @@ public class RoomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDisplayDto>> displayRoomsForUser() throws IOException{
+    public ResponseEntity<List<ProductDisplayDto>> displayRoomsForUser(){
         List<ProductDisplayDto> rooms = iRoomService.displayRooms();
         return ResponseEntity.ok(rooms);
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<List<ProductDisplayDto>> getAllRooms() throws Exception{
+    public ResponseEntity<List<ProductDisplayDto>> getAllRooms(){
         List<ProductDisplayDto> rooms = iRoomService.findAllRooms();
         return ResponseEntity.ok(rooms);
     }

@@ -20,13 +20,13 @@ public class CharacteristicController {
     private final ICharacteristicService iCharacteristicService;
 
     @PostMapping("/add")
-    public ResponseEntity<CharacteristicResponseDto> save(@Valid @RequestBody CharacteristicRequestDto characteristicRequestDto) throws IOException {
+    public ResponseEntity<CharacteristicResponseDto> save(@Valid @RequestBody CharacteristicRequestDto characteristicRequestDto){
         CharacteristicResponseDto savedCharacteristic = iCharacteristicService.createCharacteristic(characteristicRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacteristic);
     }
 
     @GetMapping
-    public ResponseEntity<List<CharacteristicResponseDto>> getAllCharacteristics() throws Exception{
+    public ResponseEntity<List<CharacteristicResponseDto>> getAllCharacteristics(){
         List<CharacteristicResponseDto> characteristics = iCharacteristicService.findAllCharacteristics();
         return ResponseEntity.ok(characteristics);
     }
@@ -38,7 +38,7 @@ public class CharacteristicController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CharacteristicResponseDto> updateCharacteristic(@PathVariable Long id, @Valid @RequestBody CharacteristicRequestDto characteristicRequestDto) throws IOException{
+    public ResponseEntity<CharacteristicResponseDto> updateCharacteristic(@PathVariable Long id, @Valid @RequestBody CharacteristicRequestDto characteristicRequestDto){
         CharacteristicResponseDto updateCharacteristic = iCharacteristicService.updateCharacteristic(id, characteristicRequestDto);
         return ResponseEntity.ok(updateCharacteristic);
     }

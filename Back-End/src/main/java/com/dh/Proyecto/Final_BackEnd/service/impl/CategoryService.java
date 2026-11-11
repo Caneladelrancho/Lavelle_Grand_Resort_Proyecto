@@ -28,7 +28,7 @@ public class CategoryService implements ICategoryService {
 
     //GUARDAR O CREAR CATEGORIA
     @Override
-    public CategoryResponseDto addCategory(CategoryRequestDto categoryRequestDto) throws IOException {
+    public CategoryResponseDto addCategory(CategoryRequestDto categoryRequestDto) {
 
         //Validar duplicados
         Optional<Category> existingCategory = categoryRepository.findByTitle(categoryRequestDto.getTitle());
@@ -36,55 +36,46 @@ public class CategoryService implements ICategoryService {
             throw new DuplicateResourceException("Ya existe una categoria con el titulo: " + categoryRequestDto.getTitle());
         }
 
-        try{
-            //Construir objeto category
-            Category category = new Category();
-            category.setTitle(categoryRequestDto.getTitle());
-            category.setDescription(categoryRequestDto.getDescription());
-            category.setCategoryType(categoryRequestDto.getCategoryType());
+        //Construir objeto category
+        Category category = new Category();
+        category.setTitle(categoryRequestDto.getTitle());
+        category.setDescription(categoryRequestDto.getDescription());
+        category.setCategoryType(categoryRequestDto.getCategoryType());
 
-            //Guardar el objeto category
-            Category savedCategory = categoryRepository.save(category);
+        //Guardar el objeto category
+        Category savedCategory = categoryRepository.save(category);
 
-            return new CategoryResponseDto(
-                    savedCategory.getId(),
-                    savedCategory.getTitle(),
-                    savedCategory.getDescription(),
-                    savedCategory.getCategoryType()
-            );
-
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
+        return new CategoryResponseDto(
+            savedCategory.getId(),
+            savedCategory.getTitle(),
+            savedCategory.getDescription(),
+            savedCategory.getCategoryType()
+        );
     }
 
     @Override
-    public List<CategoryResponseDto> findAllCategories() throws Exception {
-        try{
-            List<Category> categories = categoryRepository.findAll();
+    public List<CategoryResponseDto> findAllCategories() {
 
-            if (categories.isEmpty()){
+        List<Category> categories = categoryRepository.findAll();
+
+        if (categories.isEmpty()){
                 return new ArrayList<>();
-            }
-
-            List<CategoryResponseDto> categoryResponseDtos = new ArrayList<>();
-
-            for (Category category : categories){
-                CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
-                    categoryResponseDto.setId(category.getId());
-                    categoryResponseDto.setTitle(category.getTitle());
-                    categoryResponseDto.setDescription(category.getDescription());
-                    categoryResponseDto.setCategoryType(category.getCategoryType());
-
-                    categoryResponseDtos.add(categoryResponseDto);
-            }
-            return categoryResponseDtos;
-
-        }catch (Exception e){
-            throw new Exception("Unable to retrieve categories: " + e.getMessage(), e);
         }
+
+        List<CategoryResponseDto> categoryResponseDtos = new ArrayList<>();
+
+        for (Category category : categories){
+            CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
+            categoryResponseDto.setId(category.getId());
+            categoryResponseDto.setTitle(category.getTitle());
+            categoryResponseDto.setDescription(category.getDescription());
+            categoryResponseDto.setCategoryType(category.getCategoryType());
+
+            categoryResponseDtos.add(categoryResponseDto);
+        }
+        return categoryResponseDtos;
+
+
     }
 
     @Override

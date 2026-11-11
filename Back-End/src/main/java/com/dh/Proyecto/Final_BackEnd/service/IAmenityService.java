@@ -10,8 +10,8 @@ import java.util.List;
 public interface IAmenityService {
 
     AmenityResponseDto saveAmenity(AdminProductDto adminProductDto) throws IOException;
-    List<ProductDisplayDto> displayAmenities() throws IOException;
-    List<ProductDisplayDto> findAllAmenities() throws Exception;
+    List<ProductDisplayDto> displayAmenities();
+    List<ProductDisplayDto> findAllAmenities();
     void deleteAmenity(Long id) throws Exception;
     AmenityResponseDto updateAmenity(Long id, AdminProductDto adminProductDto) throws IOException;
 

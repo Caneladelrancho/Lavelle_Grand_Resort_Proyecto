@@ -31,13 +31,13 @@ public class AmenityController {
     }
 
     @GetMapping
-   public ResponseEntity<List<ProductDisplayDto>> displayAmenitiesForUser() throws IOException{
+   public ResponseEntity<List<ProductDisplayDto>> displayAmenitiesForUser(){
         List<ProductDisplayDto> amenities = iAmenityService.displayAmenities();
         return ResponseEntity.ok(amenities);
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<List<ProductDisplayDto>> getAllAmenities() throws Exception{
+    public ResponseEntity<List<ProductDisplayDto>> getAllAmenities(){
         List<ProductDisplayDto> amenities = iAmenityService.findAllAmenities();
         return ResponseEntity.ok(amenities);
     }

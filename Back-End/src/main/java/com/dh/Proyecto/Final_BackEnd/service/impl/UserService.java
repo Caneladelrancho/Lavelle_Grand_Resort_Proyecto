@@ -29,18 +29,25 @@ public class UserService implements IUserService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
+
+    private String normalizeEmail(String email){
+        return email.trim().toLowerCase();
+    }
+
     //Registrar usuario
     @Override
     public AuthenticationResponseDto registerUser(RegisterRequestDto request){
 
-        if (userRepository.existsByEmail(request.getEmail())){
-            throw new DuplicateResourceException("El email ya está registrado: " + request.getEmail());
+        String email = normalizeEmail(request.getEmail());
+
+        if (userRepository.existsByEmail(email)){
+            throw new DuplicateResourceException("El email ya está registrado: " + email);
         }
 
         User user = new User();
         user.setName(request.getName());
         user.setLastName(request.getLastName());
-        user.setEmail(request.getEmail());
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
 
@@ -54,15 +61,17 @@ public class UserService implements IUserService {
     @Override
     public AuthenticationResponseDto registerAdmin(RegisterRequestDto request) {
 
-        if (userRepository.existsByEmail(request.getEmail())){
-            throw new DuplicateResourceException("El email ya está registrado: " + request.getEmail());
+        String email = normalizeEmail(request.getEmail());
+
+        if (userRepository.existsByEmail(email)){
+            throw new DuplicateResourceException("El email ya está registrado: " + email);
         }
 
 
         User user = new User();
         user.setName(request.getName());
         user.setLastName(request.getLastName());
-        user.setEmail(request.getEmail());
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.ADMIN);
 
@@ -75,15 +84,18 @@ public class UserService implements IUserService {
     //Login
     @Override
     public AuthenticationResponseDto login(AuthenticationRequestDto request){
+
+        String email = normalizeEmail(request.getEmail());
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        email,
                         request.getPassword()
                 )
         );
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado: " + request.getEmail()));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado: " + email));
 
         String token = jwtUtil.generateToken(user);
         return new AuthenticationResponseDto(token);

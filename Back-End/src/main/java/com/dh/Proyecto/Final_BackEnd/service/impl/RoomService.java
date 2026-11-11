@@ -93,9 +93,9 @@ public class RoomService implements IRoomService {
 
     //MOSTRAR ROOMS AL USUARIO
     @Override
-    public List<ProductDisplayDto> displayRooms() throws IOException {
+    public List<ProductDisplayDto> displayRooms() {
 
-        try {
+
             List<Room> rooms = roomRepository.findAll();
 
             if (rooms.isEmpty()){
@@ -110,15 +110,13 @@ public class RoomService implements IRoomService {
             }
 
             return displayDtos;
-        }catch (Exception e){
-            throw  new IOException("Unable to retrieve rooms for display: " + e.getMessage());
-        }
+
     }
 
     //ENCONTRAR TODAS LAS HABITACIONES PARA EL ADMIN
     @Override
-    public List<ProductDisplayDto> findAllRooms() throws Exception {
-        try {
+    public List<ProductDisplayDto> findAllRooms() {
+
             //Traer todas las entidades de la BD y guardarlas en una lista
             List<Room> rooms = roomRepository.findAll();
 
@@ -138,9 +136,7 @@ public class RoomService implements IRoomService {
             }
             return productDisplayDtos;
 
-        }catch (Exception e){
-            throw new Exception("Unable to retrieve rooms for admin: " + e.getMessage(), e);
-        }
+
 
     }
     /*primero eliminar la imagen y despues la habitacion por que en la base de datos

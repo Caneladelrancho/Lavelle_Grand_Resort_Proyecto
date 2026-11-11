@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ICategoryService {
 
-    CategoryResponseDto addCategory(CategoryRequestDto categoryRequestDto) throws IOException;
-    List<CategoryResponseDto> findAllCategories() throws Exception;
+    CategoryResponseDto addCategory(CategoryRequestDto categoryRequestDto);
+    List<CategoryResponseDto> findAllCategories();
     void deleteCategory(Long id) throws Exception;
 
 }

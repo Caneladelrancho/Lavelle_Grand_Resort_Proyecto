@@ -10,8 +10,8 @@ import java.util.List;
 public interface IRoomService {
 
     RoomResponseDto saveRoom(AdminProductDto adminProductDto) throws IOException; //Agregar room
-    List<ProductDisplayDto> displayRooms() throws IOException;
-    List<ProductDisplayDto> findAllRooms() throws Exception;//Listar todos los rooms que ya esten registrados
+    List<ProductDisplayDto> displayRooms();
+    List<ProductDisplayDto> findAllRooms();//Listar todos los rooms que ya esten registrados
     void deleteRoom(Long id) throws Exception;//Eliminar los rooms
     RoomResponseDto updateRoom(Long id, AdminProductDto adminProductDto) throws IOException;
 }

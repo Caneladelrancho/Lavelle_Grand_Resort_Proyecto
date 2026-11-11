@@ -27,7 +27,7 @@ public class CharacteristicService implements ICharacteristicService {
 
     //CREAR CARACTERISTICA
     @Override
-    public CharacteristicResponseDto createCharacteristic(CharacteristicRequestDto characteristicRequestDto) throws IOException {
+    public CharacteristicResponseDto createCharacteristic(CharacteristicRequestDto characteristicRequestDto){
 
         //Validar duplicados
         Optional<Characteristic> existingCharacteristic = charecteristicRepository.findByName(characteristicRequestDto.getName());
@@ -35,49 +35,41 @@ public class CharacteristicService implements ICharacteristicService {
             throw new DuplicateResourceException("Ya existe a una característica con el nombre: " + characteristicRequestDto.getName());
         }
 
-        try{
-            //Crear objeto characteristic
-            Characteristic characteristic = new Characteristic();
-            characteristic.setName(characteristicRequestDto.getName());
-            characteristic.setIcon(characteristicRequestDto.getIcon());
+        //Crear objeto characteristic
+        Characteristic characteristic = new Characteristic();
+        characteristic.setName(characteristicRequestDto.getName());
+        characteristic.setIcon(characteristicRequestDto.getIcon());
 
-            Characteristic savedCharacteristic = charecteristicRepository.save(characteristic);
+        Characteristic savedCharacteristic = charecteristicRepository.save(characteristic);
 
-            return new CharacteristicResponseDto(
-                    savedCharacteristic.getId(),
-                    savedCharacteristic.getName(),
-                    savedCharacteristic.getIcon()
-            );
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
+        return new CharacteristicResponseDto(
+                savedCharacteristic.getId(),
+                savedCharacteristic.getName(),
+                savedCharacteristic.getIcon()
+        );
     }
 
     @Override
-    public List<CharacteristicResponseDto> findAllCharacteristics() throws Exception {
-        try{
-            List<Characteristic> characteristics = charecteristicRepository.findAll();
+    public List<CharacteristicResponseDto> findAllCharacteristics(){
 
-            if (characteristics.isEmpty()){
+        List<Characteristic> characteristics = charecteristicRepository.findAll();
+
+        if (characteristics.isEmpty()){
                 return new ArrayList<>();
-            }
-
-            List<CharacteristicResponseDto> characteristicResponseDtos = new ArrayList<>();
-
-            for (Characteristic characteristic : characteristics){
-                CharacteristicResponseDto characteristicResponseDto = new CharacteristicResponseDto();
-                characteristicResponseDto.setId(characteristic.getId());
-                characteristicResponseDto.setName(characteristic.getName());
-                characteristicResponseDto.setIcon(characteristic.getIcon());
-
-                characteristicResponseDtos.add(characteristicResponseDto);
-            }
-            return characteristicResponseDtos;
-        }catch (Exception e){
-            throw new Exception("Unable to retrieve characteristics: " + e.getMessage(), e);
         }
+
+        List<CharacteristicResponseDto> characteristicResponseDtos = new ArrayList<>();
+
+        for (Characteristic characteristic : characteristics){
+            CharacteristicResponseDto characteristicResponseDto = new CharacteristicResponseDto();
+            characteristicResponseDto.setId(characteristic.getId());
+            characteristicResponseDto.setName(characteristic.getName());
+            characteristicResponseDto.setIcon(characteristic.getIcon());
+
+            characteristicResponseDtos.add(characteristicResponseDto);
+        }
+        return characteristicResponseDtos;
+
     }
 
     @Override
@@ -96,28 +88,23 @@ public class CharacteristicService implements ICharacteristicService {
     }
 
     @Override
-    public CharacteristicResponseDto updateCharacteristic(Long id, CharacteristicRequestDto characteristicRequestDto) throws IOException {
+    public CharacteristicResponseDto updateCharacteristic(Long id, CharacteristicRequestDto characteristicRequestDto) {
 
         Characteristic characteristic = charecteristicRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Characteristic not found with id: " + id));
 
-        try{
-            characteristic.setName(characteristicRequestDto.getName());
-            characteristic.setIcon(characteristicRequestDto.getIcon());
 
-            Characteristic updatedCharacteristic = charecteristicRepository.save(characteristic);
+        characteristic.setName(characteristicRequestDto.getName());
+        characteristic.setIcon(characteristicRequestDto.getIcon());
 
-            return new CharacteristicResponseDto(
-                    updatedCharacteristic.getId(),
-                    updatedCharacteristic.getName(),
-                    updatedCharacteristic.getIcon()
+        Characteristic updatedCharacteristic = charecteristicRepository.save(characteristic);
 
-            );
+        return new CharacteristicResponseDto(
+                updatedCharacteristic.getId(),
+                updatedCharacteristic.getName(),
+                updatedCharacteristic.getIcon()
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
+        );
 
     }
 }

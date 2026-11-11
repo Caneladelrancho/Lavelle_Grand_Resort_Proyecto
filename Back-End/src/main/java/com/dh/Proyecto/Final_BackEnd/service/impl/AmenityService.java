@@ -72,51 +72,45 @@ public class AmenityService implements IAmenityService {
 
     //MOSTRAR AMENITIES AL USUARIO
     @Override
-    public List<ProductDisplayDto> displayAmenities() throws IOException {
+    public List<ProductDisplayDto> displayAmenities() {
 
-        try{
-            List<Amenity> amenities = amenityRepository.findAll();
+        List<Amenity> amenities = amenityRepository.findAll();
 
-            if (amenities.isEmpty()){
+        if (amenities.isEmpty()){
                 return new ArrayList<>();
-            }
+        }
 
-            List<ProductDisplayDto> displayDtos = new ArrayList<>();
+        List<ProductDisplayDto> displayDtos = new ArrayList<>();
 
-            for (Amenity amenity : amenities){
+        for (Amenity amenity : amenities){
                 ProductDisplayDto displayDto = amenityMapper.mapAmenityToAmenityDisplayDto(amenity);
                 displayDtos.add(displayDto);
-            }
-            return displayDtos;
-
-        }catch (Exception e){
-            throw new IOException("Unable to retrieve amenities for display: " + e.getMessage());
-
         }
+        return displayDtos;
+
+
     }
 
     //ENCONTRAR TODOS LOS AMENITIES PARA EL ADMIN
     @Override
-    public List<ProductDisplayDto> findAllAmenities() throws Exception {
-        try{
-            List<Amenity> amenities = amenityRepository.findAll();
+    public List<ProductDisplayDto> findAllAmenities() {
 
-            if (amenities.isEmpty()){
+        List<Amenity> amenities = amenityRepository.findAll();
+
+        if (amenities.isEmpty()){
                 return new ArrayList<>();
-            }
+        }
 
-            List<ProductDisplayDto> productDisplayDtos = new ArrayList<>();
+        List<ProductDisplayDto> productDisplayDtos = new ArrayList<>();
 
-            for (Amenity amenity : amenities){
+        for (Amenity amenity : amenities){
                 ProductDisplayDto productDisplayDto = amenityMapper.mapAmenityToAmenityDisplayDto(amenity);
 
                         productDisplayDtos.add(productDisplayDto);
-            }
-            return productDisplayDtos;
-
-        }catch (Exception e){
-            throw new Exception("Unable to retrieve amenities for admin: " + e.getMessage(), e);
         }
+        return productDisplayDtos;
+
+
     }
 
     @Override

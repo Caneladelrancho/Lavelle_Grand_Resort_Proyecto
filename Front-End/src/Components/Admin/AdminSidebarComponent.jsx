@@ -15,7 +15,7 @@ export const AdminSidebarComponent = () => {
 
     return (
         <aside className='admin-sidebar'>
-            <Link to="/admin" style={{ textDecoration: 'none' }}>
+            <Link to="/" style={{ textDecoration: 'none' }}>
                 <div className='hotel-branding'>
                     <h1>Lavelle Grand Resort</h1>
                 </div>

@@ -28,17 +28,19 @@ export const BookingApp = () => {
 
         {/*Rutas de Administrador*/}
         <Route path="/admin/*" element={
-          <ProtectedRoute>
-          <AdminLayoutComponent />
+          <ProtectedRoute requiredRole="ROLE_ADMIN">
+            <AdminLayoutComponent />
           </ProtectedRoute>
         }
         />
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
-        <Route path="/profile" element={<ProfileComponent />} />
-
-        
-
+        <Route path="/profile" element={
+          <ProtectedRoute requiredRole="ROLE_USER">
+            <ProfileComponent />
+          </ProtectedRoute>
+        }
+        />
 
         {/* Redirección para rutas no encontradas */}
         <Route path="*" element={<Navigate to="/" replace />} />

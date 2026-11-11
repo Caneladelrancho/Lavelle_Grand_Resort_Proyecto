@@ -20,13 +20,13 @@ public class CategoryController {
     private final ICategoryService iCategoryService;
 
     @PostMapping("/add")
-    public ResponseEntity<CategoryResponseDto> save(@Valid @RequestBody CategoryRequestDto categoryRequestDto) throws IOException{
+    public ResponseEntity<CategoryResponseDto> save(@Valid @RequestBody CategoryRequestDto categoryRequestDto){
         CategoryResponseDto savedCategory = iCategoryService.addCategory(categoryRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponseDto>> getAllCategories() throws Exception{
+    public ResponseEntity<List<CategoryResponseDto>> getAllCategories(){
         List<CategoryResponseDto> categories = iCategoryService.findAllCategories();
         return ResponseEntity.ok(categories);
     }

@@ -6,6 +6,7 @@ import com.dh.Proyecto.Final_BackEnd.entity.Room;
 import com.dh.Proyecto.Final_BackEnd.repository.IImageRepository;
 import com.dh.Proyecto.Final_BackEnd.service.IImageService;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ImageService implements IImageService {
 
     @Autowired
@@ -38,7 +40,7 @@ public class ImageService implements IImageService {
         try{
             if (!Files.exists(ROOT_LOCATION)){
                 Files.createDirectories(ROOT_LOCATION);
-                System.out.println("Upload directory created: " + ROOT_LOCATION.toAbsolutePath());
+                log.info("Directorio de subida creado: {}", ROOT_LOCATION.toAbsolutePath());
             }
         }catch (IOException e){
             throw new RuntimeException("Could not create upload folder!", e);
@@ -110,32 +112,32 @@ public class ImageService implements IImageService {
     @Override
     public List<String> findImageUrlsRoom(Room room)  {
 
-            List<Image> images = imageRepository.findByRoom(room);
-            //Convertir las imagenes a URLs
-            return images.stream()
-                    .map(image -> {
-                        Path path = Paths.get(image.getImageUrl());
-                        String fileName = path.getFileName().toString();
+        List<Image> images = imageRepository.findByRoom(room);
+        //Convertir las imagenes a URLs
+        return images.stream()
+                .map(image -> {
+                    Path path = Paths.get(image.getImageUrl());
+                    String fileName = path.getFileName().toString();
 
-                        return BASE_URL + fileName;
+                    return BASE_URL + fileName;
 
-                    })
-                    .collect(Collectors.toList());
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<String> findImageUrlsAmenity(Amenity amenity) {
 
-            List<Image> images = imageRepository.findByAmenity(amenity);
-            return images.stream()
-                    .map(image -> {
-                        Path path = Paths.get(image.getImageUrl());
-                        String fileName = path.getFileName().toString();
+        List<Image> images = imageRepository.findByAmenity(amenity);
+        return images.stream()
+                .map(image -> {
+                    Path path = Paths.get(image.getImageUrl());
+                    String fileName = path.getFileName().toString();
 
-                        return BASE_URL + fileName;
+                    return BASE_URL + fileName;
 
-                    })
-                    .collect(Collectors.toList());
+                })
+                .collect(Collectors.toList());
     }
 
     //Eliminar imagenes de la BD y archivo fisico
@@ -150,7 +152,7 @@ public class ImageService implements IImageService {
                 Files.delete(targetPath);
             }
         }catch (IOException e){
-            System.out.println("Warning: Could not delete physical file: " + filePath);
+            log.warn("No se pudo eliminar el archivo físico: {}", filePath, e);
         }
     }
 }
